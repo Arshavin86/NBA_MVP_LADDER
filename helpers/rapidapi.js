@@ -1,31 +1,35 @@
 // const request = require('request-promise');
-const request = require('request');
+const request = require('request-promise');
 const config = require('../config/api-nba-v1.p');
-var Promise = require('bluebird');
+const Promise = require('bluebird');
+const headers = {
+    'User-Agent': 'request',
+    'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com', 
+    'X-RapidAPI-Key': config.X_RapidAPI_Key
+};
+const URL = `https://api-nba-v1.p.rapidapi.com`;
 
 
-let getGamesByDate = (date) => {
-  let options = {
-    url: `https://api-nba-v1.p.rapidapi.com/games/date/${date}`,
-    headers: {
-      'User-Agent': 'request',
-      'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com', 
-      'X-RapidAPI-Key': config.X_RapidAPI_Key
-    },
-    json: true // Automatically parses the JSON string in the response
-  };
-
- return new Promise ((resolve, reject) => {
-  request(options, (err, res, body) => {
-    if (err) {
-      reject(err);
-    } else {
-      console.log('number of games:', body.api.games.length);
-      resolve(body.api.games);
-    }
-  });
- })
+async function getGamesByDate(date) {
+    let options = {
+        url: `${URL}/games/date/${date}`,
+        headers: headers,
+        json: true // Automatically parses the JSON string in the response
+    };
+    return await request(options);
 }
 
-module.exports.getGamesByDate = getGamesByDate;
+async function getStatsByGameID (gameID) {
+    let options = {
+      url: `${URL}/statistics/players/gameId/${gameID}`,
+      headers: headers,
+      json: true
+    };
+    return await request(options);
+  }
+
+module.exports = {
+    getGamesByDate: getGamesByDate,
+    getStatsByGameID: getStatsByGameID
+}
 
