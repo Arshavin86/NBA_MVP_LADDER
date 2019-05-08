@@ -18,7 +18,6 @@ app.get('/api/games/date/:date', jsonParser, (req, res) => {
     (async function getDayLeaders() {
         let teamID;
         let gameID;
-        let leaders = [];
         let matchDay = {}
         // get all games played on one particular date
         let games = await getGamesByDate(id);
@@ -75,17 +74,27 @@ app.get('/api/games/date/:date', jsonParser, (req, res) => {
                 // console.log(leader, teamId);
             }) 
             //get name of the best player of the game
-            let bestPlayer = await getNameByPlayerID(leader.player1Id);
-            console.log(bestPlayer.api.players);
+            let bestPlayer1 = await getNameByPlayerID(leader.player1Id);
+            // console.log(bestPlayer1.api.players);
             Object.keys(matchDay).forEach(game => {
                 //match player with the game he played in from matchDay object
-                if (matchDay[game]['winningTeamId'] === bestPlayer.api.players[0].teamId) {
-                    matchDay[game]['bestPlayer'] = [`${bestPlayer.api.players[0].firstName} ${bestPlayer.api.players[0].lastName}`]
+                if (matchDay[game]['winningTeamId'] === bestPlayer1.api.players[0].teamId) {
+                    matchDay[game]['bestPlayer1'] = [`${bestPlayer1.api.players[0].firstName} ${bestPlayer1.api.players[0].lastName}`];
                 }
-                console.log(matchDay)
+                // console.log(matchDay);
             })
-          }
-          
+            console.log(leader);
+            if (!!leader.player2Id) {
+                let bestPlayer2 = await getNameByPlayerID(leader.player2Id);
+                console.log(bestPlayer2.api.players);
+                Object.keys(matchDay).forEach(game => {
+                    //match player with the game he played in from matchDay object
+                    if (matchDay[game]['winningTeamId'] === bestPlayer2.api.players[0].teamId) {
+                        matchDay[game]['bestPlayer2'] = [`${bestPlayer2.api.players[0].firstName} ${bestPlayer2.api.players[0].lastName}`];
+                    }
+                })
+            }
+        }
         res.status(200).send(matchDay);   
     })();   
 });
