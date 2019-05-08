@@ -36,8 +36,7 @@ app.get('/api/games/date/:date', jsonParser, (req, res) => {
                 score: [game.vTeam.score.points, game.hTeam.score.points],
                 logos: [game.vTeam.logo, game.hTeam.logo],
                 gameId: gameID,
-                winningTeamId: teamID,
-                bestPlayer: undefined
+                winningTeamId: teamID
             }
         });
         //I can't use forEach with async/await so I use a variation of the for-of iteration statement which iterates over async iterable objects
@@ -78,22 +77,23 @@ app.get('/api/games/date/:date', jsonParser, (req, res) => {
             Object.keys(matchDay).forEach(game => {
                 //match player with the game he played in from matchDay object
                 if (matchDay[game]['winningTeamId'] === bestPlayer1.api.players[0].teamId) {
-                    matchDay[game]['bestPlayer1'] = [`${bestPlayer1.api.players[0].firstName} ${bestPlayer1.api.players[0].lastName}`];
+                    matchDay[game]['bestPlayer1'] = `${bestPlayer1.api.players[0].firstName} ${bestPlayer1.api.players[0].lastName}`;
                 }
                 // console.log(matchDay);
             })
-            console.log(leader);
+            // console.log(leader);
             if (!!leader.player2Id) {
                 let bestPlayer2 = await getNameByPlayerID(leader.player2Id);
                 console.log(bestPlayer2.api.players);
                 Object.keys(matchDay).forEach(game => {
                     //match player with the game he played in from matchDay object
                     if (matchDay[game]['winningTeamId'] === bestPlayer2.api.players[0].teamId) {
-                        matchDay[game]['bestPlayer2'] = [`${bestPlayer2.api.players[0].firstName} ${bestPlayer2.api.players[0].lastName}`];
+                        matchDay[game]['bestPlayer2'] = `${bestPlayer2.api.players[0].firstName} ${bestPlayer2.api.players[0].lastName}`;
                     }
                 })
             }
         }
+        console.log(matchDay);
         res.status(200).send(matchDay);   
     })();   
 });
