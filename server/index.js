@@ -22,7 +22,6 @@ app.get('/api/games/date/:date', jsonParser, (req, res) => {
         // get all games played on one particular date
         let games = await getGamesByDate(id);
         // console.log(games.api.games);
-
         // find gameId and id of winning team for each game
         games.api.games.forEach(game => {
             if(Number(game.vTeam.score.points) > Number(game.hTeam.score.points)) {
@@ -56,7 +55,7 @@ app.get('/api/games/date/:date', jsonParser, (req, res) => {
             players.api.statistics.forEach( player => {
                 // console.log(player);
                 const {points, assists, totReb, steals, blocks, turnovers, plusMinus, fgp, playerId, teamId} = player;
-                if(teamId === matchDay[game]['winningTeamId']) {
+                if (teamId === matchDay[game]['winningTeamId']) {
                     currentTotal = statsCalculator(points, assists, totReb, steals, blocks, turnovers);
                     // console.log('total: ', currentTotal);
                     if (currentTotal > leader.total || (currentTotal === leader.total && plusMinus > leader.plusMinus) || 
