@@ -1,12 +1,6 @@
 \connect nba;
  CREATE SCHEMA IF NOT EXISTS testNBA AUTHORIZATION andrei;
-    DROP TABLE IF EXISTS matchDay CASCADE;
-    CREATE TABLE matchDay (
-        id SERIAL PRIMARY KEY,  
-        date date NOT NULL,
-        gameIDs text []
-    );
-
+ 
     DROP TABLE IF EXISTS team CASCADE;
     CREATE TABLE team (
         id SERIAL PRIMARY KEY,  
@@ -28,6 +22,7 @@
     DROP TABLE IF EXISTS game CASCADE;
     CREATE TABLE game (
         id SERIAL,  
+        date date NOT NULL,
         gameID text NOT NULL,
         winningTeamID text NOT NULL REFERENCES team (teamID),
         losingTeamID text NOT NULL REFERENCES team (teamID),
