@@ -26,7 +26,7 @@ exports.postTeam = async (ID, name, logo) => {
     //use prepared statement to insert team info if it doesn't exist
     let qr = 'INSERT INTO team (teamID, name, logo) SELECT $1, $2, $3 WHERE NOT EXISTS (SELECT * FROM team WHERE teamID=$4)';
     let result = await db.query(qr, [ID, name, logo, ID]);
-    console.log('Team is posted on Postgres: ', result);
+    console.log('Team list is updated on Postgres: ', result);
   }
   catch (error) {
     // console.log('POSTTeam is failed: ', error);
