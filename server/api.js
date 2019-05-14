@@ -13,25 +13,29 @@ async function getDayLeaders(date) {
 
     // find gameId and id of winning team for each game
     games.api.games.forEach(game => {
-        if(Number(game.vTeam.score.points) > Number(game.hTeam.score.points)) {
-            winningTeamID = game.vTeam.teamId;
-            loosingTeamID = game.hTeam.teamId;
-        } else {
-            winningTeamID = game.hTeam.teamId;
-            loosingTeamID = game.vTeam.teamId;
+        //prevent getting a "junk" game objects (with no real data)
+        if (game.vTeam.score.points.length) {
+            //find the winning team
+            if (Number(game.vTeam.score.points) > Number(game.hTeam.score.points)) {
+                winningTeamID = game.vTeam.teamId;
+                loosingTeamID = game.hTeam.teamId;
+            } else {
+                winningTeamID = game.hTeam.teamId;
+                loosingTeamID = game.vTeam.teamId;
+            }
+            gameID = game.gameId;
+            console.log('winningTeamID: ', winningTeamID, 'gameID: ', gameID);
+            matchDay[winningTeamID] = {
+                teams: [game.vTeam.fullName, game.hTeam.fullName],
+                score: [game.vTeam.score.points, game.hTeam.score.points],
+                logos: [game.vTeam.logo, game.hTeam.logo],
+                gameId: gameID,
+                losingTeamID: loosingTeamID,
+            }
+            //post a new team data
+            database.postTeam(game.vTeam.teamId, game.vTeam.fullName, game.vTeam.logo);
+            database.postTeam(game.hTeam.teamId, game.hTeam.fullName, game.hTeam.logo);
         }
-        gameID = game.gameId;
-        console.log('winningTeamID: ', winningTeamID, 'gameID: ', gameID);
-        matchDay[winningTeamID] = {
-            teams: [game.vTeam.fullName, game.hTeam.fullName],
-            score: [game.vTeam.score.points, game.hTeam.score.points],
-            logos: [game.vTeam.logo, game.hTeam.logo],
-            gameId: gameID,
-            losingTeamID: loosingTeamID,
-        }
-        //post a new team data
-        database.postTeam(game.vTeam.teamId, game.vTeam.fullName, game.vTeam.logo);
-        database.postTeam(game.hTeam.teamId, game.hTeam.fullName, game.hTeam.logo);
     });
     
     //I can't use forEach with async/await so I use a variation of the for-of iteration statement which iterates over async iterable objects
@@ -72,6 +76,7 @@ async function getDayLeaders(date) {
         }) 
         
         //get name of the best player of the game
+        // console.log(leader.player1Id, matchDay[team]['gameId']);
         let bestPlayer1 = await getNameByPlayerID(leader.player1Id);
         // console.log('bestPlayer1', bestPlayer1.api.players);
 
@@ -113,6 +118,7 @@ async function getDayLeaders(date) {
         await database.postGame(date, gameId, team, losingTeamID, bestPl1, bestPl2, score, statsBP1, statsBP2);
     }
     // console.log('matchDay', matchDay);
+    console.log('DONE!');
     return matchDay;   
 };
 
