@@ -64,10 +64,20 @@ async function getNameByPlayerID (playerID) {
     return await request(options);
 }  
 
+async function getPhotoByName (lastName, firstName) {
+    let options = {
+        url: `https://nba-players.herokuapp.com/players/${lastName}/${firstName}`,
+        json: true
+    };
+    return await request(options);
+} 
+
+
 module.exports = {
     getGamesByDate: getGamesByDate,
     getStatsByGameID: getStatsByGameID,
-    getNameByPlayerID: getNameByPlayerID
+    getNameByPlayerID: getNameByPlayerID,
+    getPhotoByName: getPhotoByName
 }
 
 

@@ -13,8 +13,7 @@
     CREATE TABLE player (
         id SERIAL,  
         playerID text NOT NULL UNIQUE,
-        games text [],
-        name text NOT NULL,
+        name text NOT NULL UNIQUE,
         teamID text NOT NULL REFERENCES team (teamID),
         PRIMARY KEY (id, teamID)
     );
@@ -27,9 +26,17 @@
         winningTeamID text NOT NULL REFERENCES team (teamID),
         losingTeamID text NOT NULL REFERENCES team (teamID),
         bestPlayer1 text NOT NULL REFERENCES player (playerID),
-        bestPlayer2 text NOT NULL REFERENCES player (playerID),
+        bestPlayer2 text NOT NULL,
         score text [],
         statsBP1 text [],
         statsBP2 text [],
         PRIMARY KEY (id, winningTeamID, losingTeamID, bestPlayer1, bestPlayer2)
+    );
+
+    DROP TABLE IF EXISTS playOff19 CASCADE;
+    CREATE TABLE playOff19 (
+        id SERIAL,  
+        playerID text NOT NULL UNIQUE REFERENCES player (playerID),
+        awards integer NOT NULL,
+        PRIMARY KEY (id, playerID)
     );
