@@ -13,13 +13,13 @@ const database = require('./controllers');
 
             // find gameId and id of winning team for each game
             games.api.games.forEach(game => {
-                if(Number(game.vTeam.score.points) > Number(game.hTeam.score.points)) {
+                if(game.vTeam.score.points > game.hTeam.score.points) {
                     teamID = game.vTeam.teamId;
                 } else {
                     teamID = game.hTeam.teamId;
                 }
                 gameID = game.gameId;
-                IDs.push(Number(gameID));
+                IDs.push(gameID);
                 // console.log('teamID: ', teamID, 'gameID: ', gameID);
                 matchDay[teamID] = {
                     teams: [game.vTeam.fullName, game.hTeam.fullName],
@@ -36,7 +36,7 @@ const database = require('./controllers');
             for await (const game of Object.keys(matchDay)) {
                 //get players stats for each game
                 let players = await getStatsByGameID(matchDay[game]['gameId'])
-                // console.log(players);
+                console.log(players);
                 let leader = {
                     total: 0,
                     plusMinus: 0,
@@ -69,7 +69,7 @@ const database = require('./controllers');
                 }) 
                 //get name of the best player of the game
                 let bestPlayer1 = await getNameByPlayerID(leader.player1Id);
-                // console.log(bestPlayer1.api.players);
+                // console.log('bestPlayer1', bestPlayer1.api.players);
                 Object.keys(matchDay).forEach(game => {
                     //match player with the game he played in from matchDay object
                     if (matchDay[game]['winningTeamId'] === bestPlayer1.api.players[0].teamId) {
