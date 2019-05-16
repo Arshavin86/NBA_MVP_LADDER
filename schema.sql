@@ -40,3 +40,11 @@
         awards integer NOT NULL,
         PRIMARY KEY (id, playerID)
     );
+
+    DROP TABLE IF EXISTS season19 CASCADE;
+    CREATE TABLE season19 (
+        id SERIAL,  
+        playerID text NOT NULL UNIQUE REFERENCES player (playerID),
+        awards integer NOT NULL,
+        PRIMARY KEY (id, playerID)
+    );
