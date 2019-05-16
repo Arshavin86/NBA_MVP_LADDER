@@ -2,8 +2,7 @@ import React, {useEffect} from 'react';
 
 const server = 'http://localhost:3001/api/games/date/';
 
-export default function App () {
-
+export default function Index () {
 
     useEffect(() => {
           (async() => {
@@ -20,7 +19,7 @@ export default function App () {
 
     return (
         <div>
-          <p>I'm rendering!</p>
+          <p>I'm rendering because of Next!</p>
         </div>
       );
 }
