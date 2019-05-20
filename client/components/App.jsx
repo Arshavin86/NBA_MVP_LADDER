@@ -20,7 +20,7 @@ export default function App () {
 
     return (
         <div>
-          I'm rendering!
+          <p>I'm rendering!</p>
         </div>
       );
 }
