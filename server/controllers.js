@@ -3,6 +3,7 @@ const { db } = postgres;
 const getDayLeaders = require('./api');
 
 exports.getGames = async (req, res) => {
+  console.log('id: ', req.params);
   const id = req.params.date;
   // console.log(id);
   try {

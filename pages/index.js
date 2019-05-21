@@ -15,7 +15,6 @@ const Container1 = style.div`
   vertical-align: middle;
   line-height: 40px; 
 `;
-
 const Compon1 = style.div`
   width: 290px;
   border: 0.5px solid black;
@@ -44,32 +43,39 @@ const server = 'http://localhost:3001/api/games/date/';
     //         }
     //       })();
     //   }, []);
+const formatDate = date => {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
 
 const Index = props => {
-  const [data, setData] = useState(props);
+  const [data, setData] = useState(props.games);
   const [date, setDate] = useState(props.games[0].date);
 
   console.log('date in Index: ', date);
 
-  const handleDateChange = date => {
-    setDate (date);
-    
+  const handleDateChange = async date => {
+    // const ISODate = date.toISOString().slice(0, 10);
+    const ISODate = formatDate(date);
+    console.log('ISODate:', ISODate);
+    setDate (ISODate);
+    try {
+      const response = await fetch(server + ISODate);
+      const json = await response.json();
+      console.log(json);
+      setData (json); 
+    } catch (e) {
+      console.log(e);
+    }
   } 
-
-  // useEffect(() => {
-  //   (async() => {
-  //     try {
-  //       const response = await fetch(server + date);
-  //       const json = await response.json();
-  //       console.log(json);
-  //       setData (json);
-  //       setLoading(false); 
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   })();
-  // }, []);
-
+  
   return (
     <Layout>
       <Container1>
@@ -80,7 +86,7 @@ const Index = props => {
         </Compon1>
         <Compon2>
           <ul>
-            {data.games.map(game => (
+            {data.map(game => (
               <li key={game.id}>
                 <a>{game.score[0]} - {game.score[1]}</a>
               </li>
