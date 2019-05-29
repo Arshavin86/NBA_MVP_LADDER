@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import Calendar from '../components/Calendar.js'
+import {useState} from 'react';
+import Calendar_nav from '../components/Calendar_nav.js'
 import Layout from '../components/MyLayout.js';
 import style from 'styled-components';
 import fetch from 'isomorphic-unfetch';
@@ -44,7 +44,8 @@ const server = 'http://localhost:3001/api/games/date/';
     //       })();
     //   }, []);
 const formatDate = date => {
-    var d = new Date(date),
+   
+    let d = date ? new Date(date) : new Date(),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
         year = d.getFullYear();
@@ -55,14 +56,17 @@ const formatDate = date => {
     return [year, month, day].join('-');
 }
 
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const d = new Date();
+const dayName = days[d.getDay()];
+
 const Index = props => {
   const [data, setData] = useState(props.games);
-  const [date, setDate] = useState(props.games[0].date);
+  const [date, setDate] = useState(props.date);
 
   console.log('date in Index: ', date);
 
   const handleDateChange = async date => {
-    // const ISODate = date.toISOString().slice(0, 10);
     const ISODate = formatDate(date);
     console.log('ISODate:', ISODate);
     setDate (ISODate);
@@ -75,22 +79,29 @@ const Index = props => {
       console.log(e);
     }
   } 
+
+  const gamesListing = data => {
+    let context = data ? (
+      data.map(game => (
+        <li key={game.id}>
+          <a>{game.score[0]} - {game.score[1]}</a>
+        </li>
+      ))
+    ) : (
+      'No games are scheduled on this day.'
+    ) 
+    return context;
+  }
   
   return (
     <Layout>
       <Container1>
         <Compon1>
-          <p>Last Games</p>
-          <Calendar onChange = {handleDateChange} 
-            />
+          <Calendar_nav  onChange = {handleDateChange}/>
         </Compon1>
         <Compon2>
-          <ul>
-            {data.map(game => (
-              <li key={game.id}>
-                <a>{game.score[0]} - {game.score[1]}</a>
-              </li>
-            ))}
+          <ul> 
+            {gamesListing(data)}
           </ul>
         </Compon2>
       </Container1>
@@ -98,14 +109,14 @@ const Index = props => {
   );
 }
 Index.getInitialProps = async function () {
-  let date = '2018-10-17';
-  const res = await fetch(server + date)
+  let date = formatDate();
+  console.log('DATE in props: ', date);
+  const res = await fetch(server + date);
   const data = await res.json()
-
   console.log(`Show data fetched in Index. Count: ${data.length}`)
-  console.log ('data')
   return {
-    games: data
+    games: data,
+    date: date
   }
 }
 
