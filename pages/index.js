@@ -55,6 +55,7 @@ const formatDate = date => {
 const Index = props => {
   const [data, setData] = useState(props.games);
   const [date, setDate] = useState(props.date);
+  const [calOpen, setCal] = useState(false);
 
   // console.log('date in Index: ', date);
   // console.log('data in Index: ', data);
