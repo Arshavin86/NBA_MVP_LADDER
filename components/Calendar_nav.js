@@ -7,6 +7,7 @@ const Container2 = style.div`
   flex-direction: row; 
 `;
 const Cal = props => {
+    console.log('props.date', props.date);
 
     return (
         <Container2>
@@ -14,7 +15,7 @@ const Cal = props => {
                 <img src="/static/scroll-left-icon.png" onClick={e => {e.preventDefault();}} alt="my image"/>
             </div>
             <div>
-                <Calendar onChange={props.onChange}
+                <Calendar onChange={props.onChange} date = {props.date}
                 />
             </div>
             <div>

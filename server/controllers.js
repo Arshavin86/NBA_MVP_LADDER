@@ -19,7 +19,7 @@ exports.getGames = async (req, res) => {
     //   console.log (list.length)
     //   res.status(200).send(list);
     if (data.length) {
-      console.log (data)
+      // console.log (data)
       res.status(200).send(data);
     } else {
       let games = await getDayLeaders(id);

@@ -15,34 +15,24 @@ const Container1 = style.div`
   vertical-align: middle;
   line-height: 40px; 
 `;
-const Compon1 = style.div`
-  width: 290px;
+const Scoreboard = style.div`
   border: 0.5px solid black;
+  font-family: "Flama-Basic",sans-serif;
 `;
-const Compon2 = style(Compon1)`
+const Scoreboard_nav = style.div`
+  background-color: #00092D;
+`;
+
+const Scoreboard_bottom = style.ul`
+  
+`;
+
+const Compon2 = style(Scoreboard_bottom)`
   width: 150px;
 `;
 
 const server = 'http://localhost:3001/api/games/date/';
 
-    //use Hooks to fetch data  
-    // const [data, setData] = useState([]);
-    // const [loading, setLoading] = useState(true);
-
-    // useEffect(() => {
-    //       (async() => {
-    //         let date = '2018-10-17';
-    //         try {
-    //           const response = await fetch(server + date);
-    //           const json = await response.json();
-    //           console.log(json);
-    //           setData (json);
-    //           setLoading(false); 
-    //         } catch (e) {
-    //           console.log(e);
-    //         }
-    //       })();
-    //   }, []);
 const formatDate = date => {
    
     let d = date ? new Date(date) : new Date(),
@@ -90,7 +80,7 @@ const Index = props => {
         </li>
       )});
     } else {
-      return 'No games are scheduled on this day.';
+      return 'No games were played in this day';
     } 
     console.log('context', context);
     return context;
@@ -99,13 +89,16 @@ const Index = props => {
   return (
     <Layout>
       <Container1>
-        <Compon1>
-          <Calendar_nav  onChange = {handleDateChange}/>
-        </Compon1>
-        <Compon2>
-          <ul> 
+        <Scoreboard>
+          <Scoreboard_nav>
+            <Calendar_nav  onChange = {handleDateChange} date = {date}/>
+          </Scoreboard_nav>  
+          <Scoreboard_bottom> 
             {gamesListing(data)}
-          </ul>
+          </Scoreboard_bottom>
+        </Scoreboard>
+        <Compon2>
+          Place for video player/news etc.
         </Compon2>
       </Container1>
     </Layout>
@@ -124,3 +117,22 @@ Index.getInitialProps = async function () {
 }
 
 export default Index;
+
+ //use Hooks to fetch data  
+    // const [data, setData] = useState([]);
+    // const [loading, setLoading] = useState(true);
+
+    // useEffect(() => {
+    //       (async() => {
+    //         let date = '2018-10-17';
+    //         try {
+    //           const response = await fetch(server + date);
+    //           const json = await response.json();
+    //           console.log(json);
+    //           setData (json);
+    //           setLoading(false); 
+    //         } catch (e) {
+    //           console.log(e);
+    //         }
+    //       })();
+    //   }, []);
