@@ -5,7 +5,7 @@ const getDayLeaders = require('./api');
 exports.getGames = async (req, res) => {
   // console.log('id: ', req.params);
   const id = req.params.date;
-  console.log(id);
+  // console.log(id);
   try {
     let data = await db.query('SELECT * FROM game WHERE date = $1', id);
     // let list = await db.query('SELECT name, teamID, awards FROM player INNER JOIN season18 ON player.playerID = season18.playerID WHERE awards < 16 and awards > 10');

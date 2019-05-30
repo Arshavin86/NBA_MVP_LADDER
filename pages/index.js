@@ -65,6 +65,7 @@ const Index = props => {
   const [date, setDate] = useState(props.date);
 
   console.log('date in Index: ', date);
+  console.log('data in Index: ', data);
 
   const handleDateChange = async date => {
     const ISODate = formatDate(date);
@@ -81,15 +82,17 @@ const Index = props => {
   } 
 
   const gamesListing = data => {
-    let context = data ? (
-      data.map(game => (
-        <li key={game.id}>
+    let context = [];
+    if (data.length) {
+      data.map(game => {
+        context.push (<li key={game.id}>
           <a>{game.score[0]} - {game.score[1]}</a>
         </li>
-      ))
-    ) : (
-      'No games are scheduled on this day.'
-    ) 
+      )});
+    } else {
+      return 'No games are scheduled on this day.';
+    } 
+    console.log('context', context);
     return context;
   }
   
