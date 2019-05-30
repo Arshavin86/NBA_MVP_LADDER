@@ -1,14 +1,14 @@
 import {useState} from 'react';
 import Calendar_nav from '../components/Calendar_nav.js'
 import Layout from '../components/MyLayout.js';
+import Scoreboard_wrapper from '../components/Scoreboard_wrapper.js';
 import style from 'styled-components';
 import fetch from 'isomorphic-unfetch';
-
+import ApiContext from '../components/Context.js';
 
 const Container1 = style.div`
   display: flex; 
   flex-direction: row;
-  cursor: pointer;
   border: 0.5px solid black;
   width: 440px;
   text-align: left;
@@ -46,16 +46,18 @@ const formatDate = date => {
     return [year, month, day].join('-');
 }
 
-const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const d = new Date();
-const dayName = days[d.getDay()];
+// const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+// const d = new Date();
+// const dayName = days[d.getDay()];
+
+// export const ApiContext = React.createContext([{}, () => {}]);
 
 const Index = props => {
   const [data, setData] = useState(props.games);
   const [date, setDate] = useState(props.date);
 
-  console.log('date in Index: ', date);
-  console.log('data in Index: ', data);
+  // console.log('date in Index: ', date);
+  // console.log('data in Index: ', data);
 
   const handleDateChange = async date => {
     const ISODate = formatDate(date);
@@ -64,37 +66,26 @@ const Index = props => {
     try {
       const response = await fetch(server + ISODate);
       const json = await response.json();
-      console.log(json);
+      // console.log(json);
       setData (json); 
     } catch (e) {
       console.log(e);
     }
   } 
-
-  const gamesListing = data => {
-    let context = [];
-    if (data.length) {
-      data.map(game => {
-        context.push (<li key={game.id}>
-          <a>{game.score[0]} - {game.score[1]}</a>
-        </li>
-      )});
-    } else {
-      return 'No games were played in this day';
-    } 
-    console.log('context', context);
-    return context;
-  }
   
   return (
     <Layout>
       <Container1>
         <Scoreboard>
           <Scoreboard_nav>
-            <Calendar_nav  onChange = {handleDateChange} date = {date}/>
+            <ApiContext.Provider value = {[date, handleDateChange]}>
+              <Calendar_nav/>
+            </ApiContext.Provider>
           </Scoreboard_nav>  
           <Scoreboard_bottom> 
-            {gamesListing(data)}
+            <ApiContext.Provider value = {[data]}>
+              <Scoreboard_wrapper/>
+            </ApiContext.Provider>
           </Scoreboard_bottom>
         </Scoreboard>
         <Compon2>
