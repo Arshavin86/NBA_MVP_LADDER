@@ -23,8 +23,12 @@ const Scoreboard_nav = style.div`
   background-color: #00092D;
 `;
 
-const Scoreboard_bottom = style.ul`
-  
+const Scoreboard_bottom = style.div`
+  background: #CCD0D3;
+  width: 100%;
+  font-family: "Flama-Basic",sans-serif;
+  font-size: 100%;
+  overflow-x: hidden;
 `;
 
 const Compon2 = style(Scoreboard_bottom)`
