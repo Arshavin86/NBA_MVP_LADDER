@@ -19,16 +19,16 @@ const Day = style.span`
   text-align: left;
 `;
 
-const Image = style.img`
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
-`;
+// const Image = style.img`
+//   height: 30px;
+//   width: 30px;
+//   cursor: pointer;
+// `;
 
-const Date = style.span`
-  cursor: pointer;
-  padding: 0px 10px 0px 10px;
-`;
+// const Date = style.span`
+//   cursor: pointer;
+//   padding: 0px 10px 0px 10px;
+// `;
 
 // const formatDate = date => {
    

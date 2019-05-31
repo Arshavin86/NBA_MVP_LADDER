@@ -17,7 +17,7 @@ const Image = style.input`
 const Cal = props => {
     const [date, setDate] = useContext(ApiContext);
 
-    //it decrements a date by 2 and doesn't increment?????
+    //it decrements a date by 2 and doesn't increment if I put -1 and 1, but it works with 0 and 2???
     const changeDate = (incrementor) => {
         let newDate = new Date (date);
         newDate.setDate(newDate.getDate() + incrementor);
@@ -27,11 +27,11 @@ const Cal = props => {
 
     return (
         <Container2>
-            <Image type="image" src="/static/scroll-left-icon.png" onClick={e => {e.preventDefault(); changeDate(-1)}} alt="my image"/>
+            <Image type="image" src="/static/scroll-left-icon.png" onClick={e => {e.preventDefault(); changeDate(0)}} alt="my image"/>
             <div>
                 <Calendar/>
             </div>
-            <Image type="image" src="/static/scroll-right-icon.png" onClick={e => {e.preventDefault(); changeDate(1)}} alt="my image"/>   
+            <Image type="image" src="/static/scroll-right-icon.png" onClick={e => {e.preventDefault(); changeDate(2)}} alt="my image"/>   
         </Container2>      
     )
 }

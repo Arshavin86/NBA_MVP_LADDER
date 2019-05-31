@@ -32,6 +32,14 @@ const Team = style.div`
 const TeamLogo = style.div`
     flex: 1 0 0;
     text-align: center;
+    padding: 6px 10px 7px 3px;
+`;
+
+const TeamScore = style.div`
+    font-family: "Flama-Basic",sans-serif;
+    font-size: 24px;
+    text-align: right;
+    line-height: initial;
 `;
 
 const gamesListing = data => {
@@ -43,27 +51,39 @@ const gamesListing = data => {
 
     if (data.length) {
       data.map(game => {
-        visitorLogo = game.score[0] > game.score[1] ? game.logo : game.losingTeam.logo;
-        visitorName = game.score[0] > game.score[1] ? game.name : game.losingTeam.name;
-        homelogo = game.score[0] < game.score[1] ? game.logo : game.losingTeam.logo;
-        homeName = game.score[0] < game.score[1] ? game.name : game.losingTeam.name;
+        visitorLogo = Number(game.score[0]) > Number(game.score[1]) ? game.logo : game.losingTeam[0].logo;
+        visitorName = Number(game.score[0]) > Number(game.score[1]) ? game.name : game.losingTeam[0].name;
+        homelogo = Number(game.score[0]) < Number(game.score[1]) ? game.logo : game.losingTeam[0].logo;
+        homeName = Number(game.score[0]) < Number(game.score[1]) ? game.name : game.losingTeam[0].name;
         context.push (
         <Section key={game.id}>
             <Score_tile >
                 <Score_tile_wrapper>
                     <Team>
                         <TeamLogo>
-                            <img src={visitorLogo} height="34px">
+                            <img src={visitorLogo} height="34px" >
                             </img>
                         </TeamLogo>
-                    <a>{game.score[0]} - {game.score[1]}</a>
+                        <div>
+                            {visitorName}
+                        </div>
+                        <TeamScore>
+                            {game.score[0]}
+                        </TeamScore>
                     </Team>
                     <Team>
-                    <a>{game.score[0]} - {game.score[1]}</a>
+                        <TeamLogo>
+                            <img src={homelogo} height="34px" >
+                            </img>
+                        </TeamLogo>
+                        <div>
+                            {homeName}
+                        </div>
+                        <TeamScore>
+                            {game.score[1]}
+                        </TeamScore>
                     </Team>
-                    
-                </Score_tile_wrapper>
-                
+                </Score_tile_wrapper>  
             </Score_tile>
         </Section>
       )});
