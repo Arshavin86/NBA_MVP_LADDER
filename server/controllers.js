@@ -19,10 +19,12 @@ exports.getGames = async (req, res) => {
       const start = async (data) => {
         await asyncForEach(data, async game => {
           let data2 = await db.query('SELECT name, logo FROM team WHERE teamID = $1', game.losingteamid);
+          let data3 = await db.query('SELECT name FROM player WHERE playerID = $1', game.bestplayer1);
           game['losingTeam'] = data2;
+          game['BP1name'] = data3;
         });
         console.log('Done');
-        console.log(data);
+        // console.log(data);
         res.status(200).send(data);
         return data;
       }
