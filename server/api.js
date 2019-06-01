@@ -38,7 +38,7 @@ async function getDayLeaders(date) {
                 database.postTeam(game.hTeam.teamId, game.hTeam.fullName, game.hTeam.logo);
             });
 
-            console.log('matchDay: ', matchDay)
+            // console.log('matchDay: ', matchDay)
             //I can't use forEach with async/await so I use a variation of the for-of iteration statement which iterates over async iterable objects
             for await (const team of Object.keys(matchDay)) {
                 //get players stats for each game
@@ -73,15 +73,22 @@ async function getDayLeaders(date) {
                                 leader.statsBP2 = [points, assists, totReb, steals, blocks, turnovers, plusMinus, fgp];
                             }
                         } 
-                        // console.log('leader', leader, teamId);
+                        // console.log('leader', leader, teamId, matchDay[team]['gameId']);
                     }) 
 
                     //get name of the best player of the game
                     // console.log(leader.player1Id, matchDay[team]['gameId']);
+
+                    //check if data from API has playerID
+                    if (!leader.player1Id) {
+                        console.log(`There is no playerID in game ${matchDay[team]['gameId']} stats!`);
+                        return 0;
+                    }
                     let bestPlayer1 = await getNameByPlayerID(leader.player1Id);
                     // console.log('bestPlayer1', bestPlayer1.api.players);
 
                     //post or update player info
+                    // console.log('player: ', leader.player1Id)
                     await database.postPlayer(leader.player1Id, `${bestPlayer1.api.players[0].firstName} ${bestPlayer1.api.players[0].lastName}`, team);
 
                     matchDay[team]['bestPl1'] = bestPlayer1.api.players[0].playerId;
@@ -119,6 +126,7 @@ async function getDayLeaders(date) {
                     await database.postGame(date, gameId, team, losingTeamID, bestPl1, bestPl2, score, statsBP1, statsBP2);
                 } else {
                     console.log(`There is no stats of game ${matchDay[team]['gameId']} for ${matchDay[team]['teams']}!!!!!`);
+                    return 0;
                 }    
             }
             console.log('DONE!'); 
@@ -127,7 +135,7 @@ async function getDayLeaders(date) {
         console.log('We got junky object from API!');
         return 0;
     }
-    console.log('There is no game on this day');
+    console.log('There is no game played in this day');
     return 0;   
 };
 

@@ -77,7 +77,7 @@ const gamesListing = data => {
         stats[3] = Number(game.statsbp1[3]) > 2 ? Number(game.statsbp1[3]) + ' stl ' : undefined;
         stats[4] = Number(game.statsbp1[4]) > 2 ? Number(game.statsbp1[4]) + ' blk ' : undefined;
         stats[5] = Number(game.statsbp1[5]) > 9 ? Number(game.statsbp1[5]) + ' tov ' : undefined;
-        stats[6] = Number(game.statsbp1[6]) > 19 ? Number(game.statsbp1[6]) + ' +- ' : undefined;
+        stats[6] = Number(game.statsbp1[6]) > 19 ? + Number(game.statsbp1[6]) + ' plusMinus ' : undefined;
         stats[7] = Number(game.statsbp1[7]) > 59.9 ? Number(game.statsbp1[7]) + ' fgp ' : undefined;
  
         statsLine = game.BP1name[0].name + ': ' + stats.map(stat => {
