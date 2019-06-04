@@ -1,10 +1,13 @@
-import {useState} from 'react';
-import Calendar_nav from '../components/Calendar_nav.js'
+import {useState, useEffect} from 'react';
+import Calendar_nav from '../components/Calendar_nav.js';
 import Layout from '../components/MyLayout.js';
 import Scoreboard_wrapper from '../components/Scoreboard_wrapper.js';
 import style from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import ApiContext from '../components/Context.js';
+import YoutubeAPI_Key from '../config/youtube';
+import searchYouTube from '../helpers/youtube_api';
+import Videoboard from '../components/Videoboard';
 
 const Container1 = style.div`
   display: flex; 
@@ -59,9 +62,30 @@ const formatDate = date => {
 const Index = props => {
   const [data, setData] = useState(props.games);
   const [date, setDate] = useState(props.date);
+  const [query, setQuery] = useState('Lebron');
+  const [video, setVideo] = useState('Lebron');
 
+  // props.games[0]['id']
   // console.log('date in Index: ', date);
   // console.log('data in Index: ', data);
+
+  useEffect(() => {
+    (async() => {
+      let options = {
+        query: query,
+        max: 5,
+        key: YoutubeAPI_Key,
+      };
+      try {
+        const response = await searchYouTube (options);
+        // const json = await response.json();
+        console.log('Youtube data:', response);
+        setVideo(response);
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  }, []);
 
   const handleDateChange = async date => {
     const ISODate = formatDate(date);
@@ -81,6 +105,22 @@ const Index = props => {
       console.log(e);
     }
   } 
+
+  const handleVideoChange = async query => {
+    let options = {
+      query: query,
+      max: 5,
+      key: YoutubeAPI_Key,
+    };
+    try {
+      const response = await searchYouTube (options);
+      // const json = await response.json();
+      console.log('Youtube data:', response);
+      setVideo(response);
+    } catch (e) {
+      console.log(e);
+    }
+  }
   
   return (
     <Layout>
@@ -92,18 +132,22 @@ const Index = props => {
             </ApiContext.Provider>
           </Scoreboard_nav>  
           <Scoreboard_bottom> 
-            <ApiContext.Provider value = {[data]}>
+            <ApiContext.Provider value = {[data, handleVideoChange]}>
               <Scoreboard_wrapper/>
             </ApiContext.Provider>
           </Scoreboard_bottom>
         </Scoreboard>
         <Compon2>
-          Place for video player/news etc.
+          <ApiContext.Provider value = {[video]}>
+              <Videoboard/>
+          </ApiContext.Provider>
+          {/* {query} */}
         </Compon2>
       </Container1>
     </Layout>
   );
 }
+
 Index.getInitialProps = async function () {
   let date = formatDate();
   let json;
@@ -121,7 +165,8 @@ Index.getInitialProps = async function () {
     }
     return {
       games: json,
-      date: date
+      date: date,
+      // query: json[0].id
     }
   } catch (e) {
     console.log(e);

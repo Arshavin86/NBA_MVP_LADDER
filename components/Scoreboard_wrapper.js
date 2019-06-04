@@ -96,7 +96,7 @@ const MVPButton = style (WatchButton)`
     padding: 10px 10px 0px 10px; 
 `;
 
-const gamesListing = data => {
+const gamesListing = (data, setVideo) => {
     let context = [],
     visitorLogo,
     visitorName,
@@ -104,6 +104,11 @@ const gamesListing = data => {
     homeName,
     stats = [],
     statsLine;
+
+    const changeVideo = (query) => {
+        console.log(query)
+        setVideo(query);
+    }
 
     if (typeof data === 'object') {
       data.map(game => {
@@ -160,7 +165,7 @@ const gamesListing = data => {
                 </GameMVP>
                 <Bottom>
                     <Watch>
-                        <WatchButton >
+                        <WatchButton onClick={e => {e.preventDefault(); changeVideo(game.BP1name.name)}}>
                             Watch
                         </WatchButton>
                     </Watch>
@@ -186,9 +191,9 @@ const gamesListing = data => {
 }
 
 const Wrapper = props => {
-    const [data] = useContext(ApiContext);
+    const [data, setVideo] = useContext(ApiContext);
 
-    return gamesListing(data);
+    return gamesListing(data, setVideo);
 }
 
 export default Wrapper;
