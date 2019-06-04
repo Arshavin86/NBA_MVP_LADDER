@@ -1,6 +1,12 @@
 import {useContext} from 'react';
 import style from 'styled-components';
 import ApiContext from './Context';
+// import styler from './StyledLinks';
+// import Link from 'next/link'
+
+
+  
+// const StyledLink = styler ('/boxscore', 'BOXSCORE');
 
 const Section = style.section`
     order: initial;
@@ -56,6 +62,12 @@ const GameMVP = style.div`
     padding: 0 5px;
 `;
 
+const BoxScore = style.div`
+    display: block;
+    padding: 6px 0px;
+    border-top: 1px solid #e6e8ea;
+`;
+
 const gamesListing = data => {
     let context = [],
     visitorLogo,
@@ -65,7 +77,7 @@ const gamesListing = data => {
     stats = [],
     statsLine;
 
-    if (data.length) {
+    if (typeof data === 'object') {
       data.map(game => {
         visitorLogo = Number(game.score[0]) > Number(game.score[1]) ? game.logo : game.losingTeam[0].logo;
         visitorName = Number(game.score[0]) > Number(game.score[1]) ? game.name : game.losingTeam[0].name;
@@ -118,11 +130,13 @@ const gamesListing = data => {
                 <GameMVP>
                     {statsLine}
                 </GameMVP>
+                <BoxScore>
+                </BoxScore>
             </Score_tile>
         </Section>
       )});
     } else {
-      return 'No games were played on this day';
+        return data;
     } 
     // console.log('context', context);
     return context;
