@@ -1,6 +1,6 @@
 const postgres = require('../database/postgres');
 const { db } = postgres;
-const getDayLeaders = require('./api');
+const getDayLeaders = require('./nba_api');
 
 exports.getGames = async (req, res) => {
   // console.log('id: ', req.params);

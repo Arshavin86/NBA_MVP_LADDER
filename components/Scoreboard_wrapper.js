@@ -15,7 +15,6 @@ const Section = style.section`
 `;
 
 const Score_tile = style.div`
-    cursor: pointer;
     margin: 10px auto;
     background: #fff;
     color: #11202B;
@@ -62,10 +61,39 @@ const GameMVP = style.div`
     padding: 0 5px;
 `;
 
-const BoxScore = style.div`
-    display: block;
+const Bottom = style.div`
+    display: flex; 
+    flex-direction: row;
     padding: 6px 0px;
     border-top: 1px solid #e6e8ea;
+    width: 100%;
+    text-align: center;
+`;
+
+const Watch = style.div`
+    border-right: 1px solid #e6e8ea; 
+`;
+
+const WatchButton = style.div`
+    display: block;
+    padding: 10px 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    cursor: pointer;
+`;
+
+const Boxscore = style (Watch)`
+    border-right: 1px solid #e6e8ea;
+`;
+const BoxscoreButton = style (WatchButton)`
+    padding: 10px 10px 0px 10px; 
+`;
+
+const MVP = style (Watch)`
+    border-right: 0px solid #e6e8ea;
+`;
+const MVPButton = style (WatchButton)`
+    padding: 10px 10px 0px 10px; 
 `;
 
 const gamesListing = data => {
@@ -130,8 +158,23 @@ const gamesListing = data => {
                 <GameMVP>
                     {statsLine}
                 </GameMVP>
-                <BoxScore>
-                </BoxScore>
+                <Bottom>
+                    <Watch>
+                        <WatchButton >
+                            Watch
+                        </WatchButton>
+                    </Watch>
+                    <Boxscore>
+                        <BoxscoreButton>
+                            Boxscore
+                        </BoxscoreButton>
+                    </Boxscore>
+                    <MVP>
+                        <MVPButton>
+                            MVP of the game
+                        </MVPButton>
+                    </MVP>
+                </Bottom>
             </Score_tile>
         </Section>
       )});
