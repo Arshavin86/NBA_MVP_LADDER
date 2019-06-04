@@ -73,10 +73,26 @@
     --     PRIMARY KEY (id, playerID)
     -- );
 
-    DROP TABLE IF EXISTS season18 CASCADE;
-    CREATE TABLE season18 (
-        id SERIAL,  
-        playerID text NOT NULL UNIQUE REFERENCES player (playerID),
-        awards integer NOT NULL,
-        PRIMARY KEY (id, playerID)
-    );
+    -- DROP TABLE IF EXISTS season18 CASCADE;
+    -- CREATE TABLE season18 (
+    --     id SERIAL,  
+    --     playerID text NOT NULL UNIQUE REFERENCES player (playerID),
+    --     awards integer NOT NULL,
+    --     PRIMARY KEY (id, playerID)
+    -- );
+
+    -- DROP TABLE IF EXISTS season17 CASCADE;
+    --     CREATE TABLE season17 (
+    --         id SERIAL,  
+    --         playerID text NOT NULL UNIQUE REFERENCES player (playerID),
+    --         awards integer NOT NULL,
+    --         PRIMARY KEY (id, playerID)
+    --     );
+
+        DROP TABLE IF EXISTS season16 CASCADE;
+        CREATE TABLE season16 (
+            id SERIAL,  
+            playerID text NOT NULL UNIQUE REFERENCES player (playerID),
+            awards integer NOT NULL,
+            PRIMARY KEY (id, playerID)
+        );

@@ -59,20 +59,24 @@ const formatDate = date => {
 const Index = props => {
   const [data, setData] = useState(props.games);
   const [date, setDate] = useState(props.date);
-  const [calOpen, setCal] = useState(false);
 
   // console.log('date in Index: ', date);
   // console.log('data in Index: ', data);
 
   const handleDateChange = async date => {
     const ISODate = formatDate(date);
+    let json;
     console.log('ISODate:', ISODate);
     setDate (ISODate);
     try {
       const response = await fetch(server + ISODate);
-      const json = await response.json();
-      // console.log(json);
-      setData (json); 
+      if (response.status === 500) {
+        json = 'No games were played on this day';
+      } else {
+        json = await response.json();
+        console.log('JSON:', json); 
+      }
+      setData (json);
     } catch (e) {
       console.log(e);
     }
@@ -102,13 +106,25 @@ const Index = props => {
 }
 Index.getInitialProps = async function () {
   let date = formatDate();
+  let json;
   console.log('DATE in props: ', date);
-  const res = await fetch(server + date);
-  const data = await res.json()
-  console.log(`Show data fetched in Index. Count: ${data.length}`)
-  return {
-    games: data,
-    date: date
+
+  try {
+    const res = await fetch(server + date);
+    console.log('res!!!!!', res.status);
+    if (res.status === 500) {
+      json = 'No games were played on this day';
+    } else {
+      const json = await res.json();
+      console.log('json!!!!!', json);
+      console.log(`Show data fetched in Index. Count: ${json.length}`)
+    }
+    return {
+      games: json,
+      date: date
+    }
+  } catch (e) {
+    console.log(e);
   }
 }
 

@@ -1,6 +1,12 @@
 import {useContext} from 'react';
 import style from 'styled-components';
 import ApiContext from './Context';
+// import styler from './StyledLinks';
+// import Link from 'next/link'
+
+
+  
+// const StyledLink = styler ('/boxscore', 'BOXSCORE');
 
 const Section = style.section`
     order: initial;
@@ -9,7 +15,6 @@ const Section = style.section`
 `;
 
 const Score_tile = style.div`
-    cursor: pointer;
     margin: 10px auto;
     background: #fff;
     color: #11202B;
@@ -56,6 +61,41 @@ const GameMVP = style.div`
     padding: 0 5px;
 `;
 
+const Bottom = style.div`
+    display: flex; 
+    flex-direction: row;
+    padding: 6px 0px;
+    border-top: 1px solid #e6e8ea;
+    width: 100%;
+    text-align: center;
+`;
+
+const Watch = style.div`
+    border-right: 1px solid #e6e8ea; 
+`;
+
+const WatchButton = style.div`
+    display: block;
+    padding: 10px 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    cursor: pointer;
+`;
+
+const Boxscore = style (Watch)`
+    border-right: 1px solid #e6e8ea;
+`;
+const BoxscoreButton = style (WatchButton)`
+    padding: 10px 10px 0px 10px; 
+`;
+
+const MVP = style (Watch)`
+    border-right: 0px solid #e6e8ea;
+`;
+const MVPButton = style (WatchButton)`
+    padding: 10px 10px 0px 10px; 
+`;
+
 const gamesListing = data => {
     let context = [],
     visitorLogo,
@@ -65,7 +105,7 @@ const gamesListing = data => {
     stats = [],
     statsLine;
 
-    if (data.length) {
+    if (typeof data === 'object') {
       data.map(game => {
         visitorLogo = Number(game.score[0]) > Number(game.score[1]) ? game.logo : game.losingTeam[0].logo;
         visitorName = Number(game.score[0]) > Number(game.score[1]) ? game.name : game.losingTeam[0].name;
@@ -77,7 +117,7 @@ const gamesListing = data => {
         stats[3] = Number(game.statsbp1[3]) > 2 ? Number(game.statsbp1[3]) + ' stl ' : undefined;
         stats[4] = Number(game.statsbp1[4]) > 2 ? Number(game.statsbp1[4]) + ' blk ' : undefined;
         stats[5] = Number(game.statsbp1[5]) > 9 ? Number(game.statsbp1[5]) + ' tov ' : undefined;
-        stats[6] = Number(game.statsbp1[6]) > 19 ? Number(game.statsbp1[6]) + ' +- ' : undefined;
+        stats[6] = Number(game.statsbp1[6]) > 19 ? + Number(game.statsbp1[6]) + ' plusMinus ' : undefined;
         stats[7] = Number(game.statsbp1[7]) > 59.9 ? Number(game.statsbp1[7]) + ' fgp ' : undefined;
  
         statsLine = game.BP1name[0].name + ': ' + stats.map(stat => {
@@ -118,11 +158,28 @@ const gamesListing = data => {
                 <GameMVP>
                     {statsLine}
                 </GameMVP>
+                <Bottom>
+                    <Watch>
+                        <WatchButton >
+                            Watch
+                        </WatchButton>
+                    </Watch>
+                    <Boxscore>
+                        <BoxscoreButton>
+                            Boxscore
+                        </BoxscoreButton>
+                    </Boxscore>
+                    <MVP>
+                        <MVPButton>
+                            MVP of the game
+                        </MVPButton>
+                    </MVP>
+                </Bottom>
             </Score_tile>
         </Section>
       )});
     } else {
-      return 'No games were played on this day';
+        return data;
     } 
     // console.log('context', context);
     return context;

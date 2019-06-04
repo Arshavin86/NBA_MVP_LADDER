@@ -56,7 +56,7 @@ const Cal = props => {
             icon={'/static/calender-google-icon.png'}
             onChange={date => {setDate(date);}}
             //define minimum date (exists in DB) that the user can select
-            minDate={'2017-10-17'} 
+            minDate={'2015-10-28'} 
             className="color"
             iconClass="icon"
             // value={formatDate(date)}
