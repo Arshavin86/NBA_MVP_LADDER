@@ -2,7 +2,7 @@ const {getGamesByDate, getStatsByGameID, getNameByPlayerID, getPhotoByName} = re
 const {statsCalculator} = require('../helpers/statsCalculater');
 const database = require('./controllers');
 
-async function getDayLeaders(date) {
+const getDayLeaders = async (date) => {
     let winningTeamID;
     let loosingTeamID;
     let gameID;
