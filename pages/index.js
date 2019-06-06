@@ -1,3 +1,4 @@
+
 import {useState, useEffect} from 'react';
 import Calendar_nav from '../components/Calendar_nav.js';
 import Layout from '../components/MyLayout.js';
@@ -5,8 +6,6 @@ import Scoreboard_wrapper from '../components/Scoreboard_wrapper.js';
 import style from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import ApiContext from '../components/Context.js';
-import YoutubeAPI_Key from '../config/youtube';
-import searchYouTube from '../helpers/youtube_api';
 import Videoboard from '../components/Videoboard';
 
 const Container1 = style.div`
@@ -38,7 +37,7 @@ const Compon2 = style(Scoreboard_bottom)`
   width: 150px;
 `;
 
-const server = 'http://localhost:3001/api/games/date/';
+const server = 'http://localhost:3001/api/';
 
 const formatDate = date => {
    
@@ -53,34 +52,19 @@ const formatDate = date => {
     return [year, month, day].join('-');
 }
 
-// const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-// const d = new Date();
-// const dayName = days[d.getDay()];
-
-// export const ApiContext = React.createContext([{}, () => {}]);
-
 const Index = props => {
   const [data, setData] = useState(props.games);
   const [date, setDate] = useState(props.date);
   const [query, setQuery] = useState('Lebron');
-  const [video, setVideo] = useState('Lebron');
-
-  // props.games[0]['id']
-  // console.log('date in Index: ', date);
-  // console.log('data in Index: ', data);
+  const [video, setVideo] = useState(null);
 
   useEffect(() => {
     (async() => {
-      let options = {
-        query: query,
-        max: 5,
-        key: YoutubeAPI_Key,
-      };
       try {
-        const response = await searchYouTube (options);
-        // const json = await response.json();
-        console.log('Youtube data:', response);
-        setVideo(response);
+        const response = await fetch (server + 'videos/' + query);
+        const json = await response.json();
+        console.log('Youtube data on FE:', json);
+        setVideo(json);
       } catch (e) {
         console.log(e);
       }
@@ -93,7 +77,7 @@ const Index = props => {
     console.log('ISODate:', ISODate);
     setDate (ISODate);
     try {
-      const response = await fetch(server + ISODate);
+      const response = await fetch(server + 'games/date/' + ISODate);
       if (response.status === 500) {
         json = 'No games were played on this day';
       } else {
@@ -115,7 +99,7 @@ const Index = props => {
     try {
       const response = await searchYouTube (options);
       // const json = await response.json();
-      console.log('Youtube data:', response);
+      console.log('Youtube data on FE:', response);
       setVideo(response);
     } catch (e) {
       console.log(e);
@@ -141,7 +125,6 @@ const Index = props => {
           <ApiContext.Provider value = {[video]}>
               <Videoboard/>
           </ApiContext.Provider>
-          {/* {query} */}
         </Compon2>
       </Container1>
     </Layout>
@@ -149,13 +132,13 @@ const Index = props => {
 }
 
 Index.getInitialProps = async function () {
-  let date = formatDate();
+  let date = formatDate('2019-06-05');
   let json;
   console.log('DATE in props: ', date);
 
   try {
-    const res = await fetch(server + date);
-    console.log('res!!!!!', res.status);
+    const res = await fetch(server + 'games/date/' + date);
+    console.log('res status on FE:', res.status);
     if (res.status === 500) {
       json = 'No games were played on this day';
     } else {
@@ -174,22 +157,3 @@ Index.getInitialProps = async function () {
 }
 
 export default Index;
-
- //use Hooks to fetch data  
-    // const [data, setData] = useState([]);
-    // const [loading, setLoading] = useState(true);
-
-    // useEffect(() => {
-    //       (async() => {
-    //         let date = '2018-10-17';
-    //         try {
-    //           const response = await fetch(server + date);
-    //           const json = await response.json();
-    //           console.log(json);
-    //           setData (json);
-    //           setLoading(false); 
-    //         } catch (e) {
-    //           console.log(e);
-    //         }
-    //       })();
-    //   }, []);

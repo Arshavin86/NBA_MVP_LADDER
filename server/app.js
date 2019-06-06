@@ -15,4 +15,8 @@ app.get('/api/games/date/:date', jsonParser, (req, res) => {
      database.getGames(req, res);
 });
 
+app.get('/api/videos/:query', jsonParser, (req, res) => {
+     database.getVideos(req, res);
+})
+
 module.exports = app;
