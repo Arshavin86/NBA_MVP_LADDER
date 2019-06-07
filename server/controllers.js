@@ -2,6 +2,7 @@ const postgres = require('../database/postgres');
 const { db } = postgres;
 const getDayLeaders = require('./nba_api');
 const searchYouTube = require ('../helpers/youtube_api');
+const searchNews = require ('../helpers/news_api');
 
 exports.getGames = async (req, res) => {
   // console.log('id: ', req.params);
@@ -111,15 +112,29 @@ exports.postGame = async (date, ID, WTID, LTID, BP1, BP2, score, SBP1, SBP2) => 
   }
 }
 
-exports.getVideos = async (req, res) => {
+exports.getNews = async (req, res) => {
   const query = req.params.query;
-  console.log('id', query )
+  console.log('id', query );
 
-    try {
-      const response = await searchYouTube (query);
-      // console.log('Youtube data on BE:', response);
-      res.status(200).send(response);
-    } catch (e) {
-      console.log(e);
-    }
+  try {
+    const response = await searchNews (query);
+    console.log('News data on BE:', response);
+    res.status(200).send(response);
+  } catch (e) {
+    console.log(e);
+  }
+  
 }
+
+// exports.getVideos = async (req, res) => {
+//   const query = req.params.query;
+//   console.log('id', query )
+
+//     try {
+//       const response = await searchYouTube (query);
+//       // console.log('Youtube data on BE:', response);
+//       res.status(200).send(response);
+//     } catch (e) {
+//       console.log(e);
+//     }
+// }

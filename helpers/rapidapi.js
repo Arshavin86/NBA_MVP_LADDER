@@ -1,4 +1,4 @@
-// const request = require('request-promise');
+
 const request = require('request-promise');
 const config = require('../config/api-nba-v1.p');
 const headers = {

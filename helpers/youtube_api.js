@@ -3,9 +3,7 @@ const {YoutubeAPI_Key, CLIENT_ID, CLIENT_SECRET, REDIRECT_URL} = require ('../co
 const {google} = require('googleapis');
 
 const searchYouTube = async (query) => {
-  const q = query;
-  const getVideos = async () => {
-
+  
     const youtube = google.youtube({
       version: 'v3',
       auth: YoutubeAPI_Key,
@@ -15,7 +13,7 @@ const searchYouTube = async (query) => {
       part: 'snippet',
       maxResults: 5,
       order: 'viewCount',
-      q: q,
+      q: query,
       chart: 'mostPopular',
       type: 'video',
       key: YoutubeAPI_Key,
@@ -33,8 +31,6 @@ const searchYouTube = async (query) => {
     } catch (e) {
       console.log(e); 
     }
-  }
-  return getVideos ();
 }
 
 module.exports = searchYouTube;

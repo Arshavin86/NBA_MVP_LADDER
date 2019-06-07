@@ -6,20 +6,24 @@ import Scoreboard_wrapper from '../components/Scoreboard_wrapper.js';
 import style from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import ApiContext from '../components/Context.js';
-import Videoboard from '../components/Videoboard';
+import MainBoard from '../components/MainBoard';
 
 const Container1 = style.div`
   display: flex; 
   flex-direction: row;
   border: 0.5px solid black;
-  width: 440px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: none;
   text-align: left;
   vertical-align: middle;
   line-height: 40px; 
+  background: #CCD0D3;
 `;
 const Scoreboard = style.div`
   border: 0.5px solid black;
   font-family: "Flama-Basic",sans-serif;
+  width: 320px;
 `;
 const Scoreboard_nav = style.div`
   background-color: #00092D;
@@ -33,38 +37,44 @@ const Scoreboard_bottom = style.div`
   overflow-x: hidden;
 `;
 
-const Compon2 = style(Scoreboard_bottom)`
-  width: 150px;
+const Main = style(Scoreboard_bottom)`
+  width: 640px;
+  padding: 30px 30px 30px;
+  background: #fefefe;
 `;
 
 const server = 'http://localhost:3001/api/';
 
 const formatDate = date => {
    
-    let d = date ? new Date(date) : new Date(),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
+  let d = date ? new Date(date) : new Date(),
+  month = '' + (d.getMonth() + 1),
+  day = '' + d.getDate(),
+  year = d.getFullYear();
 
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
 
-    return [year, month, day].join('-');
+  return [year, month, day].join('-');
 }
 
 const Index = props => {
   const [data, setData] = useState(props.games);
   const [date, setDate] = useState(props.date);
-  const [query, setQuery] = useState('Lebron');
+  const [news, setNews] = useState('nba');
   const [video, setVideo] = useState(null);
+  const [videosOn, setMain] = useState (false);
 
   useEffect(() => {
     (async() => {
       try {
-        const response = await fetch (server + 'videos/' + query);
+        const response = await fetch (server + 'news/' + news);
+        // const response = await fetch (server + 'videos/' + query);
         const json = await response.json();
-        console.log('Youtube data on FE:', json);
-        setVideo(json);
+        setNews(json);
+        console.log('News data on FE:', json);
+        // console.log('Youtube data on FE:', json);
+        // setVideo(json);
       } catch (e) {
         console.log(e);
       }
@@ -121,11 +131,11 @@ const Index = props => {
             </ApiContext.Provider>
           </Scoreboard_bottom>
         </Scoreboard>
-        <Compon2>
-          <ApiContext.Provider value = {[video]}>
-              <Videoboard/>
+        <Main>
+          <ApiContext.Provider value = {[video, news, videosOn]}>
+            <MainBoard/>
           </ApiContext.Provider>
-        </Compon2>
+        </Main>
       </Container1>
     </Layout>
   );

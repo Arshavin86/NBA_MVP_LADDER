@@ -1,16 +1,23 @@
-import Header from './Header'
+import Header from './Header';
+import style from 'styled-components';
 
-const layoutStyle = {
-  margin: 20,
-  padding: 20,
-  border: '1px solid #DDD'
-}
+const LayoutStyle = style.div `
+  height: auto,
+  margin: 0;
+  padding: 0;
+  background: #fefefe;
+  font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #0a0a0a;
+  -webkit-font-smoothing: antialiased;
+`
 
 const Layout = props => (
-  <div style={layoutStyle}>
+  <LayoutStyle>
     <Header />
     {props.children}
-  </div>
+  </LayoutStyle>
 )
 
 export default Layout;

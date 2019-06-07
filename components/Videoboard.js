@@ -25,7 +25,7 @@ const Videoboard = props => {
         return (
             <div>    
                 <div>
-                    <iframe className="embed-responsive-item" src={'https://www.youtube.com/embed/' + videos[0].id.videoId} allowFullScreen={true} >
+                    <iframe src={'https://www.youtube.com/embed/' + videos[0].id.videoId} allowFullScreen={true} >
                     </iframe>
                 </div>
                 <div>
