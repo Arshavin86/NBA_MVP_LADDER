@@ -1,27 +1,38 @@
-const $ = require('jquery');
+const {YoutubeAPI_Key, CLIENT_ID, CLIENT_SECRET, REDIRECT_URL} = require ('../config/youtube');
+//get Node.js client library for using Google APIs
+const {google} = require('googleapis');
 
-const searchYouTube = async options => {
-    try {
-        const response = await $.ajax({
-            url: 'https://www.googleapis.com/youtube/v3/search',
-            data: {
-              part: 'snippet',
-              q: options.query,
-              maxResults: options.max,
-              key: options.key.YoutubeAPI_Key,
-              type: 'video'
-            },
-            contentType: 'application/json'
-        });
-        if (response.status === 500 || response.status === 404) {
-          response = 'No videos!';
-        } else {
-          console.log('res', response)
-        }
-        return response;
-    } catch (e) {
-    console.log(e);
-    }
-  };
+const searchYouTube = async (query) => {
   
-  export default searchYouTube;
+    const youtube = google.youtube({
+      version: 'v3',
+      auth: YoutubeAPI_Key,
+    });
+
+    const params = {
+      part: 'snippet',
+      maxResults: 5,
+      order: 'viewCount',
+      q: query,
+      chart: 'mostPopular',
+      type: 'video',
+      key: YoutubeAPI_Key,
+    };
+    try {
+      const response = await youtube.search.list(params);
+  
+      if (response.status === 500 || response.status === 404) {
+        response = 'No videos!';
+        console.log('res in searchYouTube: ', response)
+      } else {
+        // console.log('res in searchYouTube: ', response.data.items[0]);
+        return response.data.items[0];
+      } 
+    } catch (e) {
+      console.log(e); 
+    }
+}
+
+module.exports = searchYouTube;
+
+

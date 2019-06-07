@@ -4,8 +4,6 @@ import ApiContext from './Context';
 // import styler from './StyledLinks';
 // import Link from 'next/link'
 
-
-  
 // const StyledLink = styler ('/boxscore', 'BOXSCORE');
 
 const Section = style.section`
