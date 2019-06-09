@@ -79,6 +79,10 @@ const WatchButton = style.div`
     text-transform: uppercase;
     cursor: pointer;
 `;
+const HiddenText = style.span`
+    font-color: black;
+    font-size: 0px;
+`;
 
 const Boxscore = style (Watch)`
     border-right: 1px solid #e6e8ea;
@@ -94,7 +98,7 @@ const MVPButton = style (WatchButton)`
     padding: 10px 10px 0px 10px; 
 `;
 
-const gamesListing = (data, setVideo) => {
+const gamesListing = (data, handleVideoChange) => {
     let context = [],
     visitorLogo,
     visitorName,
@@ -103,9 +107,11 @@ const gamesListing = (data, setVideo) => {
     stats = [],
     statsLine;
 
-    const changeVideo = (query) => {
+    //I use textContent here instead of {visitorName} and {homeName} variables cause by the end of the mapping there values are equal to the names from last element of data array
+    const changeVideo = (e) => {
+        const query = e.currentTarget.textContent.slice(5)
         console.log(query)
-        setVideo(query);
+        handleVideoChange(query);
     }
 
     if (typeof data === 'object') {
@@ -163,8 +169,11 @@ const gamesListing = (data, setVideo) => {
                 </GameMVP>
                 <Bottom>
                     <Watch>
-                        <WatchButton onClick={e => {e.preventDefault(); changeVideo(game.BP1name.name)}}>
+                        <WatchButton onClick={e => {e.preventDefault(); changeVideo(e)}}>
                             Watch
+                            <HiddenText>
+                                {visitorName} - {homeName}
+                            </HiddenText>
                         </WatchButton>
                     </Watch>
                     <Boxscore>
@@ -189,9 +198,9 @@ const gamesListing = (data, setVideo) => {
 }
 
 const Wrapper = props => {
-    const [data, setVideo] = useContext(ApiContext);
+    const [data, handleVideoChange] = useContext(ApiContext);
 
-    return gamesListing(data, setVideo);
+    return gamesListing(data, handleVideoChange);
 }
 
 export default Wrapper;

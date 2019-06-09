@@ -52,9 +52,12 @@ const formatDate = date => {
   day = '' + d.getDate(),
   year = d.getFullYear();
 
-  if (month.length < 2) month = '0' + month;
-  if (day.length < 2) day = '0' + day;
-
+  if (month.length < 2) {
+    month = '0' + month;
+  }
+  if (day.length < 2) {
+    day = '0' + day;
+  }
   return [year, month, day].join('-');
 }
 
@@ -62,7 +65,7 @@ const Index = props => {
   const [data, setData] = useState(props.games);
   const [date, setDate] = useState(props.date);
   const [news, setNews] = useState('nba');
-  const [video, setVideo] = useState(null);
+  const [videos, setVideo] = useState(null);
   const [videosOn, setMain] = useState (false);
 
   useEffect(() => {
@@ -72,7 +75,7 @@ const Index = props => {
         // const response = await fetch (server + 'videos/' + query);
         const json = await response.json();
         setNews(json);
-        console.log('News data on FE:', json);
+        // console.log('News data on FE:', json);
         // console.log('Youtube data on FE:', json);
         // setVideo(json);
       } catch (e) {
@@ -101,16 +104,12 @@ const Index = props => {
   } 
 
   const handleVideoChange = async query => {
-    let options = {
-      query: query,
-      max: 5,
-      key: YoutubeAPI_Key,
-    };
     try {
-      const response = await searchYouTube (options);
-      // const json = await response.json();
-      console.log('Youtube data on FE:', response);
-      setVideo(response);
+        const response = await fetch (server + 'videos/' + query + ' ' + date);
+        const json = await response.json();
+        console.log('Youtube data on FE:', json);
+        setVideo(json);
+        setMain(true);
     } catch (e) {
       console.log(e);
     }
@@ -132,7 +131,7 @@ const Index = props => {
           </Scoreboard_bottom>
         </Scoreboard>
         <Main>
-          <ApiContext.Provider value = {[video, news, videosOn]}>
+          <ApiContext.Provider value = {[videos, news, videosOn, date]}>
             <MainBoard/>
           </ApiContext.Provider>
         </Main>

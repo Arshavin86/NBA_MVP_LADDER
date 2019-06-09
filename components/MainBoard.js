@@ -7,7 +7,7 @@ import NewsBoard from './NewsBoard';
 const MainBoard = props => {
     const [videos, news, videosOn] = useContext(ApiContext);
     // console.log(video[0].items);
-    // console.log("videos: ", videos, 'news: ', news, 'videosOn: ', videosOn)
+    console.log("videos: ", videos, 'news: ', news, 'videosOn: ', videosOn)
 
     if (videosOn) {
         return (

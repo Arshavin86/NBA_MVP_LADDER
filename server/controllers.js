@@ -118,7 +118,7 @@ exports.getNews = async (req, res) => {
 
   try {
     const response = await searchNews (query);
-    console.log('News data on BE:', response);
+    // console.log('News data on BE:', response);
     res.status(200).send(response);
   } catch (e) {
     console.log(e);
@@ -126,15 +126,31 @@ exports.getNews = async (req, res) => {
   
 }
 
-// exports.getVideos = async (req, res) => {
-//   const query = req.params.query;
-//   console.log('id', query )
+exports.getVideos = async (req, res) => {
+  const query = req.params.query.slice(0, -10);
 
-//     try {
-//       const response = await searchYouTube (query);
-//       // console.log('Youtube data on BE:', response);
-//       res.status(200).send(response);
-//     } catch (e) {
-//       console.log(e);
-//     }
-// }
+  //get finish date for search
+  const dateFinish = req.params.query.slice(-10);
+  const dFN = new Date(dateFinish);
+
+  //get start date for search
+  let dateStart = new Date(dateFinish);
+  dateStart.setDate(dateStart.getDate() - 1);
+  const dST = new Date(dateStart);
+  
+
+  //convert both dates to ISO format
+  const StartISO = dST.toISOString();
+  const FinishISO = dFN.toISOString();
+
+  // console.log('query on BE: ', query );
+  console.log('dates on BE: ', StartISO, FinishISO);
+
+    try {
+      const response = await searchYouTube (query, StartISO, FinishISO);
+      // console.log('Youtube data on BE:', response);
+      res.status(200).send(response);
+    } catch (e) {
+      console.log(e);
+    }
+}
