@@ -2,32 +2,43 @@ const {YoutubeAPI_Key, CLIENT_ID, CLIENT_SECRET, REDIRECT_URL} = require ('../co
 //get Node.js client library for using Google APIs
 const {google} = require('googleapis');
 
-const searchYouTube = async (query) => {
-  
+const searchYouTube = async (query, date1, date2) => {
+
     const youtube = google.youtube({
       version: 'v3',
       auth: YoutubeAPI_Key,
     });
 
-    const params = {
-      part: 'snippet',
-      maxResults: 5,
-      order: 'viewCount',
-      q: query,
-      chart: 'mostPopular',
-      type: 'video',
-      key: YoutubeAPI_Key,
-    };
+    const setParams = channelID => {
+      const params = {
+        part: 'snippet',
+        maxResults: 5,
+        order: 'viewCount',
+        q: query,
+        chart: 'mostPopular',
+        type: 'video',
+        channelId: channelID, 
+        publishedAfter: date1,
+        publishedBefore: date2,
+        key: YoutubeAPI_Key,
+      };
+      return params;
+    }
+    
+    const paramsXimoPierto = setParams('UCS7kvhJx431xCKuSgkBaUWw');
+    const paramsFreeDawkins = setParams('UCEjOSbbaOfgnfRODEEMYlCw');
+    const paramsHouseOfHighlights = setParams('UCqQo7ewe87aYAe7ub5UqXMw');
+    const paramsNBA = setParams('UCWJ2lWNubArHWmf3FIHbfcQ');
+
     try {
-      const response = await youtube.search.list(params);
-  
-      if (response.status === 500 || response.status === 404) {
-        response = 'No videos!';
-        console.log('res in searchYouTube: ', response)
-      } else {
-        // console.log('res in searchYouTube: ', response.data.items[0]);
-        return response.data.items[0];
-      } 
+      const response1 = await youtube.search.list(paramsXimoPierto);
+      const response2 = await youtube.search.list(paramsFreeDawkins);
+      const response3 = await youtube.search.list(paramsHouseOfHighlights);
+      const response4 = await youtube.search.list(paramsNBA);
+      const res = response1.data.items.concat(response2.data.items, response3.data.items, response4.data.items);
+
+      console.log('res in searchYouTube: ', res.length);
+        return res; 
     } catch (e) {
       console.log(e); 
     }
@@ -35,4 +46,4 @@ const searchYouTube = async (query) => {
 
 module.exports = searchYouTube;
 
-
+// UCEjOSbbaOfgnfRODEEMYlCw
