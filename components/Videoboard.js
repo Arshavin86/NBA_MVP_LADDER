@@ -46,6 +46,12 @@ const Videoboard = props => {
                 Video will be here
             </div>
         )
+    } if (!videos.length) { 
+        return (
+            <div>
+                There are no videos of this game available
+            </div>
+        )
     } else {
         return (
             <div>    

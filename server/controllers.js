@@ -131,7 +131,8 @@ exports.getVideos = async (req, res) => {
 
   //get finish date for search
   const dateFinish = req.params.query.slice(-10);
-  const dFN = new Date(dateFinish);
+  let dFN = new Date(dateFinish);
+  dFN.setDate(dFN.getDate() + 1)
 
   //get start date for search
   let dateStart = new Date(dateFinish);
