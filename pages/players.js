@@ -1,4 +1,4 @@
-import Layout from '../components/MyLayout.js';
+    import Layout from '../components/MyLayout.js';
 // import a simple implementation of the browser fetch API, which works both in client and server environments
 import fetch from 'isomorphic-unfetch';
 
