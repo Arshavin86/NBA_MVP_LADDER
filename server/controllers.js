@@ -22,8 +22,9 @@ exports.getGames = async (req, res) => {
         try {
           await asyncForEach(data, async game => {
             let data2 = await db.query('SELECT name, logo FROM team WHERE teamID = $1', game.losingteamid);
-            let data3 = await db.query('SELECT name FROM player WHERE playerID = $1', game.bestplayer1);
+            let data3 = await db.query('SELECT firstName, lastName FROM player WHERE playerID = $1', game.bestplayer1);
             //there is a problem: in some cases there is no 'losingTeam' property in data object sent to user! 
+            // console.log(data3);
             game['losingTeam'] = data2;
             if (!game['losingTeam']) {
               console.log ('losingTeam property is not written down to the response object!');

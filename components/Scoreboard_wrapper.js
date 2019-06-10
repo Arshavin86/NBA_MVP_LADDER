@@ -128,8 +128,14 @@ const gamesListing = (data, handleVideoChange) => {
         stats[5] = Number(game.statsbp1[5]) > 9 ? Number(game.statsbp1[5]) + ' tov ' : undefined;
         stats[6] = Number(game.statsbp1[6]) > 19 ? + Number(game.statsbp1[6]) + ' plusMinus ' : undefined;
         stats[7] = Number(game.statsbp1[7]) > 59.9 ? Number(game.statsbp1[7]) + ' fgp ' : undefined;
- 
-        statsLine = game.BP1name[0].name + ': ' + stats.map(stat => {
+        
+        let firstname = game.BP1name[0].firstname
+        let lastname = game.BP1name[0].lastname;
+        //get rid of this unpronounced name
+        if (lastname === 'Antetokounmpo') {
+            lastname = '';
+        }
+        statsLine = firstname + ' ' + lastname + ': ' + stats.map(stat => {
             if (stat) {
                 return stat
             }
