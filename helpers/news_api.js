@@ -18,6 +18,3 @@ const searchNews = async (query) => {
 }
   
   module.exports = searchNews;
-  
-  
-//   abc-news, bleacher-report, espn, fox-sports, google-news

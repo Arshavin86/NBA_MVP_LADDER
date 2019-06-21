@@ -131,11 +131,13 @@ const gamesListing = (data, handleVideoChange) => {
         
         let firstname = game.BP1name[0].firstname
         let lastname = game.BP1name[0].lastname;
+        let space = ' ';
         //get rid of this unpronounced name
         if (lastname === 'Antetokounmpo') {
             lastname = '';
+            space = '';
         }
-        statsLine = firstname + ' ' + lastname + ': ' + stats.map(stat => {
+        statsLine = firstname + space + lastname + ': ' + stats.map(stat => {
             if (stat) {
                 return stat
             }
