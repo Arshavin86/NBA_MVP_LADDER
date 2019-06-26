@@ -22,13 +22,21 @@ const Letter = style.div`
 const playersListing = players => {
     let context = [];
     let letters = [];
+    let name = '';
 
-    players.map(player => {
-        //creating an alphabetic list
-        if (!letters.includes(player.name[0])) {
-            letters.push(player.name[0]);
-        }
+    players.map((player, index) => {
+        //clear players array from repeated players  
+        if (player.name === name) {
+            players.splice(index, 1);
+        } else {
+            //creating an alphabetic list
+            if (!letters.includes(player.name[0])) {
+                letters.push(player.name[0]);
+            }
+            name = player.name;
+        } 
     })
+
     //sort array A-Z 
     letters.sort();
 
