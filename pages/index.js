@@ -11,7 +11,7 @@ import MainBoard from '../components/MainBoard';
 const Container1 = style.div`
   display: flex; 
   flex-direction: row;
-  border: 0.5px solid black;
+  // border: 0.5px solid black;
   margin-right: auto;
   margin-left: auto;
   max-width: none;
@@ -30,7 +30,6 @@ const Scoreboard_nav = style.div`
 `;
 
 const Scoreboard_bottom = style.div`
-  background: #CCD0D3;
   width: 100%;
   font-family: "Flama-Basic",sans-serif;
   font-size: 100%;

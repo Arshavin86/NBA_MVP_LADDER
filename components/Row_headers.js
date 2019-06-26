@@ -2,16 +2,13 @@ import style from 'styled-components';
 
 const Container = style.div`
     text-transform: uppercase;
-    font-size: 15px;
-    width: 100%;er-bottom: 1px solid #B3C1CA;
+    width: 100%;
     font-family: "Flama-Medium",sans-serif;
     display: flex;
     justify-content: space-between;
-
     font-size: 0.875em;
-    padding-top: 10px;
-    padding-bottom: 10px;
     border-bottom: solid 1px #66737C;
+    padding: 0px 10px;
 `;
 
 const Player = style.div`
@@ -22,7 +19,7 @@ const Player = style.div`
 `;
 
 const Team = style.div`
-    padding: 10px 0;
+    padding: 10px 10px;
 `;
 
 const Headers = props => {

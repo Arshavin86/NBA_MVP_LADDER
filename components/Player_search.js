@@ -7,14 +7,14 @@ const Container = style.div`
     width: 100%;
     position: relative;
     z-index: 2;
-    height: 43px;
+    height: 33px;
     background-color: #CCD0D3;
-    padding: 8px;
+    padding: 5px 5px 5px 0px;
     border-bottom: 1px solid #B3C1CA;
 `;
 
 const Input = style.input`
-    height: 28px;
+    height: 25px;
     border-radius: 4px;
     padding-top: 0;
     padding-bottom: 0;

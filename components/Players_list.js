@@ -1,7 +1,6 @@
 import {useContext} from 'react';
 import style from 'styled-components';
 import ApiContext from './Context';
-import {useState, useEffect} from 'react';
 
 const abbreviation = {
     'Brooklyn Nets': 'BKN',
@@ -37,14 +36,12 @@ const abbreviation = {
 }
 
 const Container = style.section`
-    
+    padding-left: 10px;
+    font-size: 12px;
 `;
 
 const List = style.div`
-    padding-right: .9375rem;
-    padding-left: .9375rem;
     position: relative;
-    font-size: 15px;
     padding: 13px 0;
     border-bottom: solid 1px #66737C;
     display: flex;

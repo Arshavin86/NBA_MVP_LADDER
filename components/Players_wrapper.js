@@ -14,8 +14,7 @@ const List = style.div`
 
 const Letter = style.div`
     background-color: #e6e8ea;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    padding-left: 10px;
     font-size: 0.875em;
 `;
 
