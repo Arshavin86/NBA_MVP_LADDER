@@ -26,24 +26,26 @@ const searchYouTube = async (query, date1, date2) => {
     }
     
     const paramsXimoPierto = setParams('UCS7kvhJx431xCKuSgkBaUWw');
-    const paramsFreeDawkins = setParams('UCEjOSbbaOfgnfRODEEMYlCw');
-    const paramsHouseOfHighlights = setParams('UCqQo7ewe87aYAe7ub5UqXMw');
-    const paramsNBA = setParams('UCWJ2lWNubArHWmf3FIHbfcQ');
+    // const paramsFreeDawkins = setParams('UCEjOSbbaOfgnfRODEEMYlCw');
+    // const paramsHouseOfHighlights = setParams('UCqQo7ewe87aYAe7ub5UqXMw');
+    // const paramsNBA = setParams('UCWJ2lWNubArHWmf3FIHbfcQ');
 
     try {
       const response1 = await youtube.search.list(paramsXimoPierto);
-      const response2 = await youtube.search.list(paramsFreeDawkins);
-      const response3 = await youtube.search.list(paramsHouseOfHighlights);
-      const response4 = await youtube.search.list(paramsNBA);
-      const res = response1.data.items.concat(response2.data.items, response3.data.items, response4.data.items);
+      
+      // const response2 = await youtube.search.list(paramsFreeDawkins);
+      // const response3 = await youtube.search.list(paramsHouseOfHighlights);
+      // const response4 = await youtube.search.list(paramsNBA);
+      // const res = response2.data.items.concat(response3.data.items, response4.data.items);
+      // const res = response1.data.items.concat(response2.data.items, response3.data.items, response4.data.items);
 
-      console.log('res in searchYouTube: ', res.length);
-        return res; 
+      return response1.data.items;
+
+      // console.log('res in searchYouTube: ', res.length);
+      //   return res; 
     } catch (e) {
       console.log(e); 
     }
 }
 
 module.exports = searchYouTube;
-
-// UCEjOSbbaOfgnfRODEEMYlCw

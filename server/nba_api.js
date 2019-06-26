@@ -1,6 +1,6 @@
 const {getGamesByDate, getStatsByGameID, getNameByPlayerID, getPhotoByName} = require('../helpers/rapidapi')
 const {statsCalculator} = require('../helpers/statsCalculater');
-const database = require('./controllers');
+const database = require('../database/controllers');
 
 const getDayLeaders = async (date) => {
     let winningTeamID;

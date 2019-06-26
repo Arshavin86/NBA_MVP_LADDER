@@ -1,17 +1,17 @@
 
 import {useState, useEffect} from 'react';
-import Calendar_nav from '../components/Calendar_nav.js';
-import Layout from '../components/MyLayout.js';
-import Scoreboard_wrapper from '../components/Scoreboard_wrapper.js';
+import Calendar_nav from '../components/Calendar_nav';
+import Layout from '../components/MyLayout';
+import Scoreboard_wrapper from '../components/Scoreboard_wrapper';
 import style from 'styled-components';
 import fetch from 'isomorphic-unfetch';
-import ApiContext from '../components/Context.js';
+import ApiContext from '../components/Context';
 import MainBoard from '../components/MainBoard';
 
 const Container1 = style.div`
   display: flex; 
   flex-direction: row;
-  border: 0.5px solid black;
+  // border: 0.5px solid black;
   margin-right: auto;
   margin-left: auto;
   max-width: none;
@@ -30,7 +30,6 @@ const Scoreboard_nav = style.div`
 `;
 
 const Scoreboard_bottom = style.div`
-  background: #CCD0D3;
   width: 100%;
   font-family: "Flama-Basic",sans-serif;
   font-size: 100%;

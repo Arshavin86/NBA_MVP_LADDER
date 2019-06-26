@@ -37,8 +37,8 @@ const URL = `https://api-nba-v1.p.rapidapi.com`;
 //     getNameByPlayerID: getNameByPlayerID.get
 // }
 
-async function getGamesByDate(date) {
-    let options = {
+const getGamesByDate = async date => {
+    const options = {
         url: `${URL}/games/date/${date}`,
         headers: headers,
         json: true // Automatically parses the JSON string in the response
@@ -46,8 +46,8 @@ async function getGamesByDate(date) {
     return await request(options);
 };
 
-async function getStatsByGameID (gameID) {
-    let options = {
+const getStatsByGameID = async gameID => {
+    const options = {
         url: `${URL}/statistics/players/gameId/${gameID}`,
         headers: headers,
         json: true
@@ -55,8 +55,8 @@ async function getStatsByGameID (gameID) {
     return await request(options);
 };
 
-async function getNameByPlayerID (playerID) {
-    let options = {
+const getNameByPlayerID = async playerID => {
+    const options = {
         url: `${URL}/players/playerId/${playerID}`,
         headers: headers,
         json: true
@@ -64,8 +64,8 @@ async function getNameByPlayerID (playerID) {
     return await request(options);
 }  
 
-async function getPhotoByName (lastName, firstName) {
-    let options = {
+const getPhotoByName = async (lastName, firstName) => {
+    const options = {
         url: `https://nba-players.herokuapp.com/players/${lastName}/${firstName}`,
         json: true
     };
