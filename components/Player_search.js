@@ -3,8 +3,26 @@ import style from 'styled-components';
 import ApiContext from './Context';
 import {useState, useEffect} from 'react';
 
+const Container = style.div`
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    height: 43px;
+    background-color: #CCD0D3;
+    padding: 8px;
+    border-bottom: 1px solid #B3C1CA;
+`;
+
+const Input = style.input`
+    height: 28px;
+    border-radius: 4px;
+    padding-top: 0;
+    padding-bottom: 0;
+`;
+
+
 const Search = props => {
-    const [players, setPlayers, fullList] = useContext(ApiContext);
+    const [setPlayers, fullList] = useContext(ApiContext);
     const [value, setValue] = useState('');
 
     const onSubmit = event => {
@@ -26,13 +44,13 @@ const Search = props => {
         console.log('value in onChange: ', event.target.value)
         setValue(event.target.value);
     }
-    
+
     return (
-        <div>
+        <Container>
             <form onSubmit={onSubmit}>
-                <input type="text" placeholder="Search Player"  onChange={onChange} value={value}></input>
+                <Input type="text" placeholder="Search Player"  onChange={onChange} value={value}></Input>
             </form>
-        </div>
+        </Container>
     )
     
 }

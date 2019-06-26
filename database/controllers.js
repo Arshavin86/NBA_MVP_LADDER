@@ -49,7 +49,7 @@ exports.getGames = async (req, res) => {
       if (!games) {
         res.sendStatus(500);
       } else {
-        data = await db.query('SELECT * FROM game WHERE date = $1', id);
+        data = await db.query('SELECT * FROM game INNER JOIN team WHERE date = $1', id);
         // console.log(data);
         res.status(200).send(data);
       }
@@ -119,7 +119,7 @@ exports.getPlayers = async (req, res) => {
     // const data = {image: image}
     // res.status(200).send(image);
 
-    const data = await db.query('SELECT * FROM player');
+    const data = await db.query('SELECT player.*, team.name FROM player INNER JOIN team ON player.teamID = team.teamID');
     // console.log('Players: ', data.length);
     
     res.status(200).send(data);
