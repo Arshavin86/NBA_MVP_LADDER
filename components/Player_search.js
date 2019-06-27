@@ -5,8 +5,6 @@ import {useState, useEffect} from 'react';
 
 const Container = style.div`
     width: 100%;
-    position: relative;
-    z-index: 2;
     height: 33px;
     background-color: #CCD0D3;
     padding: 5px 5px 5px 0px;
@@ -14,6 +12,8 @@ const Container = style.div`
 `;
 
 const Input = style.input`
+    position: fixed;
+    z-index: 2;
     height: 25px;
     border-radius: 4px;
     padding-top: 0;

@@ -10,18 +10,24 @@ import MainBoard from '../components/MainBoard';
 
 const Container1 = style.div`
   display: flex; 
+  color: black; 
+  background: #E5E7E9;
+  min-height: 100px;
+`;
+
+const Container2 = style.div`
+  display: flex; 
   flex-direction: row;
-  // border: 0.5px solid black;
   margin-right: auto;
   margin-left: auto;
   max-width: none;
   text-align: left;
   vertical-align: middle;
   line-height: 40px; 
-  background: #CCD0D3;
+  background: #E5E7E9;
 `;
 const Scoreboard = style.div`
-  border: 0.5px solid black;
+  // border: 0.5px solid black;
   font-family: "Flama-Basic",sans-serif;
   width: 320px;
 `;
@@ -34,6 +40,7 @@ const Scoreboard_bottom = style.div`
   font-family: "Flama-Basic",sans-serif;
   font-size: 100%;
   overflow-x: hidden;
+  background: #CCD0D3;
 `;
 
 const Main = style(Scoreboard_bottom)`
@@ -116,7 +123,8 @@ const Index = props => {
   
   return (
     <Layout>
-      <Container1>
+      <Container1>Here could be your advertisement </Container1>
+      <Container2>
         <Scoreboard>
           <Scoreboard_nav>
             <ApiContext.Provider value = {[date, handleDateChange]}>
@@ -134,13 +142,13 @@ const Index = props => {
             <MainBoard/>
           </ApiContext.Provider>
         </Main>
-      </Container1>
+      </Container2> 
     </Layout>
   );
 }
 
 Index.getInitialProps = async function () {
-  let date = formatDate('2019-06-05');
+  let date = formatDate('2019-04-13');
   let json;
   console.log('DATE in props: ', date);
 

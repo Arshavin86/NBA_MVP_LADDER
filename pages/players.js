@@ -13,13 +13,20 @@ const server = 'http://localhost:3001/api/players';
 
 const Container1 = style.div`
   display: flex; 
+  color: black; 
+  background: #E5E7E9;
+  min-height: 100px;
+`;
+
+const Container2 = style.div`
+  display: flex; 
   flex-direction: row;
   margin-right: auto;
   margin-left: auto;
-  // flex: 0 0 32px;
   height: 100vh;
-  background: #CCD0D3;
+  background: #E5E7E9;
   padding: 0 15px;
+  
 `;
 
 const Sidebar = style.div`
@@ -31,7 +38,8 @@ const Sidebar = style.div`
 `;
 
 const Sidebar_nav = style.div`
-  
+position: static;
+z-index: -1;
 `;
 
 const Sidebar_bottom = style.div`
@@ -49,13 +57,20 @@ const Main = style(Sidebar_bottom)`
 `;
 
  const Players = (props) => {
+
+  // return (
+  //   <div>
+  //     <img src={props.image}></img>
+  //   </div>
+  // )
     const [players, setPlayers] = useState(props.players);
     // console.log(players);
     const fullList = props.players;
 
     return (
         <Layout>
-          <Container1>
+          <Container1>Here could be your advertisement </Container1>
+          <Container2>
             <Sidebar>
               <Sidebar_nav>
                 <ApiContext.Provider value = {[setPlayers, fullList]}>
@@ -74,7 +89,7 @@ const Main = style(Sidebar_bottom)`
                 <MainBoard_players/>
               </ApiContext.Provider>
             </Main>
-          </Container1>
+          </Container2>
         </Layout>
       );
  }
@@ -86,6 +101,10 @@ Players.getInitialProps = async function () {
     const data = await res.json();
     const players = [];
     let playerName;
+    // console.log('IMAGE: ', data.image);
+    // return {
+    //       image: data.image
+    //   }
     // const encodeData = encodeURIComponent(data.image);
 
     // console.log(`Show data fetched in Players. ${data[0]}`)

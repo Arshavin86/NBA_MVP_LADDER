@@ -30,5 +30,8 @@ app.get('/api/players', jsonParser, (req, res) => {
      database.getPlayers(req, res);
 })
 
+app.get('/api/seasons', jsonParser, (req, res) => {
+     database.getSeasons(req, res);
+})
 
 module.exports = app;

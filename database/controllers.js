@@ -23,6 +23,7 @@ exports.getGames = async (req, res) => {
           await asyncForEach(data, async game => {
             const data2 = await db.query('SELECT name, logo FROM team WHERE teamID = $1', game.losingteamid);
             const data3 = await db.query('SELECT firstName, lastName FROM player WHERE playerID = $1', game.bestplayer1);
+
             //there is a problem: in some cases there is no 'losingTeam' property in data object sent to user! 
             // console.log(data3);
             game['losingTeam'] = data2;
@@ -87,7 +88,7 @@ exports.postTeam = async (ID, name, logo) => {
   }
 }
 
-exports.postPlayer = async (ID, name, team) => {
+exports.postPlayer = async ID => {
   try {
     const start = 1;
     //update the number of "PlayerOfTheGame awards" if player exists or insert a new raw
@@ -117,10 +118,9 @@ exports.getPlayers = async (req, res) => {
 
     // const image = await getImages ('Lebron', 'James'); 
     // const data = {image: image}
-    // res.status(200).send(image);
+    // res.status(200).send(data);
 
     const data = await db.query('SELECT player.*, team.name FROM player INNER JOIN team ON player.teamID = team.teamID');
-    // console.log('Players: ', data.length);
     
     res.status(200).send(data);
     // //function to add player photo to each player
@@ -142,5 +142,20 @@ exports.getPlayers = async (req, res) => {
     
   } catch (e) {
     console.log('getPlayers is failed: ', e);
+  }
+}
+
+exports.getSeasons = async (req, res) => {
+  
+  try {
+    const list = await db.query('SELECT firstName, lastName, awards, position, pos, name FROM player INNER JOIN season19 ON player.playerID = season19.playerID INNER JOIN team ON player.teamID = team.teamID ORDER BY position ASC;;');
+
+    // const list = await db.query('SELECT firstName, lastName, teamID, awards FROM player INNER JOIN season19 ON player.playerID = season19.playerID WHERE awards > 12 ORDER BY awards DESC;');
+    
+      res.status(200).send(list);
+    
+    
+  } catch (e) {
+    console.log('getSeasons is failed: ', e);
   }
 }
