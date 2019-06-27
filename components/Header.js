@@ -1,11 +1,28 @@
-import Link from 'next/link'
+import Link from 'next/link';
+import style from 'styled-components';
+
+const Container = style.div`
+  display: flex; 
+  flex-direction: row;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px; 
+  background: #1D428A;
+  position: fixed;
+  z-index: 1;
+`;
 
 const linkStyle = {
-  marginRight: 15
+  marginRight: 15,
+  color: 'white',
+  marginLeft: 15,
 }
 
 const Header = () => (
-  <div>
+  <Container>
     <Link href="/">
       <a style={linkStyle}>Home</a>
     </Link>
@@ -24,7 +41,7 @@ const Header = () => (
     <Link href="/leaders">
       <a style={linkStyle}>Leaders</a>
     </Link>
-  </div>
+  </Container>
 )
 
 export default Header;

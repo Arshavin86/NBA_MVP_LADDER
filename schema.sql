@@ -25,27 +25,21 @@
 --         PRIMARY KEY (id, winningTeamID, losingTeamID, bestPlayer1, bestPlayer2)
 --     );
 
---     DROP TABLE IF EXISTS playOff19 CASCADE;
---     CREATE TABLE playOff19 (
---         id SERIAL,  
---         playerID text NOT NULL UNIQUE REFERENCES player (playerID),
---         awards integer NOT NULL,
---         PRIMARY KEY (id, playerID)
---     );
-
---     DROP TABLE IF EXISTS season19 CASCADE;
---     CREATE TABLE season19 (
---         id SERIAL,  
---         playerID text NOT NULL UNIQUE REFERENCES player (playerID),
---         awards integer NOT NULL,
---         PRIMARY KEY (id, playerID)
---     );
+    -- DROP TABLE IF EXISTS playOff19 CASCADE;
+    -- CREATE TABLE playOff19 (
+    --     id SERIAL,  
+    --     playerID text NOT NULL UNIQUE REFERENCES player (playerID),
+    --     awards integer NOT NULL,
+    --     position text not null,
+    --     PRIMARY KEY (id, playerID)
+    -- );
 
     -- DROP TABLE IF EXISTS playOff18 CASCADE;
     -- CREATE TABLE playOff18 (
     --     id SERIAL,  
     --     playerID text NOT NULL UNIQUE REFERENCES player (playerID),
     --     awards integer NOT NULL,
+    --     position text not null,
     --     PRIMARY KEY (id, playerID)
     -- );
 
@@ -54,6 +48,7 @@
     --     id SERIAL,  
     --     playerID text NOT NULL UNIQUE REFERENCES player (playerID),
     --     awards integer NOT NULL,
+    --         position text not null,
     --     PRIMARY KEY (id, playerID)
     -- );
 
@@ -62,8 +57,18 @@
     --     id SERIAL,  
     --     playerID text NOT NULL UNIQUE REFERENCES player (playerID),
     --     awards integer NOT NULL,
+    --     position text not null,
     --     PRIMARY KEY (id, playerID)
     -- );
+
+--  DROP TABLE IF EXISTS season19 CASCADE;
+--     CREATE TABLE season19 (
+--         id SERIAL,  
+--         playerID text NOT NULL UNIQUE REFERENCES player (playerID),
+--         awards integer NOT NULL,
+--         position integer NOT NULL,
+--         PRIMARY KEY (id, playerID)
+--     );
 
     -- DROP TABLE IF EXISTS season18 CASCADE;
     -- CREATE TABLE season18 (
@@ -89,24 +94,24 @@
         --     PRIMARY KEY (id, playerID)
         -- );
 
-        DROP TABLE IF EXISTS player CASCADE;
-    CREATE TABLE player (
-        id SERIAL,  
-        playerID text NOT NULL UNIQUE,
-        teamID text NOT NULL REFERENCES team (teamID),
-        firstName text NOT NULL,
-        lastName text NOT NULL,
-        yearsPro text, 
-        collegeName text,
-        country text,
-        dateOfBirth text,
-        affiliation text,
-        heightInMeters text,
-        weightInKilograms text,
-        pos text,
-        jersey text,
-        active text,
-        startNba text,
-        PRIMARY KEY (id, teamID)
-    );
+    --     DROP TABLE IF EXISTS player CASCADE;
+    -- CREATE TABLE player (
+    --     id SERIAL,  
+    --     playerID text NOT NULL UNIQUE,
+    --     teamID text NOT NULL REFERENCES team (teamID),
+    --     firstName text NOT NULL,
+    --     lastName text NOT NULL,
+    --     yearsPro text, 
+    --     collegeName text,
+    --     country text,
+    --     dateOfBirth text,
+    --     affiliation text,
+    --     heightInMeters text,
+    --     weightInKilograms text,
+    --     pos text,
+    --     jersey text,
+    --     active text,
+    --     startNba text,
+    --     PRIMARY KEY (id, teamID)
+    -- );
 

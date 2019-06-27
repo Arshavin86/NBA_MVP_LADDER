@@ -35,7 +35,7 @@ const Name = style.p`
 `;
 
 const Details = style.div`
-    font-size: 0.85em;
+    font-size: 0.75em;
 `;
 
 

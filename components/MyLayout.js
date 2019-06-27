@@ -10,7 +10,6 @@ const LayoutStyle = style.div `
   font-weight: normal;
   line-height: 1.5;
   color: #0a0a0a;
-  -webkit-font-smoothing: antialiased;
 `
 
 const Layout = props => (

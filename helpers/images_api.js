@@ -7,7 +7,7 @@ const getImages = async (firstName, lastName) => {
         // encoding: null,
         // resolveWithFullResponse: true,
         headers: {
-            "content-type": "image/png"
+            "content-type": "application/x-www-form-urlencoded"
         },
         // json: true,
     };
