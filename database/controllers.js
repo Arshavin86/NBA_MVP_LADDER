@@ -92,9 +92,9 @@ exports.postPlayer = async ID => {
   try {
     const start = 1;
     //update the number of "PlayerOfTheGame awards" if player exists or insert a new raw
-    const qr2 = 'INSERT INTO playOff19 (playerID, awards) VALUES ($1, $2) ON CONFLICT (playerID) DO UPDATE SET awards = playOff19.awards + 1';
+    const qr2 = 'INSERT INTO season19 (playerID, awards) VALUES ($1, $2) ON CONFLICT (playerID) DO UPDATE SET awards = season19.awards + 1';
     const result2 = await db.query(qr2, [ID, start]);
-    console.log('Award is posted on Postgres: ', result1, result2);
+    console.log('Award is posted on Postgres: ', result2);
   }
   catch (error) {
     console.log('POSTPlayer is failed: ', error);
@@ -146,16 +146,27 @@ exports.getPlayers = async (req, res) => {
 }
 
 exports.getSeasons = async (req, res) => {
+  console.log('id: ', req.params);
+  const id = req.params.query;
+  //get a year from query as a number
+  const queryArray = id.split('-');
+  const year = Number(queryArray[1]);
   
   try {
-    const list = await db.query('SELECT firstName, lastName, awards, position, pos, name FROM player INNER JOIN season19 ON player.playerID = season19.playerID INNER JOIN team ON player.teamID = team.teamID ORDER BY position ASC;;');
-
-    // const list = await db.query('SELECT firstName, lastName, teamID, awards FROM player INNER JOIN season19 ON player.playerID = season19.playerID WHERE awards > 12 ORDER BY awards DESC;');
-    
+    //check if we seek playOffs or regular season
+    if (queryArray[0][0] === 'p') {
+      const qr = 'SELECT firstName, lastName, teamID, awards, pos, position FROM player INNER JOIN playOff$1 ON player.playerID = playOff$1.playerID ORDER BY position ASC;'
+      const list = await db.query(qr, [year]);
+      console.log('list:', list);
       res.status(200).send(list);
-    
-    
+    } else {
+      const qr = 'SELECT firstName, lastName, teamID, awards, pos, position FROM player INNER JOIN season$1 ON player.playerID = season$1.playerID ORDER BY position ASC;'
+      const list = await db.query(qr, [year]);
+      // console.log('list:', list);
+      res.status(200).send(list);
+    } 
   } catch (e) {
     console.log('getSeasons is failed: ', e);
   }
 }
+
