@@ -20,6 +20,7 @@ const Tr = style.tr`
 const Td = style.td`
     padding: 12px;
     white-space: nowrap;
+    font-size: 12px;
 `;
 
 const Th = style.th`
