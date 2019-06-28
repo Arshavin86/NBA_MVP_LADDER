@@ -1,12 +1,12 @@
 
 import {useState, useEffect} from 'react';
-import Calendar_nav from '../components/Calendar_nav';
+import Calendar_nav from '../components/index/side/Calendar_nav';
 import Layout from '../components/MyLayout';
-import Scoreboard_wrapper from '../components/Scoreboard_wrapper';
+import Scoreboard_wrapper from '../components/index/side/Scoreboard_wrapper';
 import style from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import ApiContext from '../components/Context';
-import MainBoard from '../components/MainBoard';
+import MainBoard from '../components/index/main/MainBoard';
 
 const Container1 = style.div`
   display: flex; 

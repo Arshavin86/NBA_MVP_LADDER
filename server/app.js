@@ -30,7 +30,7 @@ app.get('/api/players', jsonParser, (req, res) => {
      database.getPlayers(req, res);
 })
 
-app.get('/api/seasons', jsonParser, (req, res) => {
+app.get('/api/seasons/:query', jsonParser, (req, res) => {
      database.getSeasons(req, res);
 })
 

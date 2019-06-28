@@ -1,11 +1,9 @@
 import Layout from '../components/MyLayout.js';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import fetch from 'isomorphic-unfetch';
 import style from 'styled-components';
 import ApiContext from '../components/Context.js';
-import Table from '../components/Table';
-
-
+import Table from '../components/seasons/Table';
 
 const server = 'http://localhost:3001/api/seasons'; 
 
@@ -42,7 +40,7 @@ const Breakdown = style.div`
 
 const Button = style.button`
     margin-left: 2px;
-    border-radius: 2px;
+    border-radius: 40px;
     flex: 1 1 0;
     margin: 2px 1px;
     padding: 0;
@@ -54,6 +52,12 @@ const Button = style.button`
     text-decoration: none;
     cursor: pointer;
     width: 91px;
+    &:hover {
+        color: white;
+      }
+    &:focus {
+        outline:0;
+    }
 `;
 
 const Select = style.select`
@@ -61,7 +65,7 @@ const Select = style.select`
     overflow: hidden;
     width: 91px;
     background-color: transparent;
-    border: 0;
+    border: 10px;
     cursor: pointer;
     font-size: 12px;
     height: 32px;
@@ -69,6 +73,9 @@ const Select = style.select`
     padding: 0 30px 0 15px;
     outline: none;
     text-transform: none;
+    &:hover {
+        color: #0B5BE1;
+      }
 `;
 
 const Main = style.div`
@@ -80,12 +87,46 @@ const Main = style.div`
  const Seasons = (props) => {
 
     const [players, setPlayers] = useState(props.players);
+    const [season, setSeason] = useState('2018-2019');
+    const [seasonOn, toggleMode] = useState(true);
     // console.log('players ', players);
+
+    useEffect(() => {
+        (async() => {
+          try {
+            if (seasonOn) {
+                const response = await fetch (server + '/' + season);
+                // const response = await fetch (server + 'videos/' + query);
+                const json = await response.json();
+                console.log('Players data on FE:', json);
+                setPlayers(json);
+            } else {
+                const response = await fetch (server + '/playOffs' + season);
+                // const response = await fetch (server + 'videos/' + query);
+                const json = await response.json();
+                console.log('Players data on FE:', json);
+                setPlayers(json);
+            } 
+          } catch (e) {
+            console.log(e);
+          }
+        })();
+      }, [season, seasonOn]);
 
     const seasonChange = event => {
         event.preventDefault();
         // console.log('value in seasonChange: ', event.target.value)
-        
+        setSeason(event.target.value);  
+    }
+
+    const switchToSeason = event => {
+        event.preventDefault();
+        toggleMode(true);  
+    }
+
+    const switchToPlayOffs = event => {
+        event.preventDefault();
+        toggleMode(false);  
     }
 
     return (
@@ -93,13 +134,13 @@ const Main = style.div`
             <Container1></Container1>
             <Container2>
             <Page_header>
-              2018-2019 NBA players ranking
+                {season} NBA players ranking
             </Page_header>
             <Breakdown>
-                <Button>
+                <Button onClick={switchToSeason}>
                     Regular Season
                 </Button>
-                <Button>
+                <Button onClick={switchToPlayOffs}>
                     Playoffs
                 </Button>
                 <Select onChange={seasonChange}>
@@ -123,7 +164,7 @@ const Main = style.div`
 
  Seasons.getInitialProps = async function () {
 
-    const res = await fetch(server);
+    const res = await fetch(server + '/2018-2019');
     const data = await res.json();
 
     return {

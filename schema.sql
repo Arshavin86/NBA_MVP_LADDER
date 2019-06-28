@@ -25,76 +25,7 @@
 --         PRIMARY KEY (id, winningTeamID, losingTeamID, bestPlayer1, bestPlayer2)
 --     );
 
-    -- DROP TABLE IF EXISTS playOff19 CASCADE;
-    -- CREATE TABLE playOff19 (
-    --     id SERIAL,  
-    --     playerID text NOT NULL UNIQUE REFERENCES player (playerID),
-    --     awards integer NOT NULL,
-    --     position text not null,
-    --     PRIMARY KEY (id, playerID)
-    -- );
-
-    -- DROP TABLE IF EXISTS playOff18 CASCADE;
-    -- CREATE TABLE playOff18 (
-    --     id SERIAL,  
-    --     playerID text NOT NULL UNIQUE REFERENCES player (playerID),
-    --     awards integer NOT NULL,
-    --     position text not null,
-    --     PRIMARY KEY (id, playerID)
-    -- );
-
-    -- DROP TABLE IF EXISTS playOff17 CASCADE;
-    -- CREATE TABLE playOff17 (
-    --     id SERIAL,  
-    --     playerID text NOT NULL UNIQUE REFERENCES player (playerID),
-    --     awards integer NOT NULL,
-    --         position text not null,
-    --     PRIMARY KEY (id, playerID)
-    -- );
-
-    -- DROP TABLE IF EXISTS playOff16 CASCADE;
-    -- CREATE TABLE playOff16 (
-    --     id SERIAL,  
-    --     playerID text NOT NULL UNIQUE REFERENCES player (playerID),
-    --     awards integer NOT NULL,
-    --     position text not null,
-    --     PRIMARY KEY (id, playerID)
-    -- );
-
---  DROP TABLE IF EXISTS season19 CASCADE;
---     CREATE TABLE season19 (
---         id SERIAL,  
---         playerID text NOT NULL UNIQUE REFERENCES player (playerID),
---         awards integer NOT NULL,
---         position integer NOT NULL,
---         PRIMARY KEY (id, playerID)
---     );
-
-    -- DROP TABLE IF EXISTS season18 CASCADE;
-    -- CREATE TABLE season18 (
-    --     id SERIAL,  
-    --     playerID text NOT NULL UNIQUE REFERENCES player (playerID),
-    --     awards integer NOT NULL,
-    --     PRIMARY KEY (id, playerID)
-    -- );
-
-    -- DROP TABLE IF EXISTS season17 CASCADE;
-    --     CREATE TABLE season17 (
-    --         id SERIAL,  
-    --         playerID text NOT NULL UNIQUE REFERENCES player (playerID),
-    --         awards integer NOT NULL,
-    --         PRIMARY KEY (id, playerID)
-    --     );
-
-        -- DROP TABLE IF EXISTS season16 CASCADE;
-        -- CREATE TABLE season16 (
-        --     id SERIAL,  
-        --     playerID text NOT NULL UNIQUE REFERENCES player (playerID),
-        --     awards integer NOT NULL,
-        --     PRIMARY KEY (id, playerID)
-        -- );
-
-    --     DROP TABLE IF EXISTS player CASCADE;
+-- DROP TABLE IF EXISTS player CASCADE;
     -- CREATE TABLE player (
     --     id SERIAL,  
     --     playerID text NOT NULL UNIQUE,
@@ -114,4 +45,37 @@
     --     startNba text,
     --     PRIMARY KEY (id, teamID)
     -- );
+
+
+-- tables store all players who was MVP in at list 1 game of the season
+
+    -- DROP TABLE IF EXISTS season18 CASCADE;
+    --     CREATE TABLE season18 (
+    --         id SERIAL,  
+    --         playerID text NOT NULL UNIQUE REFERENCES player (playerID),
+    --         awards integer NOT NULL,
+    --         PRIMARY KEY (id, playerID)
+    --     );
+
+
+-- tables store 30 best players each in from regular season or best players from playoff
+
+-- DROP TABLE IF EXISTS season2016 CASCADE;
+--     CREATE TABLE season2016 (
+--         id SERIAL,  
+--         playerID text NOT NULL UNIQUE REFERENCES player (playerID),
+--         awards integer NOT NULL,
+--         position integer NOT NULL,
+--         PRIMARY KEY (id, playerID)
+--     );
+
+    -- DROP TABLE IF EXISTS playOff2018 CASCADE;
+    -- CREATE TABLE playOff2018 (
+    --     id SERIAL,  
+    --     playerID text NOT NULL UNIQUE REFERENCES player (playerID),
+    --     awards integer NOT NULL,
+    --     position integer not null,
+    --     PRIMARY KEY (id, playerID)
+    -- );
+
 
