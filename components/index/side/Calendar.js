@@ -4,8 +4,8 @@
 import Calendar from 'react-modern-datepicker';
 import {useContext} from 'react';
 import style from 'styled-components';
-import ApiContext from './Context';
-import '../static/Calendar.css';
+import ApiContext from '../../Context';
+import '../../../static/Calendar.css';
 
 const Day = style.span`
   display: flex; 

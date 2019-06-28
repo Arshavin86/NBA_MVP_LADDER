@@ -1,6 +1,5 @@
 import {useContext} from 'react';
-import style from 'styled-components';
-import ApiContext from './Context';
+import ApiContext from '../../Context';
 
 
 //filter the wrong videos (from another game) by comparing publishedDate from resourse video and date of the game from my DB
@@ -35,7 +34,7 @@ const renderVideos = (videos, date) => {
     return list;
 }
 
-const Videoboard = props => {
+const Videoboard = () => {
     const [videos, news, videosOn, date] = useContext(ApiContext);
     // console.log(video[0].items);
     console.log("videos", videos)

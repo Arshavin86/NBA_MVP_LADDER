@@ -1,7 +1,7 @@
 import {useContext} from 'react';
-import Calendar from '../components/Calendar.js'
+import Calendar from './Calendar';
 import style from 'styled-components';
-import ApiContext from './Context';
+import ApiContext from '../../Context';
 
 const Container2 = style.div`
   display: flex; 

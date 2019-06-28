@@ -7,9 +7,12 @@ const getDayLeaders = async (date) => {
     let loosingTeamID;
     let gameID;
     let matchDay = {};
+
+    
     // get all games played on one particular date
     let games = await getGamesByDate(date);
-    console.log('GAMES: ', games.api.games.length);
+    console.log(`${games.api.games.length} games on ${date}`);
+    const dayCount = games.api.games.length;
 
     if (games.api.games.length) {
         //prevent getting the "junk" game objects (with no real data)
@@ -33,9 +36,11 @@ const getDayLeaders = async (date) => {
                     gameId: gameID,
                     losingTeamID: loosingTeamID,
                 }
-                //post a new team data
-                database.postTeam(game.vTeam.teamId, game.vTeam.fullName, game.vTeam.logo);
-                database.postTeam(game.hTeam.teamId, game.hTeam.fullName, game.hTeam.logo);
+
+                //********************* */post a new team data (Uncomment next 2 lines if you need to post a new team)**********************
+                // database.postTeam(game.vTeam.teamId, game.vTeam.fullName, game.vTeam.logo);
+                // database.postTeam(game.hTeam.teamId, game.hTeam.fullName, game.hTeam.logo);
+
             });
 
             // console.log('matchDay: ', matchDay)
@@ -87,7 +92,7 @@ const getDayLeaders = async (date) => {
                     let bestPlayer1 = await getNameByPlayerID(leader.player1Id);
                     // console.log('bestPlayer1', bestPlayer1.api.players);
 
-                    //post or update player info
+                    //post or update player awards number
                     // console.log('player: ', leader.player1Id)
                     await database.postPlayer(leader.player1Id, `${bestPlayer1.api.players[0].firstName} ${bestPlayer1.api.players[0].lastName}`, team);
 
@@ -106,7 +111,7 @@ const getDayLeaders = async (date) => {
                         let bestPlayer2 = await getNameByPlayerID(leader.player2Id);
                         // console.log(bestPlayer2.api.players);
 
-                        //post or update player info
+                        //post or update player awards number
                         await database.postPlayer(leader.player2Id, `${bestPlayer2.api.players[0].firstName} ${bestPlayer2.api.players[0].lastName}`, team);
 
                         matchDay[team]['bestPl2'] = `${bestPlayer2.api.players[0].firstName} ${bestPlayer2.api.players[0].lastName}`;
@@ -130,12 +135,12 @@ const getDayLeaders = async (date) => {
                 }    
             }
             console.log('DONE!'); 
-            return 1;
+            return dayCount;
         }
-        console.log('We got junky object from API!');
+        console.log(`We got junky object from API on ${date}!`);
         return 0;
     }
-    console.log('There is no game played in this day');
+    console.log(`There is no game played in ${date}`);
     return 0;   
 };
 

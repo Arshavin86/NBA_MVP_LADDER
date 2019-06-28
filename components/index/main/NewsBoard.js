@@ -1,6 +1,6 @@
 import {useContext} from 'react';
 import style from 'styled-components';
-import ApiContext from './Context';
+import ApiContext from '../../Context';
 
 const Image = style.img`
     max-height: 1000px;

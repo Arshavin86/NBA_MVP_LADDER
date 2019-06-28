@@ -1,6 +1,6 @@
 
 import style from 'styled-components';
-import Table_body from '../components/Table_body';
+import Table_body from './Table_body';
 
 
 const Table_main = style.table`
@@ -13,6 +13,7 @@ const Table_main = style.table`
     margin: 0;
     width: 100%;
     border-top: 2px solid #9b9b9b;
+    border-bottom: 1px solid #e6e8ea;
 `;
 
 const Table_head = style.thead`
@@ -32,8 +33,8 @@ const Table = props => {
         <Table_main>
             <Table_head>
                 <tr>
+                    <th>Rk</th>
                     <th></th>
-                    <th>Team</th>
                     <th>Pos</th>
                     <th>G</th>
                     <th>MP</th>

@@ -13,6 +13,12 @@ const Container = style.div`
   background: #1D428A;
   position: fixed;
   z-index: 1;
+  justify-content: center;
+`;
+
+const Image = style.img`
+  height: 40px;
+  padding: 0px 10px 0px 10px;
 `;
 
 const linkStyle = {
@@ -23,6 +29,7 @@ const linkStyle = {
 
 const Header = () => (
   <Container>
+    <Image src="../static/MVP_logo.png" ></Image>
     <Link href="/">
       <a style={linkStyle}>Home</a>
     </Link>

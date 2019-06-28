@@ -1,6 +1,4 @@
-import {useContext} from 'react';
 import style from 'styled-components';
-import ApiContext from './Context';
 
 const Number = style.span`
     font-size: 0.7em;
@@ -16,6 +14,7 @@ const Image_wrapper = style.div`
     background-color: #CCD0D3;
     border-radius: 50%;
     background-size: 130%;
+    cursor: pointer;
 `;
 
 const Image = style.img`
@@ -32,12 +31,12 @@ const Name = style.p`
     line-height: 1.2;
     font-family: "Flama-Medium",sans-serif;
     color: #0B5BE1;
+    cursor: pointer;
 `;
 
 const Details = style.div`
     font-size: 0.75em;
 `;
-
 
 const Player = props => {
     const {number, name, position, height, weight, team} = props.player;

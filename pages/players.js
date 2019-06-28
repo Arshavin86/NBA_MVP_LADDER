@@ -3,10 +3,10 @@ import {useState} from 'react';
 import fetch from 'isomorphic-unfetch';
 import style from 'styled-components';
 import ApiContext from '../components/Context.js';
-import Player_search from '../components/Player_search';
-import Row_headers from '../components/Row_headers';
-import Players_wrapper from '../components/Players_wrapper';
-import MainBoard_players from '../components/MainBoard_players';
+import Player_search from '../components/players/side/Player_search';
+import Row_headers from '../components/players/side/Row_headers';
+import Players_wrapper from '../components/players/side/Players_wrapper';
+import MainBoard_players from '../components/players/main/MainBoard_players';
 
 
 const server = 'http://localhost:3001/api/players'; 

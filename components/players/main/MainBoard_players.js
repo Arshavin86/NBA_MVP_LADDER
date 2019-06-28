@@ -1,7 +1,7 @@
 import {useContext} from 'react';
 import style from 'styled-components';
-import ApiContext from './Context';
-import Player_bio from '../components/Player_bio';
+import ApiContext from '../../Context';
+import Player_bio from './Player_bio';
 
 const Index = style.div`
     

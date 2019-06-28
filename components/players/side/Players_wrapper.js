@@ -1,8 +1,7 @@
 import {useContext} from 'react';
 import style from 'styled-components';
-import ApiContext from './Context';
-import {useState, useEffect} from 'react';
-import Players_list from '../components/Players_list';
+import ApiContext from '../../Context';
+import Players_list from './Players_list';
 
 const Container = style.div`
     display: block;
@@ -51,16 +50,14 @@ const playersListing = players => {
     return context;
 }
 
-const Wrapper = props => {
+const Wrapper = () => {
     const [players] = useContext(ApiContext);
-
 
     return (
         <Container>
             {playersListing(players)}
         </Container>
-    )
-    
+    )  
 }
 
 export default Wrapper;

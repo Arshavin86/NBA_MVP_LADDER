@@ -1,6 +1,6 @@
 import {useContext} from 'react';
 import style from 'styled-components';
-import ApiContext from './Context';
+import ApiContext from '../../Context';
 import {useState, useEffect} from 'react';
 
 const Container = style.div`
@@ -20,7 +20,6 @@ const Input = style.input`
     padding-bottom: 0;
 `;
 
-
 const Search = props => {
     const [setPlayers, fullList] = useContext(ApiContext);
     const [value, setValue] = useState('');
@@ -28,9 +27,9 @@ const Search = props => {
     const onSubmit = event => {
         event.preventDefault();
         // console.log('Submited value: ', value);
-
     }
-    // the useEffect hook takes a value to listen to for changes
+
+    // the useEffect hook takes a value to listen to changes
     useEffect(() => {
         // filter players in list when value changes
         const filteredPlayers = fullList.filter(player => {
@@ -51,8 +50,7 @@ const Search = props => {
                 <Input type="text" placeholder="Search Player"  onChange={onChange} value={value}></Input>
             </form>
         </Container>
-    )
-    
+    )  
 }
 
 export default Search;
