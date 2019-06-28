@@ -120,7 +120,7 @@ exports.getPlayers = async (req, res) => {
     // const data = {image: image}
     // res.status(200).send(data);
 
-    const data = await db.query('SELECT player.*, team.name FROM player INNER JOIN team ON player.teamID = team.teamID');
+    const data = await db.query('SELECT player.*, team.name FROM player INNER JOIN team ON player.teamID = team.teamID ORDER BY player.lastname ASC;');
     
     res.status(200).send(data);
     // //function to add player photo to each player

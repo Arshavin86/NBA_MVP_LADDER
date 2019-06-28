@@ -20,7 +20,7 @@ const Input = style.input`
     padding-bottom: 0;
 `;
 
-const Search = props => {
+const Search = () => {
     const [setPlayers, fullList] = useContext(ApiContext);
     const [value, setValue] = useState('');
 
