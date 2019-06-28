@@ -8,6 +8,7 @@ const headers = {
     'X-RapidAPI-Key': config.X_RapidAPI_Key
 };
 const URL = `https://api-nba-v1.p.rapidapi.com`;
+// const getDayLeaders = require('../server/nba_api');
 
 const playerAdd = async () => {
     let playerId = 1159;
@@ -49,7 +50,3 @@ const playerAdd = async () => {
 };
 
 playerAdd();
-
-
-
-//1844
