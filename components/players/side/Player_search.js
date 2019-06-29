@@ -12,7 +12,7 @@ const Container = style.div`
 `;
 
 const Input = style.input`
-    position: fixed;
+    // position: fixed;
     z-index: 2;
     height: 25px;
     border-radius: 4px;

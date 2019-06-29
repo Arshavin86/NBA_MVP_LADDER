@@ -27,7 +27,7 @@ const Table_head = style.thead`
     width: 100%;
 `;
 
-const Table = props => {
+const Table = () => {
 
     return (
         <Table_main>

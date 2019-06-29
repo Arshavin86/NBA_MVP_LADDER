@@ -40,7 +40,7 @@ const Breakdown = style.div`
     justify-content: center;
 `;
 
-const Button = style.button`
+const Button1 = style.button`
     margin-left: 2px;
     border-radius: 40px;
     // flex: 1 1 0;
@@ -54,12 +54,18 @@ const Button = style.button`
     text-decoration: none;
     cursor: pointer;
     width: 191px;
+    // background-color: #CCD0D3;
+    // background-color: ${(props) => props.seasonOn ? "white" : "gray"};
     &:hover {
         color: white;
       }
     &:focus {
         outline:0;
     }
+`;
+
+const Button2 = style(Button1)`
+
 `;
 
 const Select = style.select`
@@ -123,7 +129,8 @@ const Main = style.div`
 
     const switchToSeason = event => {
         event.preventDefault();
-        toggleMode(true);  
+        toggleMode(true);
+        console.log(toggleMode);
     }
 
     const switchToPlayOffs = event => {
@@ -139,12 +146,12 @@ const Main = style.div`
                     {season} NBA players ranking
                 </Page_header>
                 <Breakdown>
-                    <Button onClick={switchToSeason}>
+                    <Button1 onClick={switchToSeason} seasonOn={toggleMode}>
                         Regular Season
-                    </Button>
-                    <Button onClick={switchToPlayOffs}>
+                    </Button1>
+                    <Button2 onClick={switchToPlayOffs} seasonOn={toggleMode}>
                         Playoffs
-                    </Button>
+                    </Button2>
                     <Select onChange={seasonChange}>
                         <option value="2018-2019">2018-2019</option>
                         <option value="2017-2018">2017-2018</option>

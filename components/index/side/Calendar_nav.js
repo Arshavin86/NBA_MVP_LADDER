@@ -11,10 +11,14 @@ const Image = style.input`
   height: 22px;
   width: 22px;
   cursor: pointer;
-  padding: 0px 10px 0px 10px;
+  margin: 10px 10px 10px 10px;
+  outline: 0;
+  &: hover {
+      background: blue;
+  }
 `;
 
-const Cal = props => {
+const Cal = () => {
     const [date, setDate] = useContext(ApiContext);
 
     //it decrements a date by 2 and doesn't increment if I put -1 and 1, but it works with 0 and 2???

@@ -11,8 +11,7 @@ import MainBoard_players from '../components/players/main/MainBoard_players';
 
 const server = 'http://localhost:3001/api/players'; 
 
-const Container1 = style.div`
-  display: flex; 
+const Container1 = style.div` 
   color: black; 
   background: #E5E7E9;
   min-height: 100px;

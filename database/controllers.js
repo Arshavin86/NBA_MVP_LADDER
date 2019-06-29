@@ -92,9 +92,9 @@ exports.postPlayer = async ID => {
   try {
     const start = 1;
     //update the number of "PlayerOfTheGame awards" if player exists or insert a new raw
-    const qr2 = 'INSERT INTO season19 (playerID, awards) VALUES ($1, $2) ON CONFLICT (playerID) DO UPDATE SET awards = season19.awards + 1';
-    const result2 = await db.query(qr2, [ID, start]);
-    console.log('Award is posted on Postgres: ', result2);
+    // const qr2 = 'INSERT INTO season19 (playerID, awards) VALUES ($1, $2) ON CONFLICT (playerID) DO UPDATE SET awards = season19.awards + 1';
+    // const result2 = await db.query(qr2, [ID, start]);
+    // console.log('Award is posted on Postgres: ', result2);
   }
   catch (error) {
     console.log('POSTPlayer is failed: ', error);
@@ -103,9 +103,9 @@ exports.postPlayer = async ID => {
 
 exports.postGame = async (date, ID, WTID, LTID, BP1, BP2, score, SBP1, SBP2) => {
   try {
-    const qr = 'INSERT INTO game (date, gameID, winningTeamID, losingTeamID, bestPlayer1, bestPlayer2, score, statsBP1, statsBP2) SELECT $1, $2, $3, $4, $5, $6, $7, $8, $9 WHERE NOT EXISTS (SELECT * FROM game WHERE gameID=$2)';
-    const result = await db.query(qr, [date, ID, WTID, LTID, BP1, BP2, score, SBP1, SBP2]);
-    console.log('Game is posted on Postgres: ', ID);
+    // const qr = 'INSERT INTO game (date, gameID, winningTeamID, losingTeamID, bestPlayer1, bestPlayer2, score, statsBP1, statsBP2) SELECT $1, $2, $3, $4, $5, $6, $7, $8, $9 WHERE NOT EXISTS (SELECT * FROM game WHERE gameID=$2)';
+    // const result = await db.query(qr, [date, ID, WTID, LTID, BP1, BP2, score, SBP1, SBP2]);
+    // console.log('Game is posted on Postgres: ', ID);
   }
   catch (error) {
     console.log('POSTGame is failed: ', error);

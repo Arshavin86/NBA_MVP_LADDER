@@ -1,6 +1,10 @@
-import {useContext} from 'react';
+import {useContext, useState} from 'react';
 import style from 'styled-components';
 import ApiContext from '../../Context';
+
+const Article = style.div`
+    border-bottom: 1px solid #e6e8ea;
+`;
 
 const Image = style.img`
     max-height: 1000px;
@@ -11,7 +15,7 @@ const Image = style.img`
 const Title = style.div`
     margin-bottom: 13px;
     color: #11202B;
-    font-size: 28px;
+    font-size: 24px;
     font-family: "Flama-Bold", sans-serif;
     font-weight: bold; 
 `;
@@ -22,24 +26,23 @@ const Description = style.div`
     font-size: 14px;
 `;
 
-
 const articlesListing = articles => {
     let context = [];
 
     articles.map (article => {
         context.push (
-        <div key={article.publishedAt}>
+        <Article key={article.publishedAt}>
             <Image src={article.urlToImage} alt="my image"/>
             <Title>{article.title}</Title>
             <Description>{article.description}</Description>
-            <div>Read more</div>
-        </div>
+            <a href={article.url}>Read more</a>
+        </Article>
         )
     })
     return context;
 }
 
-const NewsBoard = props => {
+const NewsBoard = () => {
     const [videos, news, videosOn] = useContext(ApiContext);
     // console.log(video[0].items);
     console.log("videos: ", videos, 'news: ', news, 'videosOn: ', videosOn)
