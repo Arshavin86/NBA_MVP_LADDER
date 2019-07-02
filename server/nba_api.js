@@ -1,5 +1,5 @@
 const {getGamesByDate, getStatsByGameID, getNameByPlayerID, getPhotoByName} = require('../helpers/rapidapi')
-const {statsCalculator} = require('../helpers/statsCalculater');
+const {statsCalculator} = require('../MVPCalculator/statsCalculator');
 const database = require('../database/controllers');
 
 const getDayLeaders = async (date) => {
@@ -60,9 +60,9 @@ const getDayLeaders = async (date) => {
                     //calculate stats of each player from winning team and compare it with current best result for current game
                     players.api.statistics.forEach( player => {
                         // console.log('player', player);
-                        const {points, assists, totReb, steals, blocks, turnovers, plusMinus, fgp, playerId, teamId} = player;
+                        const {points, assists, totReb, steals, blocks, turnovers, plusMinus, fgm, fga, fgp, ftm, fta, tpm, tpa, offReb, defReb, pFouls, playerId, teamId} = player;
                         if (teamId === team) {
-                            currentTotal = statsCalculator(points, assists, totReb, steals, blocks, turnovers);
+                            currentTotal = statsCalculator(points, assists, totReb, steals, blocks, turnovers, fgm, fga, ftm, fta, tpm, tpa, offReb, defReb, pFouls);
                             // console.log('total: ', currentTotal);
                             if (currentTotal > leader.total || (currentTotal === leader.total && plusMinus > leader.plusMinus) || 
                             (currentTotal === leader.total && plusMinus === leader.plusMinus && fgp > leader.fgp)) {
