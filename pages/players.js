@@ -24,8 +24,8 @@ const Container2 = style.div`
   margin-left: auto;
   height: 100vh;
   background: #E5E7E9;
-  padding: 0 15px;
-  
+  justify-content: center;
+  padding: 0 30px;
 `;
 
 const Sidebar = style.div`

@@ -25,6 +25,8 @@ const Container2 = style.div`
   vertical-align: middle;
   line-height: 40px; 
   background: #E5E7E9;
+  padding: 0 15px;
+  justify-content: center;
 `;
 const Scoreboard = style.div`
   // border: 0.5px solid black;

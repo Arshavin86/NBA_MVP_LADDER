@@ -62,7 +62,7 @@ const getDayLeaders = async (date) => {
                         // console.log('player', player);
                         const {points, assists, totReb, steals, blocks, turnovers, plusMinus, fgm, fga, fgp, ftm, fta, tpm, tpa, offReb, defReb, pFouls, playerId, teamId} = player;
                         if (teamId === team) {
-                            currentTotal = statsCalculator(points, assists, totReb, steals, blocks, turnovers, fgm, fga, ftm, fta, tpm, tpa, offReb, defReb, pFouls);
+                            currentTotal = statsCalculator(points, assists, totReb, steals, blocks, turnovers, fgm, fga, ftm, fta, tpm, tpa, offReb, defReb, pFouls, plusMinus);
                             // console.log('total: ', currentTotal);
                             if (currentTotal > leader.total || (currentTotal === leader.total && plusMinus > leader.plusMinus) || 
                             (currentTotal === leader.total && plusMinus === leader.plusMinus && fgp > leader.fgp)) {
