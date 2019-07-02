@@ -27,15 +27,21 @@ const Score_tile_wrapper = style.div`
 
 const Team = style.div`
     display: flex;
-    align-items: center;
+    align-items: left;
     margin: 0;
     min-height: 34px;
+    justify-content: space-between;
 `;
  
 const TeamLogo = style.div`
-    flex: 1 0 0;
+    // flex: 1 1 0;
     text-align: center;
     padding: 6px 10px 7px 3px;
+`;
+
+const TeamName = style.div`
+    text-align: center;
+    padding: 15px 0 0 0;
 `;
 
 const TeamScore = style.div`
@@ -43,6 +49,7 @@ const TeamScore = style.div`
     font-size: 24px;
     text-align: right;
     line-height: initial;
+    padding: 10px 0 0 0;
 `;
 
 const GameMVP = style.div`
@@ -69,7 +76,10 @@ const Bottom = style.div`
 `;
 
 const Watch = style.div`
-    border-right: 1px solid #e6e8ea; 
+    border-right: 1px solid #e6e8ea;
+    &: hover {
+        background: #F3F4F5;
+    }
 `;
 
 const WatchButton = style.div`
@@ -152,9 +162,9 @@ const gamesListing = (data, handleVideoChange) => {
                             <img src={visitorLogo} height="34px" >
                             </img>
                         </TeamLogo>
-                        <div>
+                        <TeamName>
                             {visitorName}
-                        </div>
+                        </TeamName>
                         <TeamScore>
                             {game.score[0]}
                         </TeamScore>
@@ -164,9 +174,9 @@ const gamesListing = (data, handleVideoChange) => {
                             <img src={homelogo} height="34px" >
                             </img>
                         </TeamLogo>
-                        <div>
+                        <TeamName>
                             {homeName}
-                        </div>
+                        </TeamName>
                         <TeamScore>
                             {game.score[1]}
                         </TeamScore>

@@ -12,7 +12,7 @@ const Container = style.div`
 `;
 
 const Input = style.input`
-    position: fixed;
+    // position: fixed;
     z-index: 2;
     height: 25px;
     border-radius: 4px;
@@ -20,7 +20,7 @@ const Input = style.input`
     padding-bottom: 0;
 `;
 
-const Search = props => {
+const Search = () => {
     const [setPlayers, fullList] = useContext(ApiContext);
     const [value, setValue] = useState('');
 

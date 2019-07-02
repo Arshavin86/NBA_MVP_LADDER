@@ -21,6 +21,7 @@ const Container2 = style.div`
     background: #fefefe;
     width: 800px;
     flex-flow: row wrap;
+    justify-content: center;
 `;
 
 const Page_header = style.div`
@@ -28,20 +29,21 @@ const Page_header = style.div`
     align-items: center;
     display: flex;
     height: 80px;
-    // justify-content: space-between;
-    padding: 0 24px;
-    width: 100%
+    width: 100%;
+    font-size: 28px;
+    font-weight: 800;
 `;
 
 const Breakdown = style.div`
     display: flex;
-    width: 100%
+    width: 100%;
+    justify-content: center;
 `;
 
-const Button = style.button`
+const Button1 = style.button`
     margin-left: 2px;
     border-radius: 40px;
-    flex: 1 1 0;
+    // flex: 1 1 0;
     margin: 2px 1px;
     padding: 0;
     text-align: center;
@@ -51,7 +53,9 @@ const Button = style.button`
     line-height: 28px;
     text-decoration: none;
     cursor: pointer;
-    width: 91px;
+    width: 191px;
+    // background-color: #CCD0D3;
+    // background-color: ${(props) => props.seasonOn ? "white" : "gray"};
     &:hover {
         color: white;
       }
@@ -60,27 +64,31 @@ const Button = style.button`
     }
 `;
 
+const Button2 = style(Button1)`
+
+`;
+
 const Select = style.select`
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 91px;
     background-color: transparent;
-    border: 10px;
+    border-color: gray;
+    border-radius: 40px;
     cursor: pointer;
     font-size: 12px;
     height: 32px;
     line-height: normal;
+    margin: 2px 1px;
     padding: 0 30px 0 15px;
     outline: none;
     text-transform: none;
+    width: 150px;
     &:hover {
         color: #0B5BE1;
-      }
+    }
 `;
 
 const Main = style.div`
-  width: 640px;
-  padding: 30px 30px 30px;
+  width: 100%;
+  padding: 30px 0 30px 0;
   background: #fefefe;
 `;
 
@@ -121,7 +129,8 @@ const Main = style.div`
 
     const switchToSeason = event => {
         event.preventDefault();
-        toggleMode(true);  
+        toggleMode(true);
+        console.log(toggleMode);
     }
 
     const switchToPlayOffs = event => {
@@ -133,28 +142,28 @@ const Main = style.div`
         <Layout>
             <Container1></Container1>
             <Container2>
-            <Page_header>
-                {season} NBA players ranking
-            </Page_header>
-            <Breakdown>
-                <Button onClick={switchToSeason}>
-                    Regular Season
-                </Button>
-                <Button onClick={switchToPlayOffs}>
-                    Playoffs
-                </Button>
-                <Select onChange={seasonChange}>
-                    <option value="2018-2019">2018-2019</option>
-                    <option value="2017-2018">2017-2018</option>
-                    <option value="2016-2017">2016-2017</option>
-                    <option value="2015-2016">2015-2016</option>
-                </Select>
-            </Breakdown>
-            <Main>
-                <ApiContext.Provider value = {[players]}>
-                    <Table/>
-                </ApiContext.Provider>
-            </Main>
+                <Page_header>
+                    {season} NBA players ranking
+                </Page_header>
+                <Breakdown>
+                    <Button1 onClick={switchToSeason} seasonOn={toggleMode}>
+                        Regular Season
+                    </Button1>
+                    <Button2 onClick={switchToPlayOffs} seasonOn={toggleMode}>
+                        Playoffs
+                    </Button2>
+                    <Select onChange={seasonChange}>
+                        <option value="2018-2019">2018-2019</option>
+                        <option value="2017-2018">2017-2018</option>
+                        <option value="2016-2017">2016-2017</option>
+                        <option value="2015-2016">2015-2016</option>
+                    </Select>
+                </Breakdown>
+                <Main>
+                    <ApiContext.Provider value = {[players]}>
+                        <Table/>
+                    </ApiContext.Provider>
+                </Main>
             </Container2>
             
         </Layout>

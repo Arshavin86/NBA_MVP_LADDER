@@ -138,7 +138,7 @@ const Index = props => {
           </Scoreboard_bottom>
         </Scoreboard>
         <Main>
-          <ApiContext.Provider value = {[videos, news, videosOn, date]}>
+          <ApiContext.Provider value = {[videos, news, videosOn]}>
             <MainBoard/>
           </ApiContext.Provider>
         </Main>
@@ -148,7 +148,8 @@ const Index = props => {
 }
 
 Index.getInitialProps = async function () {
-  let date = formatDate('2019-04-13');
+  // let date = formatDate('2019-06-16');
+  let date = formatDate();
   let json;
   console.log('DATE in props: ', date);
 

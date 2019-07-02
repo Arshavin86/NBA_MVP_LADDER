@@ -36,16 +36,16 @@ const Header = () => (
     <Link href="/players">
       <a style={linkStyle}>Players</a>
     </Link>
-    <Link href="/teams">
+    <Link href="/">
       <a style={linkStyle}>Teams</a>
     </Link>
     <Link href="/seasons">
       <a style={linkStyle}>Seasons</a>
     </Link>
-    <Link href="/playoffs">
+    <Link href="/">
       <a style={linkStyle}>Playoffs</a>
     </Link>
-    <Link href="/leaders">
+    <Link href="/">
       <a style={linkStyle}>Leaders</a>
     </Link>
   </Container>

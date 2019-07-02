@@ -11,8 +11,7 @@ import MainBoard_players from '../components/players/main/MainBoard_players';
 
 const server = 'http://localhost:3001/api/players'; 
 
-const Container1 = style.div`
-  display: flex; 
+const Container1 = style.div` 
   color: black; 
   background: #E5E7E9;
   min-height: 100px;
@@ -56,80 +55,80 @@ const Main = style(Sidebar_bottom)`
   background: #fefefe;
 `;
 
- const Players = (props) => {
+ const Players = props => {
 
   // return (
   //   <div>
   //     <img src={props.image}></img>
   //   </div>
   // )
-    const [players, setPlayers] = useState(props.players);
-    // console.log(players);
-    const fullList = props.players;
 
-    return (
-        <Layout>
-          <Container1>Here could be your advertisement </Container1>
-          <Container2>
-            <Sidebar>
-              <Sidebar_nav>
-                <ApiContext.Provider value = {[setPlayers, fullList]}>
-                  <Player_search/>
-                </ApiContext.Provider> 
-                <Row_headers/>
-              </Sidebar_nav>
-              <Sidebar_bottom>
-                <ApiContext.Provider value = {[players]}>
-                  <Players_wrapper/>
-                </ApiContext.Provider> 
-              </Sidebar_bottom>
-            </Sidebar>
-            <Main>
+  const [players, setPlayers] = useState(props.players);
+  // console.log(players);
+  const fullList = props.players;
+
+  return (
+      <Layout>
+        <Container1>Here could be your advertisement </Container1>
+        <Container2>
+          <Sidebar>
+            <Sidebar_nav>
+              <ApiContext.Provider value = {[setPlayers, fullList]}>
+                <Player_search/>
+              </ApiContext.Provider> 
+              <Row_headers/>
+            </Sidebar_nav>
+            <Sidebar_bottom>
               <ApiContext.Provider value = {[players]}>
-                <MainBoard_players/>
-              </ApiContext.Provider>
-            </Main>
-          </Container2>
-        </Layout>
-      );
- }
-    
-
+                <Players_wrapper/>
+              </ApiContext.Provider> 
+            </Sidebar_bottom>
+          </Sidebar>
+          <Main>
+            <ApiContext.Provider value = {[players]}>
+              <MainBoard_players/>
+            </ApiContext.Provider>
+          </Main>
+        </Container2>
+      </Layout>
+    );
+}
+  
 Players.getInitialProps = async function () {
 
-    const res = await fetch(server);
-    const data = await res.json();
-    const players = [];
-    let playerName;
-    // console.log('IMAGE: ', data.image);
-    // return {
-    //       image: data.image
-    //   }
-    // const encodeData = encodeURIComponent(data.image);
+  const res = await fetch(server);
+  const data = await res.json();
+  const players = [];
+  let playerName;
+  // console.log('IMAGE: ', data.image);
+  // return {
+  //       image: data.image
+  //   }
+  // const encodeData = encodeURIComponent(data.image);
 
-    // console.log(`Show data fetched in Players. ${data[0]}`)
-    data.map(player => {
-      //works with players who have nicknames, like 'Nene'
-      const {playerid, name, jersey, pos, heightinmeters, weightinkilograms} = player;
-      if (player.lastname.length) {
-        playerName = `${player.lastname}, ${player.firstname}`;
-      } else {
-        playerName = player.firstname;
-      }
-        players.push({
-            name: playerName,
-            id: playerid,
-            team: name,
-            number: jersey,
-            position: pos,
-            height: heightinmeters,
-            weight: weightinkilograms
-        });
-    })
-
-    return {
-        players: players
+  // console.log(`Show data fetched in Players. ${data[0]}`)
+  data.map(player => {
+    //works with players who have nicknames, like 'Nene'
+    const {playerid, name, jersey, pos, heightinmeters, weightinkilograms} = player;
+    if (player.lastname.length) {
+      playerName = `${player.lastname}, ${player.firstname}`;
+    } else {
+      playerName = player.firstname;
     }
+      players.push({
+          name: playerName,
+          id: playerid,
+          team: name,
+          number: jersey,
+          position: pos,
+          height: heightinmeters,
+          weight: weightinkilograms
+      });
+  })
+
+  return {
+      players: players
+  }
 }
 
 export default Players;
