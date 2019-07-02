@@ -14,6 +14,9 @@ const Day = style.div`
   padding: 4px 30px 4px 30px;
   box-sizing: border-box;
   text-align: center;
+  &: hover {
+    background: blue;
+  }
 `;
 
 const Cal = () => {
