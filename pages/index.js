@@ -138,7 +138,7 @@ const Index = props => {
           </Scoreboard_bottom>
         </Scoreboard>
         <Main>
-          <ApiContext.Provider value = {[videos, news, videosOn]}>
+          <ApiContext.Provider value = {[videos, news, videosOn, date]}>
             <MainBoard/>
           </ApiContext.Provider>
         </Main>
