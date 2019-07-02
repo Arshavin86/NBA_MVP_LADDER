@@ -1,11 +1,11 @@
 import {useContext} from 'react';
 import ApiContext from '../../Context';
 
-
 //filter the wrong videos (from another game) by comparing publishedDate from resourse video and date of the game from my DB
 const filterVideos = (publishedAt, date) => {
     const date1 = new Date (publishedAt);
     const date2 = new Date (date);
+    // console.log(date1, date)
     //get the difference in days between two dates
     return Math.abs((date1.getTime() - date2.getTime()) / 86400000);
 
