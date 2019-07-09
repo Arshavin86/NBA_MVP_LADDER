@@ -24,16 +24,23 @@ exports.getGames = async (req, res) => {
             const data2 = await db.query('SELECT name, logo FROM team WHERE teamID = $1', game.losingteamid);
             const data3 = await db.query('SELECT firstName, lastName FROM player WHERE playerID = $1', game.bestplayer1);
 
-            //there is a problem: in some cases there is no 'losingTeam' property in data object sent to user! 
-            // console.log(data3);
-            game['losingTeam'] = data2;
-            if (!game['losingTeam']) {
-              console.log ('losingTeam property is not written down to the response object!');
+            // because there are almost no NBA players playing in Summer league we get an empty array as data3, 
+            //so we have to send responce witn status 500 in that case.
+            //rarely, when MVP of the game is an NBA player, FE gets that games
+            if (data3.length) {
+              //there is a problem: in some cases there is no 'losingTeam' property in data object sent to user! 
+              // console.log(data3);
+              game['losingTeam'] = data2;
+              if (!game['losingTeam']) {
+                console.log ('losingTeam property is not written down to the response object!');
+                res.sendStatus(500);
+              }
+              game['BP1name'] = data3;
+            } else {
               res.sendStatus(500);
-            }
-            game['BP1name'] = data3;
+            } 
           });
-          console.log('Games are found in DB');
+          console.log(`${data.length} games are found in DB`);
           // console.log(data);
           res.status(200).send(data);
           return data;
@@ -43,7 +50,6 @@ exports.getGames = async (req, res) => {
           res.sendStatus(500);
         }
       }
-
       start(data);
     } else {
       const games = await getDayLeaders(id);
@@ -55,8 +61,6 @@ exports.getGames = async (req, res) => {
         res.status(200).send(data);
       }
     }
-
-
     // const list = await db.query('SELECT name, teamID, awards FROM player INNER JOIN season16 ON player.playerID = season16.playerID WHERE awards > 12 ORDER BY awards DESC;');
     // // let total = 0;
     // // list.forEach(player => {
@@ -103,8 +107,8 @@ exports.postPlayer = async ID => {
 
 exports.postGame = async (date, ID, WTID, LTID, BP1, BP2, score, SBP1, SBP2) => {
   try {
-    // const qr = 'INSERT INTO game (date, gameID, winningTeamID, losingTeamID, bestPlayer1, bestPlayer2, score, statsBP1, statsBP2) SELECT $1, $2, $3, $4, $5, $6, $7, $8, $9 WHERE NOT EXISTS (SELECT * FROM game WHERE gameID=$2)';
-    // const result = await db.query(qr, [date, ID, WTID, LTID, BP1, BP2, score, SBP1, SBP2]);
+    const qr = 'INSERT INTO game (date, gameID, winningTeamID, losingTeamID, bestPlayer1, bestPlayer2, score, statsBP1, statsBP2) SELECT $1, $2, $3, $4, $5, $6, $7, $8, $9 WHERE NOT EXISTS (SELECT * FROM game WHERE gameID=$2)';
+    const result = await db.query(qr, [date, ID, WTID, LTID, BP1, BP2, score, SBP1, SBP2]);
     // console.log('Game is posted on Postgres: ', ID);
   }
   catch (error) {
