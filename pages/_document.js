@@ -13,7 +13,7 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <title>My page</title>
+          <title>NBA MVP Ladder</title>
           {this.props.styleTags}
         </Head>
         <body style={{ margin: '0' }}>

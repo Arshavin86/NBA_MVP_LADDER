@@ -7,9 +7,9 @@ import Player_search from '../components/players/side/Player_search';
 import Row_headers from '../components/players/side/Row_headers';
 import Players_wrapper from '../components/players/side/Players_wrapper';
 import MainBoard_players from '../components/players/main/MainBoard_players';
+import Server from './Server';
 
-
-const server = 'http://localhost:3001/api/players'; 
+const server = Server.server;
 
 const Container1 = style.div` 
   color: black; 
@@ -96,7 +96,7 @@ const Main = style(Sidebar_bottom)`
   
 Players.getInitialProps = async function () {
 
-  const res = await fetch(server);
+  const res = await fetch(server + 'players');
   const data = await res.json();
   const players = [];
   let playerName;

@@ -94,7 +94,7 @@ const getDayLeaders = async (date) => {
 
                     //post or update player awards number
                     // console.log('player: ', leader.player1Id)
-                    await database.postPlayer(leader.player1Id, `${bestPlayer1.api.players[0].firstName} ${bestPlayer1.api.players[0].lastName}`, team);
+                    // await database.postPlayer(leader.player1Id, `${bestPlayer1.api.players[0].firstName} ${bestPlayer1.api.players[0].lastName}`, team);
 
                     matchDay[team]['bestPl1'] = bestPlayer1.api.players[0].playerId;
                     matchDay[team]['statsBP1'] = leader.statsBP1;
@@ -112,7 +112,7 @@ const getDayLeaders = async (date) => {
                         // console.log(bestPlayer2.api.players);
 
                         //post or update player awards number
-                        await database.postPlayer(leader.player2Id, `${bestPlayer2.api.players[0].firstName} ${bestPlayer2.api.players[0].lastName}`, team);
+                        // await database.postPlayer(leader.player2Id, `${bestPlayer2.api.players[0].firstName} ${bestPlayer2.api.players[0].lastName}`, team);
 
                         matchDay[team]['bestPl2'] = `${bestPlayer2.api.players[0].firstName} ${bestPlayer2.api.players[0].lastName}`;
                         matchDay[team]['statsBP2'] = leader.statsBP2;
