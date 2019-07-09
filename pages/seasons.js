@@ -4,8 +4,9 @@ import fetch from 'isomorphic-unfetch';
 import style from 'styled-components';
 import ApiContext from '../components/Context.js';
 import Table from '../components/seasons/Table';
+import Server from './Server';
 
-const server = 'http://localhost:3001/api/seasons'; 
+const server = Server.server;
 
 const Container1 = style.div`
   display: flex; 
@@ -103,14 +104,12 @@ const Main = style.div`
         (async() => {
           try {
             if (seasonOn) {
-                const response = await fetch (server + '/' + season);
-                // const response = await fetch (server + 'videos/' + query);
+                const response = await fetch (server + 'seasons/' + season);
                 const json = await response.json();
                 console.log('Players data on FE:', json);
                 setPlayers(json);
             } else {
-                const response = await fetch (server + '/playOffs' + season);
-                // const response = await fetch (server + 'videos/' + query);
+                const response = await fetch (server + 'seasons/playOffs' + season);
                 const json = await response.json();
                 console.log('Players data on FE:', json);
                 setPlayers(json);
@@ -170,10 +169,9 @@ const Main = style.div`
       );
  }
     
-
  Seasons.getInitialProps = async function () {
 
-    const res = await fetch(server + '/2018-2019');
+    const res = await fetch(server + 'seasons/2018-2019');
     const data = await res.json();
 
     return {

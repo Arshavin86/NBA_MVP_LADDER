@@ -7,6 +7,9 @@ import style from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import ApiContext from '../components/Context';
 import MainBoard from '../components/index/main/MainBoard';
+import Server from './Server';
+
+const server = Server.server;
 
 const Container1 = style.div`
   display: flex; 
@@ -50,8 +53,6 @@ const Main = style(Scoreboard_bottom)`
   padding: 30px 30px 30px;
   background: #fefefe;
 `;
-
-const server = 'http://localhost:3001/api/';
 
 const formatDate = date => {
    
