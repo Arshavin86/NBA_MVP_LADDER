@@ -88,7 +88,7 @@ exports.postTeam = async (ID, name, logo) => {
     // console.log('Team list is updated on Postgres: ', result);
   }
   catch (error) {
-    // console.log('POSTTeam is failed: ', error);
+    console.log('POSTTeam is failed: ', error);
   }
 }
 
