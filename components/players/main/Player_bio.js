@@ -51,12 +51,12 @@ const Player = props => {
         firstName = firstname.replace(/\.|\'/g, "");
     } 
     //the same thing with Irish names (O'Neal)
-    lastName = lastname.replace(/'/g, "");
+    lastName = lastname.replace(/'|Jr.| II| III| IV/g, "");
     // and with the middle names (Jr., II, III) => such players are stored only with lastnames for some reason 
-    if (lastName.match(/ Jr.| II| III/g)) {
-        lastName = lastName.replace(/ Jr.| II| III/g, "");
-        firstName = '';
-    }
+    // if (lastName.match(/ Jr.| II| III/g)) {
+    //     lastName = lastName.replace(/ Jr.| II| III/g, "");
+    //     firstName = '';
+    // }
     const short = team.split(' ');
     const shortTeam = short[short.length-1];
 
