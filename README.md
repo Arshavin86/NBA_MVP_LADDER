@@ -14,8 +14,7 @@ Here all my seasons rankings are presented. For now you can find the MVP ranking
 - PostgreSQL (for storing and retrieving NBA stats data)
 - NBA API, YouTube API, News API
 - AWS EC2 instances (for app and database deployment)
-- NGINX reverce proxy server
-- Hosted on domains.com 
+- NGINX reverce proxy server 
 _______________________________________________________________________________________________________________________________
 
-** Site has been constantly developing. I look for another NBA API to add data from more seasons. I also look for a cheap NBA players headshot images provider in order to create a personal page for each player. 
+** Site has been constantly developing. I look for another NBA API to add data from more seasons. I also look for a cheap NBA players headshot images provider which has more images than my current one (https://nba-players.herokuapp.com/) in order to create a personal page for each player. 
