@@ -42,6 +42,21 @@ const Player = props => {
     const {number, name, position, height, weight, team} = props.player;
     const firstname = name.split(', ')[1];
     const lastname = name.split(',')[0];
+    const URL = `https://nba-players.herokuapp.com`;
+    //assighn it to empty string in order to get image for Nene
+    let firstName = '';
+    let lastName;
+    //players with such names as D.J. or J.J stored as DJ and JJ, so we have to delete dots from it + Deandre' => Deandre
+    if (firstname) {
+        firstName = firstname.replace(/\.|\'/g, "");
+    } 
+    //the same thing with Irish names (O'Neal)
+    lastName = lastname.replace(/'|Jr.| II| III| IV/g, "");
+    // and with the middle names (Jr., II, III) => such players are stored only with lastnames for some reason 
+    // if (lastName.match(/ Jr.| II| III/g)) {
+    //     lastName = lastName.replace(/ Jr.| II| III/g, "");
+    //     firstName = '';
+    // }
     const short = team.split(' ');
     const shortTeam = short[short.length-1];
 
@@ -49,7 +64,7 @@ const Player = props => {
         <div>
             <Number>{number ? number : 'N/A'}</Number>
             <Image_wrapper>
-                <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Lebron_wizards_2017_%28cropped%29.jpg/800px-Lebron_wizards_2017_%28cropped%29.jpg">
+                <Image src={`${URL}/players/${lastName}/${firstName}`}>
                 </Image>
             </Image_wrapper>  
             <Name>{firstname}<br></br>{lastname}</Name> 

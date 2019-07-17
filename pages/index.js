@@ -152,6 +152,7 @@ const Index = props => {
 
 Index.getInitialProps = async function () {
   // let date = formatDate('2019-06-16');
+  // let date = formatDate('2019-07-12');
   let date = formatDate();
   let json;
   console.log('DATE in props: ', date);

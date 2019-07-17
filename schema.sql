@@ -1,4 +1,4 @@
--- \connect nba;
+\connect nba;
 --  CREATE SCHEMA IF NOT EXISTS testNBA AUTHORIZATION andrei;
  
 --     DROP TABLE IF EXISTS team CASCADE;
@@ -8,7 +8,6 @@
 --         name text NOT NULL,
 --         logo text NOT NULL
 --     );
-
 
 --     DROP TABLE IF EXISTS game CASCADE;
 --     CREATE TABLE game (
@@ -45,7 +44,6 @@
 --         startNba text,
 --         PRIMARY KEY (id, teamID)
 --     );
-
 
 -- -- tables store all players who was MVP in at list 1 game of the season
 
@@ -129,4 +127,24 @@
 --         PRIMARY KEY (id, playerID)
 --     );
 
+-- alter table for deleting rows referenced from another table
+ALTER TABLE public.game
+DROP CONSTRAINT game_losingteamid_fkey,
+ADD CONSTRAINT  game_losingteamid_fkey
+   FOREIGN KEY (losingteamid)
+   REFERENCES team(teamID)
+   ON DELETE CASCADE;
 
+ALTER TABLE public.game
+DROP CONSTRAINT game_winningteamid_fkey,
+ADD CONSTRAINT  game_winningteamid_fkey
+   FOREIGN KEY (winningteamid)
+   REFERENCES team(teamID)
+   ON DELETE CASCADE;
+
+ALTER TABLE public.player
+DROP CONSTRAINT player_teamid_fkey,
+ADD CONSTRAINT   player_teamid_fkey
+   FOREIGN KEY (teamid)
+   REFERENCES team(teamid)
+   ON DELETE CASCADE;
