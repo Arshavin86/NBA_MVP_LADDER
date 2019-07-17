@@ -95,7 +95,6 @@ const Main = style(Sidebar_bottom)`
 }
   
 Players.getInitialProps = async function () {
-
   const res = await fetch(server + 'players');
   const data = await res.json();
   const players = [];
@@ -108,8 +107,8 @@ Players.getInitialProps = async function () {
 
   // console.log(`Show data fetched in Players. ${data[0]}`)
   data.map(player => {
-    //works with players who have nicknames, like 'Nene'
     const {playerid, name, jersey, pos, heightinmeters, weightinkilograms} = player;
+    //works with player who has nickname, like 'Nene'
     if (player.lastname.length) {
       playerName = `${player.lastname}, ${player.firstname}`;
     } else {
