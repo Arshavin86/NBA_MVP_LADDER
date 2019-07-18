@@ -111,7 +111,6 @@ const Main = style.div`
                 const json = await response.json();
                 console.log('Players data on FE:', json);
                 setPlayers(json);
-                setSeasonTime('playoffs');
             } 
           } catch (e) {
             console.log(e);
