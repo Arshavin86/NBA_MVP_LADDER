@@ -92,7 +92,7 @@ const Main = style.div`
   background: #fefefe;
 `;
 
- const Seasons = (props) => {
+ const Seasons = props => {
     const [players, setPlayers] = useState(props.players);
     const [season, setSeason] = useState('2018-2019');
     const [seasonOn, toggleMode] = useState(true);
@@ -113,7 +113,7 @@ const Main = style.div`
                 setPlayers(json);
             } 
           } catch (e) {
-            console.log(e);
+            console.warn(e);
           }
         })();
     }, [season, seasonOn]);
@@ -127,7 +127,7 @@ const Main = style.div`
     const switchToSeason = event => {
         event.preventDefault();
         toggleMode(true);
-        console.log(toggleMode);
+        // console.log(toggleMode);
         setSeasonTime('regular season')
     }
 

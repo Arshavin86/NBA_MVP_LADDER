@@ -3,8 +3,7 @@ import style from 'styled-components';
 import ApiContext from '../../Context';
 import Player_bio from './Player_bio';
 
-const Index = style.div`
-    
+const Index = style.div`   
 `;
 
 const Player = style.div`
@@ -26,12 +25,11 @@ const playersListing = players => {
                 <Player_bio player={player}/>
             </Player>
         )
-    })
-        
+    })  
     return context;
 }
 
-const Mainboard = props => {
+const Mainboard = () => {
     const [players] = useContext(ApiContext);
 
     return (
