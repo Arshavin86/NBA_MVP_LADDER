@@ -12,7 +12,7 @@ Here all my seasons rankings are presented. For now you can find the MVP ranking
 - Next.js (for Server Side Rendering)
 - Node.js/Express
 - PostgreSQL (for storing and retrieving NBA stats data)
-- NBA API, YouTube API, News API
+- NBA API, YouTube API, News API, Players headshots images API
 - AWS EC2 instances (for app and database deployment)
 - NGINX reverce proxy server 
 _______________________________________________________________________________________________________________________________
