@@ -128,23 +128,23 @@
 --     );
 
 -- alter table for deleting rows referenced from another table
-ALTER TABLE public.game
-DROP CONSTRAINT game_losingteamid_fkey,
-ADD CONSTRAINT  game_losingteamid_fkey
-   FOREIGN KEY (losingteamid)
-   REFERENCES team(teamID)
-   ON DELETE CASCADE;
+-- ALTER TABLE public.game
+-- DROP CONSTRAINT game_losingteamid_fkey,
+-- ADD CONSTRAINT  game_losingteamid_fkey
+--    FOREIGN KEY (losingteamid)
+--    REFERENCES team(teamID)
+--    ON DELETE CASCADE;
 
-ALTER TABLE public.game
-DROP CONSTRAINT game_winningteamid_fkey,
-ADD CONSTRAINT  game_winningteamid_fkey
-   FOREIGN KEY (winningteamid)
-   REFERENCES team(teamID)
-   ON DELETE CASCADE;
+-- ALTER TABLE public.game
+-- DROP CONSTRAINT game_winningteamid_fkey,
+-- ADD CONSTRAINT  game_winningteamid_fkey
+--    FOREIGN KEY (winningteamid)
+--    REFERENCES team(teamID)
+--    ON DELETE CASCADE;
 
-ALTER TABLE public.player
-DROP CONSTRAINT player_teamid_fkey,
-ADD CONSTRAINT   player_teamid_fkey
-   FOREIGN KEY (teamid)
-   REFERENCES team(teamid)
-   ON DELETE CASCADE;
+-- ALTER TABLE public.player
+-- DROP CONSTRAINT player_teamid_fkey,
+-- ADD CONSTRAINT   player_teamid_fkey
+--    FOREIGN KEY (teamid)
+--    REFERENCES team(teamid)
+--    ON DELETE CASCADE;

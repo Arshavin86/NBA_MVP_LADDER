@@ -59,14 +59,13 @@ const Button1 = style.button`
     // background-color: ${(props) => props.seasonOn ? "white" : "gray"};
     &:hover {
         color: white;
-      }
+    }
     &:focus {
         outline:0;
     }
 `;
 
 const Button2 = style(Button1)`
-
 `;
 
 const Select = style.select`
@@ -93,13 +92,12 @@ const Main = style.div`
   background: #fefefe;
 `;
 
- const Seasons = (props) => {
-
+ const Seasons = props => {
     const [players, setPlayers] = useState(props.players);
     const [season, setSeason] = useState('2018-2019');
     const [seasonOn, toggleMode] = useState(true);
+    const [seasonTime, setSeasonTime] = useState('regular season');
     // console.log('players ', players);
-
     useEffect(() => {
         (async() => {
           try {
@@ -115,10 +113,10 @@ const Main = style.div`
                 setPlayers(json);
             } 
           } catch (e) {
-            console.log(e);
+            console.warn(e);
           }
         })();
-      }, [season, seasonOn]);
+    }, [season, seasonOn]);
 
     const seasonChange = event => {
         event.preventDefault();
@@ -129,20 +127,21 @@ const Main = style.div`
     const switchToSeason = event => {
         event.preventDefault();
         toggleMode(true);
-        console.log(toggleMode);
+        // console.log(toggleMode);
+        setSeasonTime('regular season')
     }
 
     const switchToPlayOffs = event => {
         event.preventDefault();
         toggleMode(false);  
+        setSeasonTime('playoffs');
     }
-
     return (
         <Layout>
             <Container1></Container1>
             <Container2>
                 <Page_header>
-                    {season} NBA players ranking
+                    {season} {seasonTime} NBA players ranking
                 </Page_header>
                 <Breakdown>
                     <Button1 onClick={switchToSeason} seasonOn={toggleMode}>
@@ -163,17 +162,14 @@ const Main = style.div`
                         <Table/>
                     </ApiContext.Provider>
                 </Main>
-            </Container2>
-            
+            </Container2>  
         </Layout>
-      );
+    );
  }
     
  Seasons.getInitialProps = async function () {
-
     const res = await fetch(server + 'seasons/2018-2019');
     const data = await res.json();
-
     return {
         players: data
     }

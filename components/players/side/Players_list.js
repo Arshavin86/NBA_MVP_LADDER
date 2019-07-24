@@ -62,7 +62,6 @@ const Abbr = style.abbr`
     padding: 0 20px 0 0;
 `;
 
-
 const playersListing = (players, letter) => {
     let context = [];
 

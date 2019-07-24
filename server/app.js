@@ -12,7 +12,7 @@ const database = require('../database/controllers');
 app.use(cors());
 app.options('*', cors());
 app.use('/', express.static('public'));
-app.use(/\/\d+\//, express.static('public'));     
+// app.use(/\/\d+\//, express.static('public'));     
 
 app.get('/api/games/date/:date', jsonParser, (req, res) => {
      database.getGames(req, res);

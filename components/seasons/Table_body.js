@@ -28,13 +28,11 @@ const Th = style.th`
     cursor: pointer;
 `;
 
-const Table_body = props => {
+const Table_body = () => {
     const [players] = useContext(ApiContext);
     // console.log(players);
-    
     const playersList = players => {
         const context = [];
-
         players.map(player => {
             const {position, firstname, lastname, pos, name} = player;
             // const short = name.split(' ');
@@ -73,8 +71,7 @@ const Table_body = props => {
                         <Td>N/A</Td>
                     </tr>
                 )
-            }
-            
+            }    
         })
         return context;
     }
@@ -83,8 +80,7 @@ const Table_body = props => {
         <Body>
             {playersList(players)}
         </Body>
-    )
-    
+    )   
 }
 
 export default Table_body;
