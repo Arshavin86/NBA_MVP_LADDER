@@ -16,7 +16,7 @@ const renderVideos = (videos, date) => {
 
     videos.map(video => {
         const difference = filterVideos (video.snippet.publishedAt, date);
-        console.log('difference:', difference);
+        //console.log('difference:', difference);
         if (difference < 3) {
             list.push( <div key={video.snippet.publishedAt}>    
                 <div>
@@ -37,7 +37,7 @@ const renderVideos = (videos, date) => {
 const Videoboard = () => {
     const [videos, news, videosOn, date] = useContext(ApiContext);
     // console.log(video[0].items);
-    console.log("videos", videos)
+    //console.log("videos", videos)
 
     if (!videos) {
         return (

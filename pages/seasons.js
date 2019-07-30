@@ -104,12 +104,12 @@ const Main = style.div`
             if (seasonOn) {
                 const response = await fetch (server + 'seasons/' + season);
                 const json = await response.json();
-                console.log('Players data on FE:', json);
+                //console.log('Players data on FE:', json);
                 setPlayers(json);
             } else {
                 const response = await fetch (server + 'seasons/playOffs' + season);
                 const json = await response.json();
-                console.log('Players data on FE:', json);
+                //console.log('Players data on FE:', json);
                 setPlayers(json);
             } 
           } catch (e) {

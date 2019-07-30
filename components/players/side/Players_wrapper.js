@@ -35,7 +35,7 @@ const playersListing = players => {
             name = player.name;
         } 
     })
-    console.log('players in list', players);
+    //console.log('players in list', players);
     //sort array A-Z 
     letters.sort();
 
