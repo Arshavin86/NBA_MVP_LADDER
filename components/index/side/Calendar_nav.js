@@ -25,7 +25,7 @@ const Cal = () => {
     const changeDate = (incrementor) => {
         let newDate = new Date (date);
         newDate.setDate(newDate.getDate() + incrementor);
-        console.log(newDate);
+       //console.log(newDate);
         setDate(newDate);
     }
 

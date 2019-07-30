@@ -40,7 +40,7 @@ const Search = () => {
 
     const onChange = event => {
         event.preventDefault();
-        console.log('value in onChange: ', event.target.value)
+       // console.log('value in onChange: ', event.target.value)
         setValue(event.target.value);
     }
 

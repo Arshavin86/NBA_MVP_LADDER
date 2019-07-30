@@ -45,7 +45,7 @@ const articlesListing = articles => {
 const NewsBoard = () => {
     const [videos, news, videosOn] = useContext(ApiContext);
     // console.log(video[0].items);
-    console.log("videos: ", videos, 'news: ', news, 'videosOn: ', videosOn)
+    //console.log("videos: ", videos, 'news: ', news, 'videosOn: ', videosOn)
 
     if (news === 'nba') {
         return (

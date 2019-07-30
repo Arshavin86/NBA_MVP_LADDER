@@ -80,7 +80,7 @@ const Index = props => {
   useEffect(() => {
     (async() => {
       try {
-        const response = await fetch (server + 'news/' + news);
+	      const response = await fetch (server + 'news/' + news);
         // const response = await fetch (server + 'videos/' + query);
         const json = await response.json();
         setNews(json);
@@ -88,7 +88,7 @@ const Index = props => {
         // console.log('Youtube data on FE:', json);
         // setVideo(json);
       } catch (e) {
-        console.log(e);
+        console.warn(e);
       }
     })();
   }, []);
@@ -96,7 +96,7 @@ const Index = props => {
   const handleDateChange = async date => {
     const ISODate = formatDate(date);
     let json;
-    console.log('ISODate:', ISODate);
+    //console.log('ISODate:', ISODate);
     setDate (ISODate);
     try {
       const response = await fetch(server + 'games/date/' + ISODate);
@@ -104,23 +104,23 @@ const Index = props => {
         json = 'No games were played on this day';
       } else {
         json = await response.json();
-        console.log('JSON:', json); 
+        //console.log('JSON:', json); 
       }
       setData (json);
     } catch (e) {
-      console.log(e);
+      console.warn(e);
     }
   } 
 
   const handleVideoChange = async query => {
     try {
-        const response = await fetch (server + 'videos/' + query + ' ' + date);
+	      const response = await fetch (server + 'videos/' + query + ' ' + date);
         const json = await response.json();
-        console.log('Youtube data on FE:', json);
+       // console.log('Youtube data on FE:', json);
         setVideo(json);
         setMain(true);
     } catch (e) {
-      console.log(e);
+      console.warn(e);
     }
   }
   
@@ -155,17 +155,17 @@ Index.getInitialProps = async function () {
   // let date = formatDate('2019-07-12');
   let date = formatDate();
   let json;
-  console.log('DATE in props: ', date);
+  //console.log('DATE in props: ', date);
 
   try {
     const res = await fetch(server + 'games/date/' + date);
-    console.log('res status on FE:', res.status);
+   // console.log('res status on FE:', res.status);
     if (res.status === 500) {
       json = 'No games were played on this day';
     } else {
       const json = await res.json();
-      console.log('json!!!!!', json);
-      console.log(`Show data fetched in Index. Count: ${json.length}`)
+     // console.log('json!!!!!', json);
+     // console.log(`Show data fetched in Index. Count: ${json.length}`)
     }
     return {
       games: json,
@@ -173,7 +173,7 @@ Index.getInitialProps = async function () {
       // query: json[0].id
     }
   } catch (e) {
-    console.log(e);
+    console.warn(e);
   }
 }
 
