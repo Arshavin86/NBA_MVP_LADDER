@@ -20,18 +20,22 @@ app.get('/api/games/date/:date', jsonParser, (req, res) => {
 
 app.get('/api/news/:query', jsonParser, (req, res) => {
      getNews(req, res);
-})
+});
 
 app.get('/api/videos/:query', jsonParser, (req, res) => {
      getVideos(req, res);
-})
+});
 
 app.get('/api/players', jsonParser, (req, res) => {
      database.getPlayers(req, res);
-})
+});
 
 app.get('/api/seasons/:query', jsonParser, (req, res) => {
      database.getSeasons(req, res);
-})
+});
+
+app.get('/api/players/:query', jsonParser, (req, res) => {
+     database.getPlayer(req, res);
+});
 
 module.exports = app;
