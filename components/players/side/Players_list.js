@@ -49,7 +49,7 @@ const List = style.div`
     justify-content: space-around;
 `;
 
-const Name = style.a`
+const Name = style.div`
     color: #0B5BE1;
     flex: 0 0 83.33333%;
     max-width: 83.33333%;
@@ -72,17 +72,15 @@ const playersListing = (players, letter) => {
         if(a.name > b.name) { return 1; }
         return 0;
     });
-
-    //   <Name>{player.name}</Name>
-    // console.log('players: ', players)
+    
     players.map(player => {
 
         const PostLink = props => (
-            <li>
+            <Name>
               <Link href="/profile/[id]" as={`/profile/${props.id.name}`}>
                 <div>{props.id.name}</div>
               </Link>
-            </li>
+            </Name>
           )
 
         //creating an alphabetical list
