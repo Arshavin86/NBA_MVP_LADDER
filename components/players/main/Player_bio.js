@@ -64,7 +64,7 @@ const Player = props => {
         <div>
             <Number>{number ? number : 'N/A'}</Number>
             <Image_wrapper>
-                <Image src={`${URL}/players/${lastName}/${firstName}`}>
+                <Image src={`${URL}/players/${lastName}/${firstName}`} alt="No image">
                 </Image>
             </Image_wrapper>  
             <Name>{firstname}<br></br>{lastname}</Name> 

@@ -1,7 +1,7 @@
 const postgres = require('./postgres');
 const { db } = postgres;
 const getDayLeaders = require('../server/nba_api');
-const getImages = require('../helpers/images_api');
+// const getImages = require('../helpers/images_api');
 
  const asyncForEach = async (array, callback) => {
   for (let index = 0; index < array.length; index++) {
@@ -171,6 +171,20 @@ exports.getSeasons = async (req, res) => {
     } 
   } catch (e) {
     console.log('getSeasons is failed: ', e);
+  }
+};
+
+exports.getPlayer = async (req, res) => {
+  console.log('name: ', req.params);
+  const name = req.params.query;
+  const firstname = name.split(', ')[1];
+  const lastname = name.split(',')[0];
+  try {
+    const qr = 'SELECT player.*, team.name FROM player INNER JOIN team ON player.teamID = team.teamID WHERE firstName = $1 AND lastName = $2;'
+    const data = await db.query(qr, [firstname, lastname]);
+    res.status(200).send(data);
+  } catch (e) {
+    console.log('getPlayer is failed: ', e);
   }
 }
 

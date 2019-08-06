@@ -1,6 +1,7 @@
 import {useContext} from 'react';
 import style from 'styled-components';
 import ApiContext from '../../Context';
+import Link from 'next/link';
 
 const abbreviation = {
     'Brooklyn Nets': 'BKN',
@@ -70,15 +71,25 @@ const playersListing = (players, letter) => {
         if(a.name < b.name) { return -1; }
         if(a.name > b.name) { return 1; }
         return 0;
-    })
-    
+    });
+
+    //   <Name>{player.name}</Name>
     // console.log('players: ', players)
     players.map(player => {
+
+        const PostLink = props => (
+            <li>
+              <Link href="/profile/[id]" as={`/profile/${props.id.name}`}>
+                <div>{props.id.name}</div>
+              </Link>
+            </li>
+          )
+
         //creating an alphabetical list
         if (player.name[0] === letter) {
             context.push (
                 <List key={player.id} >
-                    <Name>{player.name}</Name>
+                    <PostLink id={player} />
                     <Abbr tittle={player.team}>{abbreviation[player.team]}</Abbr>
                 </List>
             )
