@@ -1,6 +1,7 @@
 import {useContext} from 'react';
 import ApiContext from '../Context';
 import style from 'styled-components';
+import Details from './Details';
 
 const Header = style.div` 
   height: 100%;
@@ -31,6 +32,7 @@ const Player = () => {
     return (
         <Header team = {logoURL}>
           <Image src={`${URL}/players/${lastName}/${firstName}`} alt="No image"></Image>
+          <Details/>
         </Header>
       );
   }
