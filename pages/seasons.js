@@ -4,7 +4,7 @@ import fetch from 'isomorphic-unfetch';
 import style from 'styled-components';
 import ApiContext from '../components/Context.js';
 import Table from '../components/seasons/Table';
-import Server from './Server';
+import Server from '../components/Server';
 
 const server = Server.server;
 
@@ -58,7 +58,7 @@ const Button1 = style.button`
     // background-color: #CCD0D3;
     // background-color: ${(props) => props.seasonOn ? "white" : "gray"};
     &:hover {
-        color: white;
+        color: #0B5BE1;
     }
     &:focus {
         outline:0;

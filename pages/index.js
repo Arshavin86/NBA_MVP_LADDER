@@ -6,7 +6,7 @@ import style from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import ApiContext from '../components/Context';
 import MainBoard from '../components/index/main/MainBoard';
-import Server from './Server';
+import Server from '../components/Server';
 
 const server = Server.server;
 

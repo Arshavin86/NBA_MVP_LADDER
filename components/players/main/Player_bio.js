@@ -23,6 +23,7 @@ const Image = style.img`
     margin: 0 0 0 -20%;
     width: 140%;
     max-width: none;
+    white-space: pre;
 `;
 
 const Name = style.p`
@@ -73,7 +74,7 @@ const Player = props => {
         <div>
             <Number>{number ? number : 'N/A'}</Number>
             <Image_wrapper>
-                <Image src={`${URL}/players/${lastName}/${firstName}`} alt="No image">
+                <Image src={`${URL}/players/${lastName}/${firstName}`} alt="">
                 </Image>
             </Image_wrapper>  
             <PostLink id={props.player} firstname={firstname} lastname={lastname}/>

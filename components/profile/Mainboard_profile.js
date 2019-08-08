@@ -4,14 +4,17 @@ import style from 'styled-components';
 
 const Header = style.div` 
   height: 100%;
+  position: relative;
   background-image: url("${props => props.team}");
   background-repeat: no-repeat;
   background-size: cover;
 `;
 
 const Image = style.img`
+    position: absolute;
+    left: 0;
     bottom: 0;
-    height: 100%;
+    height: 80%;
 `;
 
 const URL = `https://nba-players.herokuapp.com`;
@@ -23,7 +26,7 @@ const Player = () => {
   const teamName = player.name.split(' ');
   const teamNick = teamName[teamName.length - 1];
   const logoURL = `../../static/Logos/${teamNick}.jpg`;
-  console.log(teamNick);
+  // console.log(teamNick);
 
     return (
         <Header team = {logoURL}>

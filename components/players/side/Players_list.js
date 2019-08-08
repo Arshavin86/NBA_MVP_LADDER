@@ -81,7 +81,7 @@ const playersListing = (players, letter) => {
                 <div>{props.id.name}</div>
               </Link>
             </Name>
-          )
+        )
 
         //creating an alphabetical list
         if (player.name[0] === letter) {

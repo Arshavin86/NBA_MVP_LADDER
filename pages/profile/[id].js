@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import Layout from '../../components/MyLayout';
 import {useState} from 'react';
-import Server from '../Server';
+import Server from '../../components/Server';
 import style from 'styled-components';
 import ApiContext from '../../components/Context';
 import MainBoard from '../../components/profile/Mainboard_profile';
@@ -27,7 +27,7 @@ const Container2 = style.div`
 
 const Main = style.div`
   width: 640px;
-  height: 180px;
+  height: 280px;
   padding: 30px 30px 30px;
   background: #fefefe;
   font-family: "Flama-Basic",sans-serif;
@@ -38,10 +38,8 @@ const Main = style.div`
 
 export default function Post(props) {
     const router = useRouter();
-  
     const [player, setPlayer] = useState(props.player[0]);
 
-    console.log(player.lastname);
     return (
         <Layout>
             <Container1>Here could be your advertisement </Container1>
@@ -61,7 +59,8 @@ Post.getInitialProps = async function (router) {
     try {
         const response = await fetch (server + 'players/' + router.query.id);
         const json = await response.json();
-        console.log(json);
+        // console.log('query from FE: ', router.query.id)
+        // console.log(json);
         return {
             player: json
         }

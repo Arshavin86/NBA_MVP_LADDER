@@ -7,7 +7,7 @@ import Player_search from '../components/players/side/Player_search';
 import Row_headers from '../components/players/side/Row_headers';
 import Players_wrapper from '../components/players/side/Players_wrapper';
 import MainBoard_players from '../components/players/main/MainBoard_players';
-import Server from './Server';
+import Server from '../components/Server';
 
 const server = Server.server;
 
