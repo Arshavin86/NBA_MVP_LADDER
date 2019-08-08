@@ -4,11 +4,10 @@ import Video from './Body_Video';
 
 const Wrapper = style.section` 
     display: flex;
-    flex-flow: row wrap;
+    flex-direction: row;
 `;
 
 const Body = () => {
-
     return (
         <Wrapper>
           <Vitals/>
