@@ -13,7 +13,7 @@ const Body = () => {
           <Vitals/>
           <Video/>
         </Wrapper>
-      );
+    );
   }
 
-  export default Body;
+export default Body;

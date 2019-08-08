@@ -29,7 +29,6 @@ const Video = style.div`
 `;
 
 const Frame = style.iframe`
-   
 `;
 
 const renderVideos = videos => {
@@ -77,5 +76,4 @@ const Videoboard = () => {
     }
 }
 
-
-  export default Videoboard;
+export default Videoboard;
