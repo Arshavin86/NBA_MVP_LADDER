@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const cors = require('cors');
 const {getNews} = require('../api/news');
-const {getVideos} = require('../api/youtube');
+const {getGameVideos, getPlayerVideos} = require('../api/youtube');
 
 
 const database = require('../database/controllers');
@@ -23,7 +23,11 @@ app.get('/api/news/:query', jsonParser, (req, res) => {
 });
 
 app.get('/api/videos/:query', jsonParser, (req, res) => {
-     getVideos(req, res);
+     getGameVideos(req, res);
+});
+
+app.get('/api/videosPlayer/:query', jsonParser, (req, res) => {
+     getPlayerVideos(req, res);
 });
 
 app.get('/api/players', jsonParser, (req, res) => {
