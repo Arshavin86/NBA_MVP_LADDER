@@ -1,10 +1,10 @@
 import {useContext} from 'react';
 import ApiContext from '../Context';
 import style from 'styled-components';
-import Details from './Details';
+import Details from './Header_Details';
 
-const Header = style.div` 
-  height: 100%;
+const Wrapper = style.div` 
+  height: 280px;
   position: relative;
   background-image: url("${props => props.team}");
   background-repeat: no-repeat;
@@ -20,7 +20,7 @@ const Image = style.img`
 
 const URL = `https://nba-players.herokuapp.com`;
 
-const Player = () => {
+const Header = () => {
   const [player] = useContext(ApiContext);
   const lastName = player.lastname;
   const firstName = player.firstname;
@@ -30,11 +30,11 @@ const Player = () => {
   // console.log(teamNick);
 
     return (
-        <Header team = {logoURL}>
-          <Image src={`${URL}/players/${lastName}/${firstName}`} alt="No image"></Image>
+        <Wrapper team = {logoURL}>
+          <Image src={`${URL}/players/${lastName}/${firstName}`} alt="Player's headshot photo"></Image>
           <Details/>
-        </Header>
+        </Wrapper>
       );
   }
 
-  export default Player;
+  export default Header;

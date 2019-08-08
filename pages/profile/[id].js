@@ -4,7 +4,8 @@ import {useState} from 'react';
 import Server from '../../components/Server';
 import style from 'styled-components';
 import ApiContext from '../../components/Context';
-import MainBoard from '../../components/profile/Mainboard_profile';
+import Header from '../../components/profile/Header';
+import Body from '../../components/profile/Body';
 
 const server = Server.server;
 
@@ -27,7 +28,6 @@ const Container2 = style.div`
 
 const Main = style.div`
   width: 640px;
-  height: 280px;
   padding: 30px 30px 30px;
   background: #fefefe;
   font-family: "Flama-Basic",sans-serif;
@@ -46,7 +46,8 @@ export default function Post(props) {
             <Container2>
             <Main>
                 <ApiContext.Provider value = {[player]}>
-                    <MainBoard/>
+                    <Header/>
+                    <Body/>
                 </ApiContext.Provider>
             </Main>
             </Container2>
