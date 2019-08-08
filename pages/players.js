@@ -26,7 +26,6 @@ const Container2 = style.div`
   background: #E5E7E9;
   justify-content: center;
   padding: 0 30px;
-  
 `;
 
 const Sidebar = style.div`
