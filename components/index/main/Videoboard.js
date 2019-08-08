@@ -16,7 +16,6 @@ const Video = style.div`
     border-bottom: 1px solid #CCD0D3;  
 `;
 
-
 const renderVideos = (videos, date) => {
     let list = [];
 
