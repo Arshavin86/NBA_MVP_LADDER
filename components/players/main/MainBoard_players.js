@@ -3,7 +3,13 @@ import style from 'styled-components';
 import ApiContext from '../../Context';
 import Player_bio from './Player_bio';
 
-const Index = style.div`   
+const Index = style.div`
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -17px; /* Increase/Decrease this value for cross-browser compatibility */
+    overflow-y: scroll;   
 `;
 
 const Player = style.div`

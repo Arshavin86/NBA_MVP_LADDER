@@ -26,6 +26,7 @@ const Container2 = style.div`
   background: #E5E7E9;
   justify-content: center;
   padding: 0 30px;
+  
 `;
 
 const Sidebar = style.div`
@@ -53,6 +54,9 @@ const Main = style(Sidebar_bottom)`
   width: 640px;
   padding: 30px 30px 30px;
   background: #fefefe;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
 `;
 
  const Players = props => {
