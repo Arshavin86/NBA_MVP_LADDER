@@ -150,7 +150,7 @@ const Index = props => {
 }
 
 Index.getInitialProps = async function () {
-  // let date = formatDate('2019-06-16');
+  // let date = formatDate('2019-06-15');
   // let date = formatDate('2019-07-12');
   let date = formatDate();
   let json;
@@ -162,7 +162,7 @@ Index.getInitialProps = async function () {
     if (res.status === 500) {
       json = 'No games were played on this day';
     } else {
-      const json = await res.json();
+      json = await res.json();
      // console.log('json!!!!!', json);
      // console.log(`Show data fetched in Index. Count: ${json.length}`)
     }
