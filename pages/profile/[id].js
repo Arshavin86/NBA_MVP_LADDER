@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router'
 import Layout from '../../components/MyLayout';
-import {useState} from 'react';
-import Server from '../Server';
+import {useState, useEffect} from 'react';
+import Server from '../../components/Server';
 import style from 'styled-components';
 import ApiContext from '../../components/Context';
-import MainBoard from '../../components/profile/Mainboard_profile';
+import Header from '../../components/profile/Header';
+import Body from '../../components/profile/Body';
 
 const server = Server.server;
 
@@ -27,7 +28,6 @@ const Container2 = style.div`
 
 const Main = style.div`
   width: 640px;
-  height: 180px;
   padding: 30px 30px 30px;
   background: #fefefe;
   font-family: "Flama-Basic",sans-serif;
@@ -38,17 +38,30 @@ const Main = style.div`
 
 export default function Post(props) {
     const router = useRouter();
-  
     const [player, setPlayer] = useState(props.player[0]);
+    const [videos, setVideo] = useState(null);
 
-    console.log(player.lastname);
+    useEffect(() => {
+        (async() => {
+            try {
+                const response = await fetch (server + 'videosPlayer/' + player.firstname + ' ' + player.lastname);
+                const json = await response.json();
+                // console.log('Youtube data on FE:', json);
+                setVideo(json);
+          } catch (e) {
+                console.warn(e);
+          }
+        })();
+      }, []);
+
     return (
         <Layout>
             <Container1>Here could be your advertisement </Container1>
             <Container2>
             <Main>
-                <ApiContext.Provider value = {[player]}>
-                    <MainBoard/>
+                <ApiContext.Provider value = {[player, videos]}>
+                    <Header/>
+                    <Body/>
                 </ApiContext.Provider>
             </Main>
             </Container2>
@@ -61,7 +74,8 @@ Post.getInitialProps = async function (router) {
     try {
         const response = await fetch (server + 'players/' + router.query.id);
         const json = await response.json();
-        console.log(json);
+        // console.log('query from FE: ', router.query.id)
+        // console.log(json);
         return {
             player: json
         }

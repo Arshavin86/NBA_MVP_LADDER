@@ -1,5 +1,6 @@
 import {useContext} from 'react';
 import ApiContext from '../../Context';
+import style from 'styled-components';
 
 //filter the wrong videos (from another game) by comparing publishedDate from resourse video and date of the game from my DB
 const filterVideos = (publishedAt, date) => {
@@ -11,6 +12,10 @@ const filterVideos = (publishedAt, date) => {
 
 } 
 
+const Video = style.div`
+    border-bottom: 1px solid #CCD0D3;  
+`;
+
 const renderVideos = (videos, date) => {
     let list = [];
 
@@ -18,7 +23,7 @@ const renderVideos = (videos, date) => {
         const difference = filterVideos (video.snippet.publishedAt, date);
         //console.log('difference:', difference);
         if (difference < 3) {
-            list.push( <div key={video.snippet.publishedAt}>    
+            list.push( <Video key={video.snippet.publishedAt}>    
                 <div>
                     <iframe src={'https://www.youtube.com/embed/' + video.id.videoId} allowFullScreen={true} >
                     </iframe>
@@ -28,7 +33,7 @@ const renderVideos = (videos, date) => {
                         {video.snippet.title}
                     </h3>
                 </div>
-            </div>)
+            </Video>)
         }
     })
     return list;

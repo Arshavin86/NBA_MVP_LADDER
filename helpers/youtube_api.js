@@ -2,7 +2,7 @@ const {YoutubeAPI_Key, CLIENT_ID, CLIENT_SECRET, REDIRECT_URL} = require ('../co
 //get Node.js client library for using Google APIs
 const {google} = require('googleapis');
 
-const searchYouTube = async (query, date1, date2) => {
+exports.searchYouTubeForGames = async (query, date1, date2) => {
 
     const youtube = google.youtube({
       version: 'v3',
@@ -48,4 +48,39 @@ const searchYouTube = async (query, date1, date2) => {
     }
 }
 
-module.exports = searchYouTube;
+exports.searchYouTubeForPlayer = async (query) => {
+
+  const youtube = google.youtube({
+    version: 'v3',
+    auth: YoutubeAPI_Key,
+  });
+
+  const setParams = channelID => {
+    const params = {
+      part: 'snippet',
+      maxResults: 2,
+      order: 'viewCount',
+      q: query,
+      chart: 'mostPopular',
+      type: 'video',
+      channelId: channelID, 
+      key: YoutubeAPI_Key,
+    };
+    return params;
+  }
+  
+  const NBA = setParams('UCWJ2lWNubArHWmf3FIHbfcQ');
+
+
+  try {
+    const response1 = await youtube.search.list(NBA);
+
+    return response1.data.items;
+
+    // console.log('res in searchYouTube: ', res.length);
+    //   return res; 
+  } catch (e) {
+    console.log(e); 
+  }
+}
+

@@ -1,4 +1,5 @@
 import style from 'styled-components';
+import Link from 'next/link';
 
 const Number = style.span`
     font-size: 0.7em;
@@ -22,6 +23,7 @@ const Image = style.img`
     margin: 0 0 0 -20%;
     width: 140%;
     max-width: none;
+    white-space: pre;
 `;
 
 const Name = style.p`
@@ -60,14 +62,22 @@ const Player = props => {
     const short = team.split(' ');
     const shortTeam = short[short.length-1];
 
+    const PostLink = props => (
+        <div>
+          <Link href="/profile/[id]" as={`/profile/${props.id.name}`}>
+            <Name>{props.firstname}<br></br>{props.lastname}</Name>
+          </Link>
+        </div>
+      )
+
     return (
         <div>
             <Number>{number ? number : 'N/A'}</Number>
             <Image_wrapper>
-                <Image src={`${URL}/players/${lastName}/${firstName}`} alt="No image">
+                <Image src={`${URL}/players/${lastName}/${firstName}`} alt="">
                 </Image>
             </Image_wrapper>  
-            <Name>{firstname}<br></br>{lastname}</Name> 
+            <PostLink id={props.player} firstname={firstname} lastname={lastname}/>
             <Details>
                 <div>{position ? position : 'N/A' }</div>
                 <span><strong>{height}</strong> m | <strong>{weight}</strong> kg</span>

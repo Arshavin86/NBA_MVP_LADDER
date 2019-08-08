@@ -7,7 +7,7 @@ import Player_search from '../components/players/side/Player_search';
 import Row_headers from '../components/players/side/Row_headers';
 import Players_wrapper from '../components/players/side/Players_wrapper';
 import MainBoard_players from '../components/players/main/MainBoard_players';
-import Server from './Server';
+import Server from '../components/Server';
 
 const server = Server.server;
 
@@ -53,6 +53,9 @@ const Main = style(Sidebar_bottom)`
   width: 640px;
   padding: 30px 30px 30px;
   background: #fefefe;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
 `;
 
  const Players = props => {
