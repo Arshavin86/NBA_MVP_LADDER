@@ -1,7 +1,8 @@
-const searchYouTube = require ('../helpers/youtube_api');
+const youtube = require ('../helpers/youtube_api');
+const searchYouTubeForGames = youtube.searchYouTubeForGames;
+const searchYouTubeForPlayer = youtube.searchYouTubeForPlayer;
 
-
-exports.getVideos = async (req, res) => {
+exports.getGameVideos = async (req, res) => {
     const query = req.params.query.slice(0, -10);
   
     //get finish date for search
@@ -23,8 +24,20 @@ exports.getVideos = async (req, res) => {
     console.log('dates on BE: ', StartISO, FinishISO);
   
       try {
-        const response = await searchYouTube (query, StartISO, FinishISO);
+        const response = await searchYouTubeForGames (query, StartISO, FinishISO);
         // console.log('Youtube data on BE:', response);
+        res.status(200).send(response);
+      } catch (e) {
+        console.log(e);
+      }
+  }
+
+  exports.getPlayerVideos = async (req, res) => {
+    const query = req.params.query;
+  
+      try {
+        const response = await searchYouTubeForPlayer (query);
+        console.log('Youtube data on BE:', response);
         res.status(200).send(response);
       } catch (e) {
         console.log(e);
