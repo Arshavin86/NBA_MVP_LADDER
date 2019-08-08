@@ -1,6 +1,7 @@
 import {useContext, useState} from 'react';
 import style from 'styled-components';
 import ApiContext from '../../Context';
+import ReactTooltip from 'react-tooltip';
 
 const Article = style.div`
     border-bottom: 1px solid #e6e8ea;
@@ -30,12 +31,14 @@ const articlesListing = articles => {
     let context = [];
 
     articles.map (article => {
+        const tip = `Continue reading on ${article.source.name}`;
         context.push (
         <Article key={article.publishedAt}>
-            <Image src={article.urlToImage} alt="my image"/>
+            <Image src={article.urlToImage} alt="Article's image"/>
             <Title>{article.title}</Title>
             <Description>{article.description}</Description>
-            <a href={article.url}>Read more</a>
+            <a href={article.url} data-tip={tip}>Read more</a>
+            <ReactTooltip />
         </Article>
         )
     })
