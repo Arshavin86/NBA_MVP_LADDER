@@ -103,7 +103,6 @@ const Index = props => {
         json = 'No games were played on this day';
       } else {
         json = await response.json();
-        //console.log('JSON:', json); 
       }
       setData (json);
     } catch (e) {
@@ -164,7 +163,6 @@ Index.getInitialProps = async function () {
     } else {
       json = await res.json();
      // console.log('json!!!!!', json);
-     // console.log(`Show data fetched in Index. Count: ${json.length}`)
     }
     return {
       games: json,

@@ -5,11 +5,11 @@
 ## Players page
   Here you can find bio of each NBA player who played at list one game for last four seasons**. Use an input field on the top of the sidebar for convenient search. You may click on the player's name to go to his profile page and find more info and even videos with him.
 ## Seasons page
-Here all my seasons rankings are presented. For now you can find the MVP rankings only for last four seasons**. Switching between regular season and playoffs you can find top-30 list for regular season or the same ranking for the playoffs (number of positions depends on  specific playoffs). 
+Here all my seasons rankings are presented. For now you can find the MVP rankings only for last four seasons*. Switching between regular season and playoffs you can find top-30 list for regular season or the same ranking for the playoffs (number of positions depends on  specific playoffs). 
 ### Tech stack
 - React.js (with broad React hooks usage)
 - Styled-components (for styling)
-- Next.js (for Server Side Rendering)
+- Next.js (for Server Side Rendering and Dynamic Routing)
 - Node.js/Express
 - PostgreSQL (for storing and retrieving NBA stats data)
 - NBA API, YouTube API, News API, Players headshots images API

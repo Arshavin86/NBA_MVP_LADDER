@@ -56,12 +56,19 @@ const NewsBoard = () => {
                 News will be here
             </div>
         )
-    } else {
+    } else if (news.articles.length) {
         return (
             <div>    
                 {articlesListing(news.articles)}
             </div>
         );
+    } else {
+        return (
+            <div>
+                Sorry. There are currently no news available.
+                <p>This is the offseason, dude.</p>
+            </div>
+        )
     }
 }
 
