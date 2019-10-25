@@ -6,7 +6,6 @@ import style from 'styled-components';
 const filterVideos = (publishedAt, date) => {
     const date1 = new Date (publishedAt);
     const date2 = new Date (date);
-    // console.log(date1, date)
     //get the difference in days between two dates
     return Math.abs((date1.getTime() - date2.getTime()) / 86400000);
 
@@ -21,7 +20,6 @@ const renderVideos = (videos, date) => {
 
     videos.map(video => {
         const difference = filterVideos (video.snippet.publishedAt, date);
-        //console.log('difference:', difference);
         if (difference < 3) {
             list.push( <Video key={video.snippet.publishedAt}>    
                 <div>
@@ -41,8 +39,6 @@ const renderVideos = (videos, date) => {
 
 const Videoboard = () => {
     const [videos, news, videosOn, date] = useContext(ApiContext);
-    // console.log(video[0].items);
-    //console.log("videos", videos)
 
     if (!videos) {
         return (
