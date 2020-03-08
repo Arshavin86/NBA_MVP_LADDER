@@ -25,7 +25,7 @@ const Container2 = style.div`
     justify-content: center;
 `
 
-const Page_header = style.div`
+const PageHeader = style.div`
     border-bottom: 3px solid #171b1f;
     align-items: center;
     display: flex;
@@ -140,9 +140,9 @@ const Seasons = props => {
     <Layout>
       <Container1 />
       <Container2>
-        <Page_header>
+        <PageHeader>
           {season} {seasonTime} NBA players ranking
-        </Page_header>
+        </PageHeader>
         <Breakdown>
           <Button1 onClick={switchToSeason} seasonOn={toggleMode}>
                         Regular Season
