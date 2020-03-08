@@ -1,4 +1,4 @@
-import style from 'styled-components';
+import style from 'styled-components'
 
 const Container = style.div`
     text-transform: uppercase;
@@ -9,28 +9,26 @@ const Container = style.div`
     font-size: 0.875em;
     border-bottom: solid 1px #66737C;
     padding: 0px 10px;
-`;
+`
 
 const Player = style.div`
     padding-top: 10px;
     padding-bottom: 10px;
     padding-right: 10px;
 
-`;
+`
 
 const Team = style.div`
     padding: 10px 10px;
-`;
+`
 
 const Headers = props => {
-
-    return (
-        <Container>
-            <Player>Player Name</Player>
-            <Team>Team</Team>
-        </Container>
-    )
-    
+  return (
+    <Container>
+      <Player>Player Name</Player>
+      <Team>Team</Team>
+    </Container>
+  )
 }
 
-export default Headers;
+export default Headers

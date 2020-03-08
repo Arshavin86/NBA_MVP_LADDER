@@ -1,23 +1,23 @@
-import { useContext } from 'react';
-import ApiContext from '../../Context';
-import Videoboard from './Videoboard';
-import NewsBoard from './NewsBoard';
+import { useContext } from 'react'
+import ApiContext from '../../Context'
+import Videoboard from './Videoboard'
+import NewsBoard from './NewsBoard'
 
 const MainBoard = () => {
-  const [videosOn] = useContext(ApiContext);
+  const [videosOn] = useContext(ApiContext)
 
   if (videosOn) {
     return (
       <div>
         <Videoboard />
       </div>
-    );
+    )
   }
   return (
     <div>
       <NewsBoard />
     </div>
-  );
-};
+  )
+}
 
-export default MainBoard;
+export default MainBoard

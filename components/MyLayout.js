@@ -1,7 +1,7 @@
-import Header from './Header';
-import style from 'styled-components';
+import Header from './Header'
+import style from 'styled-components'
 
-const LayoutStyle = style.div `
+const LayoutStyle = style.div`
   height: auto,
   margin: 0;
   padding: 0;
@@ -19,4 +19,4 @@ const Layout = props => (
   </LayoutStyle>
 )
 
-export default Layout;
+export default Layout

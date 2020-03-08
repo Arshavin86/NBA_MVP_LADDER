@@ -1,9 +1,8 @@
 
-import style from 'styled-components';
-import Table_body from './Table_body';
+import style from 'styled-components'
+import TableBody from './Table_body'
 
-
-const Table_main = style.table`
+const TableMain = style.table`
     overflow-x: auto;
     border-collapse: separate;
     color: #333;
@@ -14,9 +13,9 @@ const Table_main = style.table`
     width: 100%;
     border-top: 2px solid #9b9b9b;
     border-bottom: 1px solid #e6e8ea;
-`;
+`
 
-const Table_head = style.thead`
+const TableHead = style.thead`
     overflow-x: auto;
     border-collapse: separate;
     color: #333;
@@ -25,33 +24,30 @@ const Table_head = style.thead`
     line-height: 16px;
     margin: 0;
     width: 100%;
-`;
+`
 
 const Table = () => {
-
-    return (
-        <Table_main>
-            <Table_head>
-                <tr>
-                    <th>Rk</th>
-                    <th></th>
-                    <th>Pos</th>
-                    <th>G</th>
-                    <th>MP</th>
-                    <th>FG%</th>
-                    <th>TRB</th>
-                    <th>AST</th>
-                    <th>STL</th>
-                    <th>BLK</th>
-                    <th>TOV</th>
-                    <th>PTS</th>
-                </tr>
-            </Table_head>
-            <Table_body/>
-        </Table_main>
-    )
-    
+  return (
+    <TableMain>
+      <TableHead>
+        <tr>
+          <th>Rk</th>
+          <th />
+          <th>Pos</th>
+          <th>G</th>
+          <th>MP</th>
+          <th>FG%</th>
+          <th>TRB</th>
+          <th>AST</th>
+          <th>STL</th>
+          <th>BLK</th>
+          <th>TOV</th>
+          <th>PTS</th>
+        </tr>
+      </TableHead>
+      <TableBody />
+    </TableMain>
+  )
 }
 
-export default Table;
-
+export default Table
