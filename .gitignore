@@ -65,7 +65,5 @@ typings/
 config/
 
 # others
-package.json
-package-lock.json
 MVPCalculator/
 database/populateSeasons.js
