@@ -1,14 +1,14 @@
 
-const request = require('request-promise');
-const config = require('../config/api-nba-v1.p');
+const request = require('request-promise')
+const config = require('../config/api-nba-v1.p')
 const headers = {
-    'User-Agent': 'request',
-    'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com', 
-    'X-RapidAPI-Key': config.X_RapidAPI_Key
-};
-const URL = `https://api-nba-v1.p.rapidapi.com`;
+  'User-Agent': 'request',
+  'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com',
+  'X-RapidAPI-Key': config.X_RapidAPI_Key
+}
+const URL = 'https://api-nba-v1.p.rapidapi.com'
 
-//tryed to use one class constructor for all functions:
+// tryed to use one class constructor for all functions:
 
 // class ApiGetter {
 //     constructor (endpoint) {
@@ -38,47 +38,43 @@ const URL = `https://api-nba-v1.p.rapidapi.com`;
 // }
 
 const getGamesByDate = async date => {
-    const options = {
-        url: `${URL}/games/date/${date}`,
-        headers: headers,
-        json: true // Automatically parses the JSON string in the response
-    };
-    return await request(options);
-};
-
-const getStatsByGameID = async gameID => {
-    const options = {
-        url: `${URL}/statistics/players/gameId/${gameID}`,
-        headers: headers,
-        json: true
-    };
-    return await request(options);
-};
-
-const getNameByPlayerID = async playerID => {
-    const options = {
-        url: `${URL}/players/playerId/${playerID}`,
-        headers: headers,
-        json: true
-    };
-    return await request(options);
-}  
-
-const getPhotoByName = async (lastName, firstName) => {
-    const options = {
-        url: `https://nba-players.herokuapp.com/players/${lastName}/${firstName}`,
-        json: true
-    };
-    return await request(options);
-} 
-
-
-module.exports = {
-    getGamesByDate: getGamesByDate,
-    getStatsByGameID: getStatsByGameID,
-    getNameByPlayerID: getNameByPlayerID,
-    getPhotoByName: getPhotoByName
+  const options = {
+    url: `${URL}/games/date/${date}`,
+    headers: headers,
+    json: true // Automatically parses the JSON string in the response
+  }
+  return request(options)
 }
 
+const getStatsByGameID = async gameID => {
+  const options = {
+    url: `${URL}/statistics/players/gameId/${gameID}`,
+    headers: headers,
+    json: true
+  }
+  return request(options)
+}
 
+const getNameByPlayerID = async playerID => {
+  const options = {
+    url: `${URL}/players/playerId/${playerID}`,
+    headers: headers,
+    json: true
+  }
+  return request(options)
+}
 
+const getPhotoByName = async (lastName, firstName) => {
+  const options = {
+    url: `https://nba-players.herokuapp.com/players/${lastName}/${firstName}`,
+    json: true
+  }
+  return request(options)
+}
+
+module.exports = {
+  getGamesByDate: getGamesByDate,
+  getStatsByGameID: getStatsByGameID,
+  getNameByPlayerID: getNameByPlayerID,
+  getPhotoByName: getPhotoByName
+}

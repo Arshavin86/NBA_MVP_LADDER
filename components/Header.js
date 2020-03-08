@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import style from 'styled-components';
+import Link from 'next/link'
+import style from 'styled-components'
 
 const Container = style.div`
   display: flex; 
@@ -14,41 +14,41 @@ const Container = style.div`
   position: fixed;
   z-index: 1;
   justify-content: center;
-`;
+`
 
 const Image = style.img`
   height: 40px;
   padding: 0px 10px 0px 10px;
-`;
+`
 
 const linkStyle = {
   marginRight: 15,
   color: 'white',
-  marginLeft: 15,
+  marginLeft: 15
 }
 
 const Header = () => (
   <Container>
-    <Image src="../static/MVP_logo.png" ></Image>
-    <Link href="/">
+    <Image src='../static/MVP_logo.png' />
+    <Link href='/'>
       <a style={linkStyle}>Home</a>
     </Link>
-    <Link href="/players">
+    <Link href='/players'>
       <a style={linkStyle}>Players</a>
     </Link>
-    <Link href="/">
+    <Link href='/'>
       <a style={linkStyle}>Teams</a>
     </Link>
-    <Link href="/seasons">
+    <Link href='/seasons'>
       <a style={linkStyle}>Seasons</a>
     </Link>
-    <Link href="/">
+    <Link href='/'>
       <a style={linkStyle}>Playoffs</a>
     </Link>
-    <Link href="/">
+    <Link href='/'>
       <a style={linkStyle}>Leaders</a>
     </Link>
   </Container>
 )
 
-export default Header;
+export default Header

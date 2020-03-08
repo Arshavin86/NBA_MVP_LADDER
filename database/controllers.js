@@ -1,29 +1,29 @@
-const postgres = require('./postgres');
+const postgres = require('./postgres')
 
-const { db } = postgres;
-const getDayLeaders = require('../server/nba_api');
+const { db } = postgres
+const getDayLeaders = require('../server/nba_api')
 // const getImages = require('../helpers/images_api');
 
 const asyncForEach = async (array, callback) => {
   for (let index = 0; index < array.length; index++) {
-    await callback(array[index], index, array);
+    await callback(array[index], index, array)
   }
-};
+}
 
 exports.getGames = async (req, res) => {
   // console.log('id: ', req.params);
-  const id = req.params.date;
+  const id = req.params.date
   // console.log(id);
   try {
-    const data1 = await db.query('SELECT game.*, team.name, team.logo FROM game INNER JOIN team ON game.winningteamid = team.teamID WHERE date = $1', id);
+    const data1 = await db.query('SELECT game.*, team.name, team.logo FROM game INNER JOIN team ON game.winningteamid = team.teamID WHERE date = $1', id)
     if (data1.length) {
       // function to populate games object by additional info
       const start = async (data) => {
         try {
           await asyncForEach(data, async (game) => {
-            const { losingteamid, bestplayer1 } = game;
-            const data2 = await db.query('SELECT name, logo FROM team WHERE teamID = $1', losingteamid);
-            const data3 = await db.query('SELECT firstName, lastName FROM player WHERE playerID = $1', bestplayer1);
+            const { losingteamid, bestplayer1 } = game
+            const data2 = await db.query('SELECT name, logo FROM team WHERE teamID = $1', losingteamid)
+            const data3 = await db.query('SELECT firstName, lastName FROM player WHERE playerID = $1', bestplayer1)
 
             // because there are almost no NBA players playing in Summer league
             // we get an empty array as data3,
@@ -32,35 +32,35 @@ exports.getGames = async (req, res) => {
             if (data3.length) {
               // there is a problem: in some cases there is no 'losingTeam' property in data object sent to user!
               // console.log(data3);
-              game.losingTeam = data2;
+              game.losingTeam = data2
               if (!game.losingTeam) {
-                console.log('losingTeam property is not written down to the response object!');
-                res.sendStatus(500);
+                console.log('losingTeam property is not written down to the response object!')
+                res.sendStatus(500)
               }
-              game.BP1name = data3;
+              game.BP1name = data3
             } else {
-              res.sendStatus(500);
+              res.sendStatus(500)
             }
-          });
-          console.log(`${data.length} games are found in DB`);
+          })
+          console.log(`${data.length} games are found in DB`)
           // console.log(data);
-          res.status(200).send(data);
-          return data;
+          res.status(200).send(data)
+          return data
         } catch (e) {
-          console.log(e);
-          res.sendStatus(500);
+          console.log(e)
+          res.sendStatus(500)
         }
-      };
-      start(data1);
+      }
+      start(data1)
     } else {
-      const games = await getDayLeaders(id);
+      const games = await getDayLeaders(id)
       if (!games) {
-        res.sendStatus(500);
+        res.sendStatus(500)
       } else {
-        /*******rewrite this block as lines 21-42 when season starts*****/
-        const data4 = await db.query('SELECT game.*, team.name, team.logo FROM game INNER JOIN team ON game.winningteamid = team.teamID WHERE date = $1', id);
+        /** *****rewrite this block as lines 21-42 when season starts*****/
+        const data4 = await db.query('SELECT game.*, team.name, team.logo FROM game INNER JOIN team ON game.winningteamid = team.teamID WHERE date = $1', id)
         // console.log(data);
-        res.status(200).send(data4);
+        res.status(200).send(data4)
       }
     }
     // const list = await db.query('SELECT name, teamID, awards FROM player INNER JOIN season16 ON player.playerID = season16.playerID WHERE awards > 12 ORDER BY awards DESC;');
@@ -74,21 +74,21 @@ exports.getGames = async (req, res) => {
     //   res.status(200).send(list);
     // }
   } catch (error) {
-    console.log('Selecting from db is failed: ', error);
-    res.sendStatus(500);
+    console.log('Selecting from db is failed: ', error)
+    res.sendStatus(500)
   }
-};
+}
 
 exports.postTeam = async (ID, name, logo) => {
   try {
     // use prepared statement to insert team info if it doesn't exist
-    const qr = 'INSERT INTO team (teamID, name, logo) SELECT $1, $2, $3 WHERE NOT EXISTS (SELECT * FROM team WHERE teamID=$4)';
-    const result = await db.query(qr, [ID, name, logo, ID]);
+    const qr = 'INSERT INTO team (teamID, name, logo) SELECT $1, $2, $3 WHERE NOT EXISTS (SELECT * FROM team WHERE teamID=$4)'
+    const result = await db.query(qr, [ID, name, logo, ID])
     // console.log('Team list is updated on Postgres: ', result);
   } catch (error) {
-    console.log('POSTTeam is failed: ', error);
+    console.log('POSTTeam is failed: ', error)
   }
-};
+}
 
 exports.postPlayer = async (ID) => {
   try {
@@ -98,19 +98,19 @@ exports.postPlayer = async (ID) => {
     // const result2 = await db.query(qr2, [ID, start]);
     // console.log('Award is posted on Postgres: ', result2);
   } catch (error) {
-    console.log('POSTPlayer is failed: ', error);
+    console.log('POSTPlayer is failed: ', error)
   }
-};
+}
 
 exports.postGame = async (date, ID, WTID, LTID, BP1, BP2, score, SBP1, SBP2) => {
   try {
-    const qr = 'INSERT INTO game (date, gameID, winningTeamID, losingTeamID, bestPlayer1, bestPlayer2, score, statsBP1, statsBP2) SELECT $1, $2, $3, $4, $5, $6, $7, $8, $9 WHERE NOT EXISTS (SELECT * FROM game WHERE gameID=$2)';
-    const result = await db.query(qr, [date, ID, WTID, LTID, BP1, BP2, score, SBP1, SBP2]);
+    const qr = 'INSERT INTO game (date, gameID, winningTeamID, losingTeamID, bestPlayer1, bestPlayer2, score, statsBP1, statsBP2) SELECT $1, $2, $3, $4, $5, $6, $7, $8, $9 WHERE NOT EXISTS (SELECT * FROM game WHERE gameID=$2)'
+    const result = await db.query(qr, [date, ID, WTID, LTID, BP1, BP2, score, SBP1, SBP2])
     // console.log('Game is posted on Postgres: ', ID);
   } catch (error) {
-    console.log('POSTGame is failed: ', error);
+    console.log('POSTGame is failed: ', error)
   }
-};
+}
 
 exports.getPlayers = async (req, res) => {
   try {
@@ -118,8 +118,8 @@ exports.getPlayers = async (req, res) => {
     // const data = {image: image}
     // res.status(200).send(data);
 
-    const data = await db.query('SELECT player.*, team.name FROM player INNER JOIN team ON player.teamID = team.teamID ORDER BY player.lastname ASC;');
-    res.status(200).send(data);
+    const data = await db.query('SELECT player.*, team.name FROM player INNER JOIN team ON player.teamID = team.teamID ORDER BY player.lastname ASC;')
+    res.status(200).send(data)
     // //function to add player photo to each player
     // const addImage = async data => {
     //   try {
@@ -136,44 +136,44 @@ exports.getPlayers = async (req, res) => {
 
     // addImage(data);
   } catch (e) {
-    console.log('getPlayers is failed: ', e);
+    console.log('getPlayers is failed: ', e)
   }
-};
+}
 
 exports.getSeasons = async (req, res) => {
-  console.log('id: ', req.params);
-  const id = req.params.query;
+  console.log('id: ', req.params)
+  const id = req.params.query
   // get a year from query as a number
-  const queryArray = id.split('-');
-  const year = Number(queryArray[1]);
+  const queryArray = id.split('-')
+  const year = Number(queryArray[1])
   try {
     // check if we seek playOffs or regular season
     if (queryArray[0][0] === 'p') {
-      const qr = 'SELECT firstName, lastName, teamID, awards, pos, position FROM player INNER JOIN playOff$1 ON player.playerID = playOff$1.playerID ORDER BY position ASC;';
-      const list = await db.query(qr, [year]);
-      console.log('list:', list);
-      res.status(200).send(list);
+      const qr = 'SELECT firstName, lastName, teamID, awards, pos, position FROM player INNER JOIN playOff$1 ON player.playerID = playOff$1.playerID ORDER BY position ASC;'
+      const list = await db.query(qr, [year])
+      console.log('list:', list)
+      res.status(200).send(list)
     } else {
-      const qr = 'SELECT firstName, lastName, teamID, awards, pos, position FROM player INNER JOIN season$1 ON player.playerID = season$1.playerID ORDER BY position ASC;';
-      const list = await db.query(qr, [year]);
+      const qr = 'SELECT firstName, lastName, teamID, awards, pos, position FROM player INNER JOIN season$1 ON player.playerID = season$1.playerID ORDER BY position ASC;'
+      const list = await db.query(qr, [year])
       // console.log('list:', list);
-      res.status(200).send(list);
+      res.status(200).send(list)
     }
   } catch (e) {
-    console.log('getSeasons is failed: ', e);
+    console.log('getSeasons is failed: ', e)
   }
-};
+}
 
 exports.getPlayer = async (req, res) => {
-  console.log('name: ', req.params);
-  const name = req.params.query;
-  const firstname = name.split(', ')[1];
-  const lastname = name.split(',')[0];
+  console.log('name: ', req.params)
+  const name = req.params.query
+  const firstname = name.split(', ')[1]
+  const lastname = name.split(',')[0]
   try {
-    const qr = 'SELECT player.*, team.name FROM player INNER JOIN team ON player.teamID = team.teamID WHERE firstName = $1 AND lastName = $2;';
-    const data = await db.query(qr, [firstname, lastname]);
-    res.status(200).send(data);
+    const qr = 'SELECT player.*, team.name FROM player INNER JOIN team ON player.teamID = team.teamID WHERE firstName = $1 AND lastName = $2;'
+    const data = await db.query(qr, [firstname, lastname])
+    res.status(200).send(data)
   } catch (e) {
-    console.log('getPlayer is failed: ', e);
+    console.log('getPlayer is failed: ', e)
   }
-};
+}

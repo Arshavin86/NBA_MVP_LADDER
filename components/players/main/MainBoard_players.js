@@ -1,7 +1,7 @@
-import {useContext} from 'react';
-import style from 'styled-components';
-import ApiContext from '../../Context';
-import Player_bio from './Player_bio';
+import { useContext } from 'react'
+import style from 'styled-components'
+import ApiContext from '../../Context'
+import PlayerBio from './Player_bio'
 
 const Index = style.div`
     position: absolute;
@@ -10,7 +10,7 @@ const Index = style.div`
     left: 0;
     right: -17px; /* Increase/Decrease this value for cross-browser compatibility */
     overflow-y: scroll;   
-`;
+`
 
 const Player = style.div`
     text-align: center;
@@ -20,29 +20,29 @@ const Player = style.div`
     position: relative;
     width: 15%;
     display: inline-block;
-`;
+`
 
 const playersListing = players => {
-    const context = [];
+  const context = []
 
-    players.map((player, id) => {
-        context.push (
-            <Player key={id}>
-                <Player_bio player={player}/>
-            </Player>
-        )
-    })  
-    return context;
+  players.map((player, id) => {
+    context.push(
+      <Player key={id}>
+        <PlayerBio player={player} />
+      </Player>
+    )
+  })
+  return context
 }
 
 const Mainboard = () => {
-    const [players] = useContext(ApiContext);
+  const [players] = useContext(ApiContext)
 
-    return (
-        <Index>
-            {playersListing(players)}
-        </Index>
-    ) 
+  return (
+    <Index>
+      {playersListing(players)}
+    </Index>
+  )
 }
 
-export default Mainboard;
+export default Mainboard

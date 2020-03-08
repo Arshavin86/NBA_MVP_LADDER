@@ -1,5 +1,5 @@
-import React from 'react';
+import React from 'react'
 
-const ApiContext = React.createContext([{}, () => {}]);
+const ApiContext = React.createContext([{}, () => {}])
 
-export default ApiContext;
+export default ApiContext

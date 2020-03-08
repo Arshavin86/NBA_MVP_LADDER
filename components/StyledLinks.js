@@ -1,6 +1,5 @@
-import style from 'styled-components';
+import style from 'styled-components'
 import Link from 'next/link'
-
 
 const StyledLink = style.a`
   color: black;

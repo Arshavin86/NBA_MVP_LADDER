@@ -1,21 +1,21 @@
-import Layout from '../components/MyLayout.js';
-import {useState} from 'react';
-import fetch from 'isomorphic-unfetch';
-import style from 'styled-components';
-import ApiContext from '../components/Context.js';
-import Player_search from '../components/players/side/Player_search';
-import Row_headers from '../components/players/side/Row_headers';
-import Players_wrapper from '../components/players/side/Players_wrapper';
-import MainBoard_players from '../components/players/main/MainBoard_players';
-import Server from '../components/Server';
+import Layout from '../components/MyLayout.js'
+import { useState } from 'react'
+import fetch from 'isomorphic-unfetch'
+import style from 'styled-components'
+import ApiContext from '../components/Context.js'
+import PlayerSearch from '../components/players/side/Player_search'
+import RowHeaders from '../components/players/side/Row_headers'
+import PlayersWrapper from '../components/players/side/Players_wrapper'
+import MainBoardPlayers from '../components/players/main/MainBoard_players'
+import Server from '../components/Server'
 
-const server = Server.server;
+const server = Server.server
 
 const Container1 = style.div` 
   color: black; 
   background: #E5E7E9;
   min-height: 100px;
-`;
+`
 
 const Container2 = style.div`
   display: flex; 
@@ -26,7 +26,7 @@ const Container2 = style.div`
   background: #E5E7E9;
   justify-content: center;
   padding: 0 30px;
-`;
+`
 
 const Sidebar = style.div`
   font-family: "Flama-Basic",sans-serif;
@@ -34,74 +34,73 @@ const Sidebar = style.div`
   background: #fefefe;
   overflow: auto;
   overflow-x: hidden;
-`;
+`
 
-const Sidebar_nav = style.div`
+const SidebarNav = style.div`
 position: static;
 z-index: -1;
-`;
+`
 
-const Sidebar_bottom = style.div`
+const SidebarBottom = style.div`
   width: 100%;
   font-family: "Flama-Basic",sans-serif;
   font-size: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-`;
+`
 
-const Main = style(Sidebar_bottom)`
+const Main = style(SidebarBottom)`
   width: 640px;
   padding: 30px 30px 30px;
   background: #fefefe;
   height: 100%;
   overflow: hidden;
   position: relative;
-`;
+`
 
- const Players = props => {
-
+const Players = props => {
   // return (
   //   <div>
   //     <img src={props.image}></img>
   //   </div>
   // )
 
-  const [players, setPlayers] = useState(props.players);
+  const [players, setPlayers] = useState(props.players)
   // console.log(players);
-  const fullList = props.players;
+  const fullList = props.players
 
   return (
-      <Layout>
-        <Container1>Here could be your advertisement </Container1>
-        <Container2>
-          <Sidebar>
-            <Sidebar_nav>
-              <ApiContext.Provider value = {[setPlayers, fullList]}>
-                <Player_search/>
-              </ApiContext.Provider> 
-              <Row_headers/>
-            </Sidebar_nav>
-            <Sidebar_bottom>
-              <ApiContext.Provider value = {[players]}>
-                <Players_wrapper/>
-              </ApiContext.Provider> 
-            </Sidebar_bottom>
-          </Sidebar>
-          <Main>
-            <ApiContext.Provider value = {[players]}>
-              <MainBoard_players/>
+    <Layout>
+      <Container1>Here could be your advertisement </Container1>
+      <Container2>
+        <Sidebar>
+          <SidebarNav>
+            <ApiContext.Provider value={[setPlayers, fullList]}>
+              <PlayerSearch />
             </ApiContext.Provider>
-          </Main>
-        </Container2>
-      </Layout>
-    );
+            <RowHeaders />
+          </SidebarNav>
+          <SidebarBottom>
+            <ApiContext.Provider value={[players]}>
+              <PlayersWrapper />
+            </ApiContext.Provider>
+          </SidebarBottom>
+        </Sidebar>
+        <Main>
+          <ApiContext.Provider value={[players]}>
+            <MainBoardPlayers />
+          </ApiContext.Provider>
+        </Main>
+      </Container2>
+    </Layout>
+  )
 }
-  
+
 Players.getInitialProps = async function () {
-  const res = await fetch(server + 'players');
-  const data = await res.json();
-  const players = [];
-  let playerName;
+  const res = await fetch(server + 'players')
+  const data = await res.json()
+  const players = []
+  let playerName
   // console.log('IMAGE: ', data.image);
   // return {
   //       image: data.image
@@ -110,27 +109,27 @@ Players.getInitialProps = async function () {
 
   // console.log(`Show data fetched in Players. ${data[0]}`)
   data.map(player => {
-    const {playerid, name, jersey, pos, heightinmeters, weightinkilograms} = player;
-    //works with player who has nickname, like 'Nene'
+    const { playerid, name, jersey, pos, heightinmeters, weightinkilograms } = player
+    // works with player who has nickname, like 'Nene'
     if (player.lastname.length) {
-      playerName = `${player.lastname}, ${player.firstname}`;
+      playerName = `${player.lastname}, ${player.firstname}`
     } else {
-      playerName = player.firstname;
+      playerName = player.firstname
     }
-      players.push({
-          name: playerName,
-          id: playerid,
-          team: name,
-          number: jersey,
-          position: pos,
-          height: heightinmeters,
-          weight: weightinkilograms
-      });
+    players.push({
+      name: playerName,
+      id: playerid,
+      team: name,
+      number: jersey,
+      position: pos,
+      height: heightinmeters,
+      weight: weightinkilograms
+    })
   })
 
   return {
-      players: players
+    players: players
   }
 }
 
-export default Players;
+export default Players
