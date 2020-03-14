@@ -65,7 +65,7 @@
     "react-tooltip": "^3.10.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
-    "sequelize": "^5.15.0",
+    "sequelize": "^5.15.1",
     "styled-components": "^4.2.0",
     "unirest": "^0.6.0"
   }
