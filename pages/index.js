@@ -83,12 +83,8 @@ const Index = (props) => {
     (async () => {
       try {
         const response = await fetch(`${server}news/${news}`)
-        // const response = await fetch (server + 'videos/' + query);
         const json = await response.json()
         setNews(json)
-        // console.log('News data on FE:', json);
-        // console.log('Youtube data on FE:', json);
-        // setVideo(json);
       } catch (e) {
         console.warn(e)
       }
@@ -98,7 +94,6 @@ const Index = (props) => {
   const handleDateChange = async (date) => {
     const ISODate = formatDate(date)
     let json
-    // console.log('ISODate:', ISODate);
     setDate(ISODate)
     try {
       const response = await fetch(`${server}games/date/${ISODate}`)
@@ -117,7 +112,6 @@ const Index = (props) => {
     try {
       const response = await fetch(`${server}videos/${query} ${date}`)
       const json = await response.json()
-      // console.log('Youtube data on FE:', json);
       setVideo(json)
       setMain(true)
     } catch (e) {
@@ -157,25 +151,19 @@ Index.propTypes = {
 }
 
 Index.getInitialProps = async function () {
-  // let date = formatDate('2019-06-15');
-  // let date = formatDate('2019-07-12');
   const date = formatDate()
   let json
-  // console.log('DATE in props: ', date);
 
   try {
     const res = await fetch(`${server}games/date/${date}`)
-    // console.log('res status on FE:', res.status);
     if (res.status === 500) {
       json = 'No games were played on this day'
     } else {
       json = await res.json()
-      // console.log('json!!!!!', json);
     }
     return {
       games: json,
       todaysDate: date
-      // query: json[0].id
     }
   } catch (e) {
     console.warn(e)

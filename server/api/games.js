@@ -7,9 +7,8 @@ const asyncForEach = async (array, callback) => {
   }
 }
 exports.getGames = async (req, res) => {
-  // console.log('id: ', req.params);
   const id = req.params.date
-  // console.log(id);
+
   try {
     const data1 = await db.query('SELECT game.*, team.name, team.logo FROM game INNER JOIN team ON game.winningteamid = team.teamID WHERE date = $1', id)
     if (data1.length) {
@@ -39,7 +38,6 @@ exports.getGames = async (req, res) => {
             }
           })
           console.log(`${data.length} games are found in DB`)
-          // console.log(data);
           res.status(200).send(data)
           return data
         } catch (e) {
@@ -55,7 +53,6 @@ exports.getGames = async (req, res) => {
       } else {
         /** *****rewrite this block as lines 21-42 when season starts*****/
         const data4 = await db.query('SELECT game.*, team.name, team.logo FROM game INNER JOIN team ON game.winningteamid = team.teamID WHERE date = $1', id)
-        // console.log(data);
         res.status(200).send(data4)
       }
     }

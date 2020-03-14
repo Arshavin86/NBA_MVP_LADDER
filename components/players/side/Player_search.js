@@ -25,10 +25,8 @@ const Search = () => {
 
   const onSubmit = event => {
     event.preventDefault()
-    // console.log('Submited value: ', value);
   }
 
-  // the useEffect hook takes a value to listen to changes
   useEffect(() => {
     // filter players in list when value changes
     const filteredPlayers = fullList.filter(player => {
@@ -39,7 +37,6 @@ const Search = () => {
 
   const onChange = event => {
     event.preventDefault()
-    // console.log('value in onChange: ', event.target.value)
     setValue(event.target.value)
   }
 

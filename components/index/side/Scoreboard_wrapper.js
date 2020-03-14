@@ -1,10 +1,6 @@
 import { useContext } from 'react'
 import style from 'styled-components'
 import ApiContext from '../../Context'
-// import styler from './StyledLinks';
-// import Link from 'next/link'
-
-// const StyledLink = styler ('/boxscore', 'BOXSCORE');
 
 const Section = style.section`
     order: initial;
@@ -210,7 +206,6 @@ const gamesListing = (data, handleVideoChange) => {
   } else {
     return data
   }
-  // console.log('context', context);
   return context
 }
 

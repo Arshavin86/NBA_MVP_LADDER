@@ -1,4 +1,3 @@
-
 import style from 'styled-components'
 import TableBody from './Table_body'
 

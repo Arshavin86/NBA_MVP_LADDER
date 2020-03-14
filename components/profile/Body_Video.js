@@ -50,14 +50,14 @@ const Videoboard = () => {
   if (!videos) {
     return (
       <Wrapper>
-                Video will be here
+        Video will be here
       </Wrapper>
     )
   } if (!videos.length) {
     return (
       <Wrapper>
         <Header>
-                    There are no videos related to this player available
+          There are no videos related to this player available
         </Header>
       </Wrapper>
     )
@@ -65,7 +65,7 @@ const Videoboard = () => {
     return (
       <Wrapper>
         <Header>
-                    RELATED VIDEOS
+          RELATED VIDEOS
         </Header>
         <List>
           {renderVideos(videos)}

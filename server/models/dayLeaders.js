@@ -29,7 +29,6 @@ exports.getDayLeaders = async (date) => {
           loosingTeamID = game.vTeam.teamId
         }
         gameID = game.gameId
-        // console.log('winningTeamID: ', winningTeamID, 'gameID: ', gameID);
         matchDay[winningTeamID] = {
           teams: [game.vTeam.fullName, game.hTeam.fullName],
           score: [game.vTeam.score.points, game.hTeam.score.points],
@@ -42,14 +41,11 @@ exports.getDayLeaders = async (date) => {
         // database.postTeam(game.vTeam.teamId, game.vTeam.fullName, game.vTeam.logo);
         // database.postTeam(game.hTeam.teamId, game.hTeam.fullName, game.hTeam.logo);
       })
-
-      // console.log('matchDay: ', matchDay)
       // I can't use forEach with async/await so I use a variation of the for-of iteration statement
       //   which iterates over async iterable objects
       for await (const team of Object.keys(matchDay)) {
         // get players stats for each game
         const players = await getStatsByGameID(matchDay[team].gameId)
-        // console.log('players', players);
         const leader = {
           total: 0,
           plusMinus: 0,
@@ -61,7 +57,6 @@ exports.getDayLeaders = async (date) => {
           // calculate stats of each player from winning team
         //   and compare it with current best result for current game
           players.api.statistics.forEach((player) => {
-            // console.log('player', player);
             const {
               points, assists, totReb, steals, blocks, turnovers, plusMinus, fgm, fga, fgp,
               ftm, fta, tpm, tpa, offReb, defReb, pFouls, playerId, teamId
@@ -69,7 +64,6 @@ exports.getDayLeaders = async (date) => {
             if (teamId === team) {
               currentTotal = statsCalculator(points, assists, totReb, steals, blocks, turnovers,
                 fgm, fga, ftm, fta, tpm, tpa, offReb, defReb, pFouls, plusMinus)
-              // console.log('total: ', currentTotal);
               if (currentTotal > leader.total ||
                 (currentTotal === leader.total && plusMinus > leader.plusMinus) ||
                 (currentTotal === leader.total && plusMinus === leader.plusMinus &&
@@ -86,7 +80,6 @@ exports.getDayLeaders = async (date) => {
                 leader.statsBP2 = [points, assists, totReb, steals, blocks, turnovers, plusMinus, fgp]
               }
             }
-            // console.log('leader', leader, teamId, matchDay[team]['gameId']);
           })
 
           // get name of the best player of the game
@@ -98,10 +91,8 @@ exports.getDayLeaders = async (date) => {
             return 0
           }
           const bestPlayer1 = await getNameByPlayerID(leader.player1Id)
-          // console.log('bestPlayer1', bestPlayer1.api.players);
 
           // post or update player awards number
-          // console.log('player: ', leader.player1Id)
           // await database.postPlayer(leader.player1Id, `${bestPlayer1.api.players[0].firstName}
           //   ${bestPlayer1.api.players[0].lastName}`, team);
 
@@ -111,15 +102,8 @@ exports.getDayLeaders = async (date) => {
           // get photo of player from nba-players.herokuapp.com in png
           // let photo = await getPhotoByName (bestPlayer1.api.players[0].lastName, bestPlayer1.api.players[0].firstName);
           // matchDay[team]['player1Photo'] = photo;
-          // console.log ('photo', photo);
-
-          // console.log(matchDay);
-
-          // console.log(leader);
           if (leader.player2Id) {
             const bestPlayer2 = await getNameByPlayerID(leader.player2Id)
-            // console.log(bestPlayer2.api.players);
-
             // post or update player awards number
             // await database.postPlayer(leader.player2Id, `${bestPlayer2.api.players[0].firstName}
             // ${bestPlayer2.api.players[0].lastName}`, team);
@@ -129,8 +113,6 @@ exports.getDayLeaders = async (date) => {
 
             // let photo = await getPhotoByName (bestPlayer2.api.players[0].lastName, bestPlayer2.api.players[0].firstName);
             // matchDay[team]['player2Photo'] = photo;
-            // console.log ('photo', photo);
-            // console.log(matchDay);
           } else {
             matchDay[team].bestPl2 = 'N/A'
           }

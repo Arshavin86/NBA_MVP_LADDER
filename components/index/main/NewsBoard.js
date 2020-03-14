@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import style from 'styled-components'
 import ApiContext from '../../Context'
 import ReactTooltip from 'react-tooltip'
@@ -47,13 +47,11 @@ const articlesListing = articles => {
 
 const NewsBoard = () => {
   const [videos, news, videosOn] = useContext(ApiContext)
-  // console.log(video[0].items);
-  // console.log("videos: ", videos, 'news: ', news, 'videosOn: ', videosOn)
 
   if (news === 'nba') {
     return (
       <div>
-                News will be here
+        News will be here
       </div>
     )
   } else if (news.articles.length) {
@@ -65,7 +63,7 @@ const NewsBoard = () => {
   } else {
     return (
       <div>
-                Sorry. There are currently no news available.
+        Sorry. There are currently no news available.
         <p>This is the offseason, dude.</p>
       </div>
     )

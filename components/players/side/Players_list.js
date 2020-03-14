@@ -66,7 +66,6 @@ const Abbr = style.abbr`
 const playersListing = (players, letter) => {
   const context = []
 
-  // sort players alphabetically
   players.sort((a, b) => {
     if (a.name < b.name) { return -1 }
     if (a.name > b.name) { return 1 }
@@ -82,7 +81,6 @@ const playersListing = (players, letter) => {
       </Name>
     )
 
-    // creating an alphabetical list
     if (player.name[0] === letter) {
       context.push(
         <List key={player.id}>

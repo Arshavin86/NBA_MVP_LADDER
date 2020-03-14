@@ -6,7 +6,6 @@ exports.getNews = async (req, res) => {
 
   try {
     const response = await searchNews(query)
-    // console.log('News data on BE:', response);
     res.status(200).send(response)
   } catch (e) {
     console.log(e)

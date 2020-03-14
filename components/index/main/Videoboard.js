@@ -29,7 +29,7 @@ const renderVideos = (videos, date) => {
             {video.snippet.title}
           </h3>
         </div>
-                </Video>)
+      </Video>)
     }
   })
   return list
@@ -41,13 +41,13 @@ const Videoboard = () => {
   if (!videos) {
     return (
       <div>
-                Video will be here
+        Video will be here
       </div>
     )
   } if (!videos.length) {
     return (
       <div>
-                There are no videos of this game available
+        There are no videos of this game available
       </div>
     )
   } else {

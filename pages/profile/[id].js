@@ -44,7 +44,6 @@ export default function Post (props) {
       try {
         const response = await fetch(server + 'videosPlayer/' + player.firstname + ' ' + player.lastname)
         const json = await response.json()
-        // console.log('Youtube data on FE:', json);
         setVideo(json)
       } catch (e) {
         console.warn(e)
@@ -71,8 +70,7 @@ Post.getInitialProps = async function (router) {
   try {
     const response = await fetch(server + 'players/' + router.query.id)
     const json = await response.json()
-    // console.log('query from FE: ', router.query.id)
-    // console.log(json);
+    
     return {
       player: json
     }

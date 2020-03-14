@@ -44,7 +44,7 @@ const Vitals = () => {
       <List>
         <Item>
           <Heading>
-                    born
+            born
           </Heading>
           <Info>
             {dateofbirth}
@@ -52,7 +52,7 @@ const Vitals = () => {
         </Item>
         <Item>
           <Heading>
-                    country
+            country
           </Heading>
           <Info>
             {country}
@@ -60,7 +60,7 @@ const Vitals = () => {
         </Item>
         <Item>
           <Heading>
-                    college
+            college
           </Heading>
           <Info>
             {collegename}
@@ -68,7 +68,7 @@ const Vitals = () => {
         </Item>
         <Item>
           <Heading>
-                    NBA debut
+            NBA debut
           </Heading>
           <Info>
             {startnba}
@@ -76,7 +76,7 @@ const Vitals = () => {
         </Item>
         <Item>
           <Heading>
-                    height
+            height
           </Heading>
           <Info>
             {heightinmeters} m
@@ -84,7 +84,7 @@ const Vitals = () => {
         </Item>
         <Item>
           <Heading>
-                    weight
+            weight
           </Heading>
           <Info>
             {weightinkilograms} kg
@@ -92,7 +92,7 @@ const Vitals = () => {
         </Item>
         <Item>
           <Heading>
-                    team
+            team
           </Heading>
           <Info>
             {name}

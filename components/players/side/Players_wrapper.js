@@ -25,7 +25,6 @@ const playersListing = players => {
   players.map((player, index) => {
     // clear players array from repeated players
     if (player.name === name) {
-      // console.log('repeated player in list:', player);
       players.splice(index, 1)
     } else {
       // creating an alphabetic list
@@ -35,8 +34,6 @@ const playersListing = players => {
       name = player.name
     }
   })
-  // console.log('players in list', players);
-  // sort array A-Z
   letters.sort()
 
   letters.map((letter, id) => {

@@ -57,14 +57,7 @@ const Main = style(SidebarBottom)`
 `
 
 const Players = props => {
-  // return (
-  //   <div>
-  //     <img src={props.image}></img>
-  //   </div>
-  // )
-
   const [players, setPlayers] = useState(props.players)
-  // console.log(players);
   const fullList = props.players
 
   return (
@@ -99,13 +92,7 @@ Players.getInitialProps = async function () {
   const data = await res.json()
   const players = []
   let playerName
-  // console.log('IMAGE: ', data.image);
-  // return {
-  //       image: data.image
-  //   }
-  // const encodeData = encodeURIComponent(data.image);
 
-  // console.log(`Show data fetched in Players. ${data[0]}`)
   data.map(player => {
     const { playerid, name, jersey, pos, heightinmeters, weightinkilograms } = player
     // works with player who has nickname, like 'Nene'

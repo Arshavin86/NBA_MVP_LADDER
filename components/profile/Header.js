@@ -27,7 +27,6 @@ const Header = () => {
   const teamName = player.name.split(' ')
   const teamNick = teamName[teamName.length - 1]
   const logoURL = `../../static/Logos/${teamNick}.jpg`
-  // console.log(teamNick);
 
   return (
     <Wrapper team={logoURL}>

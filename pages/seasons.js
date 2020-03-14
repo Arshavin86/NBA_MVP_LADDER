@@ -96,19 +96,17 @@ const Seasons = props => {
   const [season, setSeason] = useState('2018-2019')
   const [seasonOn, toggleMode] = useState(true)
   const [seasonTime, setSeasonTime] = useState('regular season')
-  // console.log('players ', players);
+
   useEffect(() => {
     (async () => {
       try {
         if (seasonOn) {
           const response = await fetch(server + 'seasons/' + season)
           const json = await response.json()
-          // console.log('Players data on FE:', json);
           setPlayers(json)
         } else {
           const response = await fetch(server + 'seasons/playOffs' + season)
           const json = await response.json()
-          // console.log('Players data on FE:', json);
           setPlayers(json)
         }
       } catch (e) {
@@ -119,14 +117,12 @@ const Seasons = props => {
 
   const seasonChange = event => {
     event.preventDefault()
-    // console.log('value in seasonChange: ', event.target.value)
     setSeason(event.target.value)
   }
 
   const switchToSeason = event => {
     event.preventDefault()
     toggleMode(true)
-    // console.log(toggleMode);
     setSeasonTime('regular season')
   }
 
@@ -144,10 +140,10 @@ const Seasons = props => {
         </PageHeader>
         <Breakdown>
           <Button1 onClick={switchToSeason} seasonOn={toggleMode}>
-                        Regular Season
+            Regular Season
           </Button1>
           <Button2 onClick={switchToPlayOffs} seasonOn={toggleMode}>
-                        Playoffs
+            Playoffs
           </Button2>
           <Select onChange={seasonChange}>
             <option value='2018-2019'>2018-2019</option>

@@ -18,16 +18,11 @@ async function getGameVideos (req, res) {
   dateStart.setDate(dateStart.getDate() - 1)
   const dST = new Date(dateStart)
 
-  // convert both dates to ISO format
   const StartISO = dST.toISOString()
   const FinishISO = dFN.toISOString()
 
-  // console.log('query on BE: ', query );
-  console.log('dates on BE: ', StartISO, FinishISO)
-
   try {
     const response = await searchYouTubeForGames(query, StartISO, FinishISO)
-    // console.log('Youtube data on BE:', response);
     res.status(200).send(response)
   } catch (e) {
     console.log(e)
@@ -39,7 +34,6 @@ async function getPlayerVideos (req, res) {
 
   try {
     const response = await searchYouTubeForPlayer(query)
-    console.log('Youtube data on BE:', response)
     res.status(200).send(response)
   } catch (e) {
     console.log(e)

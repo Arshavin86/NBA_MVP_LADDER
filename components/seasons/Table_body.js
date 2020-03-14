@@ -30,13 +30,11 @@ const Th = style.th`
 
 const TableBody = () => {
   const [players] = useContext(ApiContext)
-  // console.log(players);
   const playersList = players => {
     const context = []
     players.map(player => {
-      const { position, firstname, lastname, pos, name } = player
-      // const short = name.split(' ');
-      // const shortTeam = short[short.length-1];
+      const { position, firstname, lastname, pos } = player
+
       if (position % 2 === 0) {
         context.push(
           <Tr key={position}>
