@@ -1,7 +1,7 @@
 const request = require('request-promise')
 const URL = 'https://nba-players.herokuapp.com'
 
-const getImages = async (firstName, lastName) => {
+exports.getImages = (firstName, lastName) => {
   const options = {
     url: `${URL}/players/${lastName}/${firstName}`,
     // encoding: null,
@@ -13,5 +13,3 @@ const getImages = async (firstName, lastName) => {
   }
   return request(options)
 }
-
-module.exports = getImages

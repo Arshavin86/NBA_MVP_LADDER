@@ -1,13 +1,11 @@
 import { useRouter } from 'next/router'
 import Layout from '../../components/MyLayout'
 import { useState, useEffect } from 'react'
-import Server from '../../components/Server'
+import { server } from '../../config.js'
 import style from 'styled-components'
 import ApiContext from '../../components/Context'
 import Header from '../../components/profile/Header'
 import Body from '../../components/profile/Body'
-
-const server = Server.server
 
 const Container1 = style.div` 
   color: black; 

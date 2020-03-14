@@ -1,8 +1,11 @@
-const youtube = require('../helpers/youtube_api')
-const searchYouTubeForGames = youtube.searchYouTubeForGames
-const searchYouTubeForPlayer = youtube.searchYouTubeForPlayer
+const { searchYouTubeForGames, searchYouTubeForPlayer } = require('../external-requests/youtube')
 
-exports.getGameVideos = async (req, res) => {
+module.exports = {
+  getGameVideos,
+  getPlayerVideos
+}
+
+async function getGameVideos (req, res) {
   const query = req.params.query.slice(0, -10)
 
   // get finish date for search
@@ -31,7 +34,7 @@ exports.getGameVideos = async (req, res) => {
   }
 }
 
-exports.getPlayerVideos = async (req, res) => {
+async function getPlayerVideos (req, res) {
   const query = req.params.query
 
   try {

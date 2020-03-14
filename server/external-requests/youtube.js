@@ -1,10 +1,14 @@
 const { google } = require('googleapis')
 const {
   YoutubeAPI_Key, CLIENT_ID, CLIENT_SECRET, REDIRECT_URL
-} = require('../config/youtube')
+} = require('../../config/youtube')
 // get Node.js client library for using Google APIs
+module.exports = {
+  searchYouTubeForGames,
+  searchYouTubeForPlayer
+}
 
-exports.searchYouTubeForGames = async (query, date1, date2) => {
+async function searchYouTubeForGames (query, date1, date2) {
   const youtube = google.youtube({
     version: 'v3',
     auth: YoutubeAPI_Key
@@ -49,7 +53,7 @@ exports.searchYouTubeForGames = async (query, date1, date2) => {
   }
 }
 
-exports.searchYouTubeForPlayer = async (query) => {
+async function searchYouTubeForPlayer (query) {
   const youtube = google.youtube({
     version: 'v3',
     auth: YoutubeAPI_Key

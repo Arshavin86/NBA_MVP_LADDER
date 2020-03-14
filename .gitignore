@@ -63,7 +63,9 @@ typings/
 
 # API keys and tokens
 config/
+config.js
 
 # others
-MVPCalculator/
+server/utils/
 database/populateSeasons.js
+core

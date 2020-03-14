@@ -1,6 +1,14 @@
 
 const request = require('request-promise')
-const config = require('../config/api-nba-v1.p')
+const config = require('../../config/api-nba-v1.p')
+
+module.exports = {
+  getGamesByDate,
+  getStatsByGameID,
+  getNameByPlayerID,
+  getPhotoByName
+}
+
 const headers = {
   'User-Agent': 'request',
   'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com',
@@ -37,7 +45,7 @@ const URL = 'https://api-nba-v1.p.rapidapi.com'
 //     getNameByPlayerID: getNameByPlayerID.get
 // }
 
-const getGamesByDate = async date => {
+function getGamesByDate (date) {
   const options = {
     url: `${URL}/games/date/${date}`,
     headers: headers,
@@ -46,7 +54,7 @@ const getGamesByDate = async date => {
   return request(options)
 }
 
-const getStatsByGameID = async gameID => {
+function getStatsByGameID (gameID) {
   const options = {
     url: `${URL}/statistics/players/gameId/${gameID}`,
     headers: headers,
@@ -55,7 +63,7 @@ const getStatsByGameID = async gameID => {
   return request(options)
 }
 
-const getNameByPlayerID = async playerID => {
+function getNameByPlayerID (playerID) {
   const options = {
     url: `${URL}/players/playerId/${playerID}`,
     headers: headers,
@@ -64,17 +72,10 @@ const getNameByPlayerID = async playerID => {
   return request(options)
 }
 
-const getPhotoByName = async (lastName, firstName) => {
+function getPhotoByName (lastName, firstName) {
   const options = {
     url: `https://nba-players.herokuapp.com/players/${lastName}/${firstName}`,
     json: true
   }
   return request(options)
-}
-
-module.exports = {
-  getGamesByDate: getGamesByDate,
-  getStatsByGameID: getStatsByGameID,
-  getNameByPlayerID: getNameByPlayerID,
-  getPhotoByName: getPhotoByName
 }

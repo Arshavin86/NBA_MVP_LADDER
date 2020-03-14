@@ -2,15 +2,8 @@ const promise = require('bluebird')
 
 const options = { promiseLib: promise }
 const pgp = require('pg-promise')(options)
-// const databaseConfig = require ('../config/database');
 
-const databaseConfig = {
-  host: 'localhost',
-  port: 5432,
-  user: 'andrei',
-  database: 'nba',
-  password: 'privet'
-}
+const { databaseConfig } = require('../config.js')
 
 const db = pgp(databaseConfig)
 

@@ -1,7 +1,7 @@
 const NewsAPI = require('newsapi')
-const { newsApiKey } = require('../config/news')
+const { newsApiKey } = require('../../config.js')
 
-const searchNews = async (query) => {
+exports.searchNews = async (query) => {
   const newsapi = new NewsAPI(newsApiKey)
   // To query /v2/top-headlines
   try {
@@ -16,5 +16,3 @@ const searchNews = async (query) => {
     console.log(e)
   }
 }
-
-module.exports = searchNews

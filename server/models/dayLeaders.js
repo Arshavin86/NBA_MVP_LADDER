@@ -1,10 +1,10 @@
 const {
   getGamesByDate, getStatsByGameID, getNameByPlayerID
-} = require('../helpers/rapidapi')
-const { statsCalculator } = require('../MVPCalculator/statsCalculator')
-const database = require('../database/controllers')
+} = require('../external-requests/rapidapi')
+const statsCalculator = require('../utils/statsCalculator')
+const db = require('../../database/db')
 
-const getDayLeaders = async (date) => {
+exports.getDayLeaders = async (date) => {
   let winningTeamID
   let loosingTeamID
   let gameID
@@ -140,7 +140,7 @@ const getDayLeaders = async (date) => {
           } = matchDay[team]
 
           // post a game info
-          await database.postGame(date, gameId, team, losingTeamID, bestPl1, bestPl2, score, statsBP1, statsBP2)
+          await db.postGame(date, gameId, team, losingTeamID, bestPl1, bestPl2, score, statsBP1, statsBP2)
         } else {
           console.log(`There is no stats of game ${matchDay[team].gameId} for ${matchDay[team].teams}!!!!!`)
           return 0
@@ -155,5 +155,3 @@ const getDayLeaders = async (date) => {
   console.log(`There is no game played in ${date}`)
   return 0
 }
-
-module.exports = getDayLeaders

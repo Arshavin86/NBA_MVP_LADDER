@@ -1,4 +1,4 @@
-import Layout from '../components/MyLayout.js'
+import Layout from '../components/MyLayout'
 import { useState } from 'react'
 import fetch from 'isomorphic-unfetch'
 import style from 'styled-components'
@@ -7,9 +7,7 @@ import PlayerSearch from '../components/players/side/Player_search'
 import RowHeaders from '../components/players/side/Row_headers'
 import PlayersWrapper from '../components/players/side/Players_wrapper'
 import MainBoardPlayers from '../components/players/main/MainBoard_players'
-import Server from '../components/Server'
-
-const server = Server.server
+import { server } from '../config.js'
 
 const Container1 = style.div` 
   color: black; 

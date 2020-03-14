@@ -1,4 +1,4 @@
-const searchNews = require('../helpers/news_api')
+const { searchNews } = require('../external-requests/news')
 
 exports.getNews = async (req, res) => {
   const query = req.params.query

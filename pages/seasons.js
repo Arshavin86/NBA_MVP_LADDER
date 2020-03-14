@@ -1,12 +1,11 @@
-import Layout from '../components/MyLayout.js'
 import { useState, useEffect } from 'react'
 import fetch from 'isomorphic-unfetch'
 import style from 'styled-components'
-import ApiContext from '../components/Context.js'
-import Table from '../components/seasons/Table'
-import Server from '../components/Server'
 
-const server = Server.server
+import Layout from '../components/MyLayout'
+import ApiContext from '../components/Context'
+import Table from '../components/seasons/Table'
+import { server } from '../config.js'
 
 const Container1 = style.div`
   display: flex; 

@@ -45,7 +45,7 @@ const Player = props => {
   const firstname = name.split(', ')[1]
   const lastname = name.split(',')[0]
   const URL = 'https://nba-players.herokuapp.com'
-  // assighn it to empty string in order to get image for Nene
+  // assign it to empty string in order to get image for Nene
   let firstName = ''
   // players with such names as D.J. or J.J stored as DJ and JJ, so we have to delete dots from it + Deandre' => Deandre
   if (firstname) {

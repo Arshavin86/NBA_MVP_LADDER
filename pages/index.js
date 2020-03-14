@@ -11,9 +11,7 @@ import Layout from '../components/MyLayout'
 import ScoreboardWrapper from '../components/index/side/Scoreboard_wrapper'
 import ApiContext from '../components/Context'
 import MainBoard from '../components/index/main/MainBoard'
-import Server from '../components/Server'
-
-const { server } = Server
+import { server } from '../config.js'
 
 const Container1 = style.div`
   display: flex; 
