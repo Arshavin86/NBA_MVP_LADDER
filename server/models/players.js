@@ -3,7 +3,8 @@ const { db } = require('../../database/db')
 module.exports = {
   postPlayer,
   getPlayers,
-  getPlayer
+  getPlayerByName,
+  getPlayerById
 }
 
 async function postPlayer (ID, seasonName) {
@@ -21,19 +22,25 @@ async function postPlayer (ID, seasonName) {
 async function getPlayers () {
   try {
     const qr = 'SELECT player.*, team.name FROM player INNER JOIN team ON player.teamID = team.teamID ORDER BY player.lastname ASC;'
-    const players = await db.query(qr)
-    return players
+    return await db.query(qr)
   } catch (error) {
     console.log('getPlayers failed: ', error)
   }
 }
 
-async function getPlayer ({ firstName, lastName }) {
+async function getPlayerByName ({ firstName, lastName }) {
   try {
     const qr = 'SELECT player.*, team.name FROM player INNER JOIN team ON player.teamID = team.teamID WHERE firstName = $1 AND lastName = $2;'
-    const player = await db.query(qr, [firstName, lastName])
-    return player
+    return await db.query(qr, [firstName, lastName])
   } catch (error) {
-    console.log('getPlayers failed: ', error)
+    console.log('getPlayerByName failed: ', error)
+  }
+}
+
+async function getPlayerById (playerId) {
+  try {
+    return await db.query('SELECT firstName, lastName FROM player WHERE playerID = $1;', playerId)
+  } catch (error) {
+    console.log('getPlayerById failed: ', error)
   }
 }

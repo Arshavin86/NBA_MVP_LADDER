@@ -18,9 +18,9 @@ async function getPlayer (req, res) {
   const firstName = name.split(', ')[1]
   const lastName = name.split(',')[0]
   try {
-    const player = await players.getPlayer({ firstName, lastName })
+    const player = await players.getPlayerByName({ firstName, lastName })
     res.status(200).send(player)
   } catch (error) {
-    console.log('getPlayer failed: ', error)
+    console.log('getPlayerByName failed: ', error)
   }
 }
