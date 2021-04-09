@@ -97,7 +97,7 @@ const Index = (props) => {
     setDate(ISODate)
     try {
       const response = await fetch(`${server}games/date/${ISODate}`)
-      if (response.status === 500) {
+      if (response.status === 500 || response.status === 404) {
         json = 'No games were played on this day'
       } else {
         json = await response.json()
@@ -156,7 +156,7 @@ Index.getInitialProps = async function () {
 
   try {
     const res = await fetch(`${server}games/date/${date}`)
-    if (res.status === 500) {
+    if (res.status === 500 || res.status === 404) {
       json = 'No games were played on this day'
     } else {
       json = await res.json()
