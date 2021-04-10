@@ -1,7 +1,7 @@
 const { google } = require('googleapis')
 const {
   YoutubeAPI_Key, CLIENT_ID, CLIENT_SECRET, REDIRECT_URL
-} = require('../../config/youtube')
+} = require('../../config').youtube
 
 module.exports = {
   searchYouTubeForGames,
