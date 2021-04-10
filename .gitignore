@@ -61,10 +61,6 @@ typings/
 # next.js build output
 .next
 
-# API keys and tokens
-config/
-config.js
-
 # others
 server/utils/
 database/populateSeasons.js
