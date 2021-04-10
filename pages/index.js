@@ -11,7 +11,7 @@ import Layout from '../components/MyLayout'
 import ScoreboardWrapper from '../components/index/side/Scoreboard_wrapper'
 import ApiContext from '../components/Context'
 import MainBoard from '../components/index/main/MainBoard'
-import { server } from '../config.js'
+import { serverHost } from '../config.js'
 
 const Container1 = style.div`
   display: flex; 
@@ -82,7 +82,7 @@ const Index = (props) => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch(`${server}news/${news}`)
+        const response = await fetch(`${serverHost}/api/news/${news}`)
         const json = await response.json()
         setNews(json)
       } catch (e) {
@@ -96,7 +96,7 @@ const Index = (props) => {
     let json
     setDate(ISODate)
     try {
-      const response = await fetch(`${server}games/date/${ISODate}`)
+      const response = await fetch(`${serverHost}/api/games/date/${ISODate}`)
       if (response.status === 500 || response.status === 404) {
         json = 'No games were played on this day'
       } else {
@@ -110,7 +110,7 @@ const Index = (props) => {
 
   const handleVideoChange = async (query) => {
     try {
-      const response = await fetch(`${server}videos/${query} ${date}`)
+      const response = await fetch(`${serverHost}/api/videos/${query} ${date}`)
       const json = await response.json()
       setVideo(json)
       setMain(true)
@@ -155,7 +155,7 @@ Index.getInitialProps = async function () {
   let json
 
   try {
-    const res = await fetch(`${server}games/date/${date}`)
+    const res = await fetch(`${serverHost}/api/games/date/${date}`)
     if (res.status === 500 || res.status === 404) {
       json = 'No games were played on this day'
     } else {

@@ -7,7 +7,7 @@ import PlayerSearch from '../components/players/side/Player_search'
 import RowHeaders from '../components/players/side/Row_headers'
 import PlayersWrapper from '../components/players/side/Players_wrapper'
 import MainBoardPlayers from '../components/players/main/MainBoard_players'
-import { server } from '../config.js'
+import { serverHost } from '../config.js'
 
 const Container1 = style.div` 
   color: black; 
@@ -88,7 +88,7 @@ const Players = props => {
 }
 
 Players.getInitialProps = async function () {
-  const res = await fetch(server + 'players')
+  const res = await fetch(`${serverHost}/api/players`)
   const data = await res.json()
   const players = []
   let playerName

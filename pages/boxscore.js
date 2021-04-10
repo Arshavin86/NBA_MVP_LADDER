@@ -1,7 +1,7 @@
 import Layout from '../components/MyLayout.js'
 // import a simple implementation of the browser fetch API, which works both in client and server environments
 import fetch from 'isomorphic-unfetch'
-import { server } from '../config.js'
+import { serverHost } from '../config.js'
 
 const Boxscore = (props) => (
   <Layout>
@@ -18,7 +18,7 @@ const Boxscore = (props) => (
 
 Boxscore.getInitialProps = async function () {
   const date = '2018-10-17'
-  const res = await fetch(`${server}games/date/${date}`)
+  const res = await fetch(`${serverHost}/api/games/date/${date}`)
   const data = await res.json()
 
   console.log(`Show data fetched in Boxscore. Count: ${data.length}`)

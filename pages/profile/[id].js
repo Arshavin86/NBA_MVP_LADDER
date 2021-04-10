@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import Layout from '../../components/MyLayout'
 import { useState, useEffect } from 'react'
-import { server } from '../../config.js'
+import { serverHost } from '../../config.js'
 import style from 'styled-components'
 import ApiContext from '../../components/Context'
 import Header from '../../components/profile/Header'
@@ -42,7 +42,7 @@ export default function Post (props) {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch(server + 'videosPlayer/' + player.firstname + ' ' + player.lastname)
+        const response = await fetch(`${serverHost}/api/videosPlayer/${player.firstname} ${player.lastname}`)
         const json = await response.json()
         setVideo(json)
       } catch (e) {

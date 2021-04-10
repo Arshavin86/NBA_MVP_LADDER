@@ -5,7 +5,7 @@ import style from 'styled-components'
 import Layout from '../components/MyLayout'
 import ApiContext from '../components/Context'
 import Table from '../components/seasons/Table'
-import { server } from '../config.js'
+import { serverHost } from '../config.js'
 
 const Container1 = style.div`
   display: flex; 
@@ -101,11 +101,11 @@ const Seasons = props => {
     (async () => {
       try {
         if (seasonOn) {
-          const response = await fetch(server + 'seasons/' + season)
+          const response = await fetch(`${serverHost}/api/seasons/${season}`)
           const json = await response.json()
           setPlayers(json)
         } else {
-          const response = await fetch(server + 'seasons/playOffs' + season)
+          const response = await fetch(`${serverHost}/api/seasons/playOffs/${season}`)
           const json = await response.json()
           setPlayers(json)
         }
@@ -163,7 +163,7 @@ const Seasons = props => {
 }
 
 Seasons.getInitialProps = async function () {
-  const res = await fetch(server + 'seasons/2018-2019')
+  const res = await fetch(`${serverHost}/api/seasons/2018-2019`)
   const data = await res.json()
   return {
     players: data
