@@ -110,7 +110,7 @@ const Seasons = props => {
           setPlayers(json)
         }
       } catch (e) {
-        console.warn(e)
+        console.error(e)
       }
     })()
   }, [season, seasonOn])

@@ -43,7 +43,7 @@ const postGame = async (date, ID, WTID, LTID, BP1, BP2, score, SBP1, SBP2) => {
     const result = await db.query(qr, [date, ID, WTID, LTID, BP1, BP2, score, SBP1, SBP2])
     console.log('Game is posted on Postgres: ', ID)
   } catch (error) {
-    console.log('POSTGame is failed: ', error)
+    console.error('POSTGame is failed: ', error)
   }
 }
 
@@ -138,7 +138,7 @@ const gameAdd = async () => {
     }
     console.log(`Done with ${gameId} teams`)
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }
 
@@ -167,7 +167,7 @@ const teamAdd = async () => {
     }
     console.log(`Done with ${teamid} teams`)
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }
 
@@ -206,7 +206,7 @@ const playerAdd = async () => {
     }
     console.log('Done')
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 
   // let data = await db.query('SELECT game.*, team.name, team.logo FROM game INNER JOIN team ON game.winningteamid = team.teamID WHERE date = $1', id);

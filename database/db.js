@@ -13,7 +13,7 @@ db.connect()
     obj.done() // success, release the connection;
   })
   .catch((error) => {
-    console.log('ERROR:', error.message || error)
+    console.error('ERROR:', error.message || error)
   })
 
 module.exports = { db }

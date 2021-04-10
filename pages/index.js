@@ -86,7 +86,7 @@ const Index = (props) => {
         const json = await response.json()
         setNews(json)
       } catch (e) {
-        console.warn(e)
+        console.error(e)
       }
     })()
   }, [])
@@ -104,7 +104,7 @@ const Index = (props) => {
       }
       setData(json)
     } catch (e) {
-      console.warn(e)
+      console.error(e)
     }
   }
 
@@ -115,7 +115,7 @@ const Index = (props) => {
       setVideo(json)
       setMain(true)
     } catch (e) {
-      console.warn(e)
+      console.error(e)
     }
   }
 
@@ -166,7 +166,7 @@ Index.getInitialProps = async function () {
       todaysDate: date
     }
   } catch (e) {
-    console.warn(e)
+    console.error(e)
   }
 }
 

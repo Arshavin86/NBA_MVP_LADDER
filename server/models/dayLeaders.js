@@ -88,7 +88,7 @@ exports.storeGamesStats = async (date) => {
     console.log('DONE!')
     return dayCount
   } catch (error) {
-    console.log('ERROR', error.message)
+    console.error('ERROR', error.message)
   }
 }
 

@@ -81,7 +81,7 @@ async function addBestPlayerAndLoosingTeam (games) {
     console.log(`${games.length} games are found in DB`)
     return { games }
   } catch (error) {
-    console.log(error)
+    console.error(error)
     return { error: true }
   }
 }

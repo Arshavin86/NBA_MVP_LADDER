@@ -17,6 +17,6 @@ async function getSeasons ({ queryArray, year }) {
       return list
     }
   } catch (e) {
-    console.log('getSeasons is failed: ', e)
+    console.error('getSeasons is failed: ', e)
   }
 }

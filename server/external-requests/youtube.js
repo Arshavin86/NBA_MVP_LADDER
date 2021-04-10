@@ -46,7 +46,7 @@ async function searchYouTubeForGames (query, date1, date2) {
 
     return response3.data.items
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }
 
@@ -76,6 +76,6 @@ async function searchYouTubeForPlayer (query) {
     const response1 = await youtube.search.list(NBA)
     return response1.data.items
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }

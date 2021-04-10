@@ -12,6 +12,6 @@ async function getSeasons (req, res) {
     const list = await seasons.getSeasons({ queryArray, year })
     res.status(200).send(list)
   } catch (error) {
-    console.log('getSeasons failed: ', error)
+    console.error('getSeasons failed: ', error)
   }
 }

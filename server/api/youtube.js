@@ -25,7 +25,7 @@ async function getGameVideos (req, res) {
     const response = await searchYouTubeForGames(query, StartISO, FinishISO)
     res.status(200).send(response)
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }
 
@@ -36,6 +36,6 @@ async function getPlayerVideos (req, res) {
     const response = await searchYouTubeForPlayer(query)
     res.status(200).send(response)
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }

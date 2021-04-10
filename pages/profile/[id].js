@@ -46,7 +46,7 @@ export default function Post (props) {
         const json = await response.json()
         setVideo(json)
       } catch (e) {
-        console.warn(e)
+        console.error(e)
       }
     })()
   }, [])
@@ -75,6 +75,6 @@ Post.getInitialProps = async function (router) {
       player: json
     }
   } catch (e) {
-    console.warn(e)
+    console.error(e)
   }
 }

@@ -9,7 +9,7 @@ async function getPlayers (req, res) {
     const allPlayers = await players.getPlayers()
     res.status(200).send(allPlayers)
   } catch (error) {
-    console.log('getPlayers failed: ', error)
+    console.error('getPlayers failed: ', error)
   }
 }
 
@@ -21,6 +21,6 @@ async function getPlayer (req, res) {
     const player = await players.getPlayerByName({ firstName, lastName })
     res.status(200).send(player)
   } catch (error) {
-    console.log('getPlayerByName failed: ', error)
+    console.error('getPlayerByName failed: ', error)
   }
 }

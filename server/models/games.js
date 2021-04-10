@@ -12,7 +12,7 @@ async function postGame (game) {
     await db.query(qr, [date, gameId, team, losingTeamID, bestPl1, bestPl2, score, statsBP1, statsBP2])
     console.log('Game is posted on Postgres: ', gameId)
   } catch (error) {
-    console.log('postGame is failed: ', error)
+    console.error('postGame is failed: ', error)
   }
 }
 
@@ -20,6 +20,6 @@ async function getGames (date) {
   try {
     return await db.query('SELECT game.*, team.name, team.logo FROM game INNER JOIN team ON game.winningteamid = team.teamID WHERE date = $1', date)
   } catch (error) {
-    console.log('getGames is failed: ', error)
+    console.error('getGames is failed: ', error)
   }
 }

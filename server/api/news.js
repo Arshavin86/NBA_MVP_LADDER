@@ -8,6 +8,6 @@ exports.getNews = async (req, res) => {
     const response = await searchNews(query)
     res.status(200).send(response)
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }

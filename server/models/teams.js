@@ -12,7 +12,7 @@ async function postTeam (ID, name, logo) {
     await db.query(qr, [ID, name, logo, ID])
     console.log('Team list is updated on Postgres')
   } catch (error) {
-    console.log('postTeam is failed: ', error)
+    console.error('postTeam is failed: ', error)
   }
 }
 
@@ -20,6 +20,6 @@ async function getTeam (teamId) {
   try {
     return await db.query('SELECT name, logo FROM team WHERE teamID = $1', teamId)
   } catch (error) {
-    console.log('getTeam is failed: ', error)
+    console.error('getTeam is failed: ', error)
   }
 }

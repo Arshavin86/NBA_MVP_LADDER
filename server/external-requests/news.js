@@ -10,6 +10,6 @@ exports.searchNews = async (query) => {
     })
     return headlines
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }

@@ -15,7 +15,7 @@ async function postPlayer (ID, seasonName) {
     const result = await db.query(qr, [seasonName, ID, start])
     console.log('Award is posted on Postgres: ', result)
   } catch (error) {
-    console.log('POSTPlayer failed: ', error)
+    console.error('POSTPlayer failed: ', error)
   }
 }
 
@@ -24,7 +24,7 @@ async function getPlayers () {
     const qr = 'SELECT player.*, team.name FROM player INNER JOIN team ON player.teamID = team.teamID ORDER BY player.lastname ASC;'
     return await db.query(qr)
   } catch (error) {
-    console.log('getPlayers failed: ', error)
+    console.error('getPlayers failed: ', error)
   }
 }
 
@@ -33,7 +33,7 @@ async function getPlayerByName ({ firstName, lastName }) {
     const qr = 'SELECT player.*, team.name FROM player INNER JOIN team ON player.teamID = team.teamID WHERE firstName = $1 AND lastName = $2;'
     return await db.query(qr, [firstName, lastName])
   } catch (error) {
-    console.log('getPlayerByName failed: ', error)
+    console.error('getPlayerByName failed: ', error)
   }
 }
 
@@ -41,6 +41,6 @@ async function getPlayerById (playerId) {
   try {
     return await db.query('SELECT firstName, lastName FROM player WHERE playerID = $1;', playerId)
   } catch (error) {
-    console.log('getPlayerById failed: ', error)
+    console.error('getPlayerById failed: ', error)
   }
 }
