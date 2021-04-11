@@ -1,8 +1,8 @@
 const {
   getGamesByDate, getStatsByGameID, getNameByPlayerID
 } = require('../external-requests/rapidapi')
-const statsCalculator = require('../utils/statsCalculator')
-const db = require('../../database/db')
+const { statsCalculator } = require('../utils/statsCalculator')
+const Games = require('./games')
 
 exports.storeGamesStats = async (date) => {
   try {
@@ -83,7 +83,7 @@ exports.storeGamesStats = async (date) => {
         statsBP1,
         statsBP2
       }
-      await db.postGame(game)
+      await Games.postGame(game)
     }
     console.log('DONE!')
     return dayCount

@@ -1,5 +1,4 @@
-const postgres = require('./postgres')
-const { db } = postgres
+const { db } = require('./db')
 const request = require('request-promise')
 const { statsCalculator } = require('../MVPCalculator/statsCalculator')
 const config = require('../config/api-nba')
