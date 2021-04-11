@@ -30,7 +30,10 @@ const Header = () => {
 
   return (
     <Wrapper team={logoURL}>
-      <Image src={`${URL}/players/${lastName}/${firstName}`} alt="Player's headshot photo" />
+      <Image
+        src={`${URL}/players/${lastName}/${firstName}`}
+        alt="Player's headshot photo"
+      />
       <Details />
     </Wrapper>
   )

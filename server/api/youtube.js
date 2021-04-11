@@ -1,4 +1,7 @@
-const { searchYouTubeForGames, searchYouTubeForPlayer } = require('../external-requests/youtube')
+const {
+  searchYouTubeForGames,
+  searchYouTubeForPlayer
+} = require('../external-requests/youtube')
 
 module.exports = {
   getGameVideos,

@@ -37,7 +37,15 @@ const Item = style.li`
 
 const Vitals = () => {
   const [player] = useContext(ApiContext)
-  const { collegename, country, dateofbirth, heightinmeters, weightinkilograms, startnba, name } = player
+  const {
+    collegename,
+    country,
+    dateofbirth,
+    heightinmeters,
+    weightinkilograms,
+    startnba,
+    name
+  } = player
 
   return (
     <Wrapper>

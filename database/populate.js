@@ -40,7 +40,11 @@ const getNameByPlayerID = async playerID => {
 const postGame = async (date, ID, WTID, LTID, BP1, BP2, score, SBP1, SBP2) => {
   try {
     const qr = 'INSERT INTO game (date, gameID, winningTeamID, losingTeamID, bestPlayer1, bestPlayer2, score, statsBP1, statsBP2) SELECT $1, $2, $3, $4, $5, $6, $7, $8, $9'
-    const result = await db.query(qr, [date, ID, WTID, LTID, BP1, BP2, score, SBP1, SBP2])
+    const result = await db.query(
+      qr,
+      [date, ID, WTID, LTID, BP1, BP2, score, SBP1, SBP2]
+    )
+
     console.log('Game is posted on Postgres: ', ID)
   } catch (error) {
     console.error('POSTGame is failed: ', error)
@@ -59,10 +63,12 @@ const gameAdd = async () => {
 
       if (res.api.games.length) {
         const game = res.api.games[0]
+        const vTeamPoints = game.vTeam.score.points
+        const hTeamPoints = game.hTeam.score.points
         // prevent getting the "junk" game objects (with no real data)
-        if (game.vTeam.score.points.length) {
+        if (vTeamPoints.length) {
           // find the winning team
-          if (Number(game.vTeam.score.points) > Number(game.hTeam.score.points)) {
+          if (Number(vTeamPoints) > Number(hTeamPoints)) {
             winningTeamID = game.vTeam.teamId
             losingTeamID = game.hTeam.teamId
           } else {
@@ -91,22 +97,89 @@ const gameAdd = async () => {
       if (players.api.statistics.length) {
         // calculate stats of each player from winning team and compare it with current best result for current game
         players.api.statistics.forEach(player => {
-          const { points, assists, totReb, steals, blocks, turnovers, plusMinus, fgm, fga, fgp, ftm, fta, tpm, tpa, offReb, defReb, pFouls, playerId, teamId } = player
-          if (teamId === winningTeamID) {
-            currentTotal = statsCalculator(points, assists, totReb, steals, blocks, turnovers, fgm, fga, ftm, fta, tpm, tpa, offReb, defReb, pFouls, plusMinus)
+          const {
+            points,
+            assists,
+            totReb,
+            steals,
+            blocks,
+            turnovers,
+            plusMinus,
+            fgm,
+            fga,
+            fgp,
+            ftm,
+            fta,
+            tpm,
+            tpa,
+            offReb,
+            defReb,
+            pFouls,
+            playerId,
+            teamId
+          } = player
 
-            if (currentTotal > leader.total || (currentTotal === leader.total && plusMinus > leader.plusMinus) ||
-                        (currentTotal === leader.total && plusMinus === leader.plusMinus && fgp > leader.fgp)) {
+          if (teamId === winningTeamID) {
+            currentTotal = statsCalculator(
+              points,
+              assists,
+              totReb,
+              steals,
+              blocks,
+              turnovers,
+              fgm,
+              fga,
+              ftm,
+              fta,
+              tpm,
+              tpa,
+              offReb,
+              defReb,
+              pFouls,
+              plusMinus
+            )
+
+            if (
+              currentTotal > leader.total ||
+              (currentTotal === leader.total && plusMinus > leader.plusMinus) ||
+              (
+                currentTotal === leader.total &&
+                plusMinus === leader.plusMinus &&
+                fgp > leader.fgp
+              )
+            ) {
               leader.total = currentTotal
               leader.player1Id = playerId
               leader.teamId = teamId
               leader.plusMinus = plusMinus
               leader.fgp = fgp
               leader.player2Id = undefined
-              leader.statsBP1 = [points, assists, totReb, steals, blocks, turnovers, plusMinus, fgp]
-            } else if (currentTotal === leader.total && plusMinus === leader.plusMinus && fgp === leader.fgp) {
+              leader.statsBP1 = [
+                points,
+                assists,
+                totReb,
+                steals,
+                blocks,
+                turnovers,
+                plusMinus,
+                fgp
+              ]
+            } else if (
+              currentTotal === leader.total &&
+              plusMinus === leader.plusMinus &&
+              fgp === leader.fgp
+            ) {
               leader.player2Id = playerId
-              leader.statsBP2 = [points, assists, totReb, steals, blocks, turnovers, plusMinus, fgp]
+              leader.statsBP2 = [
+                points,
+                assists,
+                totReb,
+                steals,
+                blocks,
+                turnovers,
+                plusMinus,
+                fgp
+              ]
             }
           }
         })
@@ -129,7 +202,17 @@ const gameAdd = async () => {
         }
         // const {date, score} = matchday;
         // post a game info
-        await postGame(date, gameId, winningTeamID, losingTeamID, bestPl1, bestPl2, score, statsBP1, statsBP2)
+        await postGame(
+          date,
+          gameId,
+          winningTeamID,
+          losingTeamID,
+          bestPl1,
+          bestPl2,
+          score,
+          statsBP1,
+          statsBP2
+        )
       } else {
         console.log(`There is no stats of game ${gameId} for ${gameId}!!!!!`)
         return 0
@@ -161,7 +244,10 @@ const teamAdd = async () => {
       const { fullName, teamId, nickname, logo, shortName } = res.api.teams[0]
 
       const qr = 'INSERT INTO team (teamID, name, logo, nickname, shortName) SELECT $1, $2, $3, $4, $5'
-      const result = await db.query(qr, [teamId, fullName, logo, nickname, shortName])
+      const result = await db.query(
+        qr,
+        [teamId, fullName, logo, nickname, shortName]
+      )
       console.log('ID passed: ', teamid)
       teamid++
     }
@@ -187,14 +273,46 @@ const playerAdd = async () => {
 
       // avoid query player from WNBA
       if (res.api.players[0].leagues.standard) {
-        const { teamId, firstName, lastName, yearsPro, collegeName, country, dateOfBirth, affiliation, heightInMeters, weightInKilograms, startNba } = res.api.players[0]
+        const {
+          teamId,
+          firstName,
+          lastName,
+          yearsPro,
+          collegeName,
+          country,
+          dateOfBirth,
+          affiliation,
+          heightInMeters,
+          weightInKilograms,
+          startNba
+        } = res.api.players[0]
+
         const { jersey, active, pos } = res.api.players[0].leagues.standard
 
         // avoid query not NBA player or with no teamId in his profile
         const team = await db.query('SELECT * FROM team WHERE teamID = $1', teamId)
         if (team.length) {
           const qr = 'INSERT INTO player (playerID, teamID, firstName, lastName, yearsPro, collegeName, country, dateOfBirth, affiliation, heightInMeters, weightInKilograms, startNba, pos, jersey, active) SELECT $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15'
-          const result = await db.query(qr, [playerId, teamId, firstName, lastName, yearsPro, collegeName, country, dateOfBirth, affiliation, heightInMeters, weightInKilograms, startNba, pos, jersey, active])
+          const result = await db.query(
+            qr,
+            [
+              playerId,
+              teamId,
+              firstName,
+              lastName,
+              yearsPro,
+              collegeName,
+              country,
+              dateOfBirth,
+              affiliation,
+              heightInMeters,
+              weightInKilograms,
+              startNba,
+              pos,
+              jersey,
+              active
+            ]
+          )
           console.log('ID passed: ', playerId)
         } else {
           console.log('ID banned: ', playerId)

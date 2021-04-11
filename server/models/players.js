@@ -39,7 +39,10 @@ async function getPlayerByName ({ firstName, lastName }) {
 
 async function getPlayerById (playerId) {
   try {
-    return await db.query('SELECT firstName, lastName FROM player WHERE playerID = $1;', playerId)
+    return await db.query(
+      'SELECT firstName, lastName FROM player WHERE playerID = $1;',
+      playerId
+    )
   } catch (error) {
     console.error('getPlayerById failed: ', error)
   }

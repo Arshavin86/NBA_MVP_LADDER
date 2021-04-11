@@ -115,6 +115,7 @@ const gamesListing = (data, handleVideoChange) => {
 
   // I use textContent here instead of {visitorName} and {homeName} variables cause by the end of the mapping there values are equal to the names from last element of data array
   const changeVideo = (e) => {
+    e.preventDefault()
     const query = e.currentTarget.textContent.slice(5)
     console.log(query)
     handleVideoChange(query)
@@ -122,18 +123,53 @@ const gamesListing = (data, handleVideoChange) => {
 
   if (typeof data === 'object') {
     data.map(game => {
-      visitorLogo = Number(game.score[0]) > Number(game.score[1]) ? game.logo : game.losingTeam[0].logo
-      visitorName = Number(game.score[0]) > Number(game.score[1]) ? game.name : game.losingTeam[0].name
-      homelogo = Number(game.score[0]) < Number(game.score[1]) ? game.logo : game.losingTeam[0].logo
-      homeName = Number(game.score[0]) < Number(game.score[1]) ? game.name : game.losingTeam[0].name
-      stats[0] = Number(game.statsbp1[0]) > 14 ? Number(game.statsbp1[0]) + ' pts ' : undefined
-      stats[1] = Number(game.statsbp1[1]) > 4 ? Number(game.statsbp1[1]) + ' ast ' : undefined
-      stats[2] = Number(game.statsbp1[2]) > 4 ? Number(game.statsbp1[2]) + ' reb ' : undefined
-      stats[3] = Number(game.statsbp1[3]) > 2 ? Number(game.statsbp1[3]) + ' stl ' : undefined
-      stats[4] = Number(game.statsbp1[4]) > 2 ? Number(game.statsbp1[4]) + ' blk ' : undefined
-      stats[5] = Number(game.statsbp1[5]) > 9 ? Number(game.statsbp1[5]) + ' tov ' : undefined
-      stats[6] = Number(game.statsbp1[6]) > 19 ? +Number(game.statsbp1[6]) + ' plusMinus ' : undefined
-      stats[7] = Number(game.statsbp1[7]) > 59.9 ? Number(game.statsbp1[7]) + ' fgp ' : undefined
+      visitorLogo = Number(game.score[0]) > Number(game.score[1])
+        ? game.logo
+        : game.losingTeam[0].logo
+
+      visitorName = Number(game.score[0]) > Number(game.score[1])
+        ? game.name
+        : game.losingTeam[0].name
+
+      homelogo = Number(game.score[0]) < Number(game.score[1])
+        ? game.logo
+        : game.losingTeam[0].logo
+
+      homeName = Number(game.score[0]) < Number(game.score[1])
+        ? game.name
+        : game.losingTeam[0].name
+
+      stats[0] = Number(game.statsbp1[0]) > 14
+        ? Number(game.statsbp1[0]) + ' pts '
+        : undefined
+
+      stats[1] = Number(game.statsbp1[1]) > 4
+        ? Number(game.statsbp1[1]) + ' ast '
+        : undefined
+
+      stats[2] = Number(game.statsbp1[2]) > 4
+        ? Number(game.statsbp1[2]) + ' reb '
+        : undefined
+
+      stats[3] = Number(game.statsbp1[3]) > 2
+        ? Number(game.statsbp1[3]) + ' stl '
+        : undefined
+
+      stats[4] = Number(game.statsbp1[4]) > 2
+        ? Number(game.statsbp1[4]) + ' blk '
+        : undefined
+
+      stats[5] = Number(game.statsbp1[5]) > 9
+        ? Number(game.statsbp1[5]) + ' tov '
+        : undefined
+
+      stats[6] = Number(game.statsbp1[6]) > 19
+        ? +Number(game.statsbp1[6]) + ' plusMinus '
+        : undefined
+
+      stats[7] = Number(game.statsbp1[7]) > 59.9
+        ? Number(game.statsbp1[7]) + ' fgp '
+        : undefined
 
       const firstname = game.bestPlayerName[0].firstname
       let lastname = game.bestPlayerName[0].lastname
@@ -181,7 +217,7 @@ const gamesListing = (data, handleVideoChange) => {
             </GameMVP>
             <Bottom>
               <Watch>
-                <WatchButton onClick={e => { e.preventDefault(); changeVideo(e) }}>
+                <WatchButton onClick={changeVideo}>
                             Watch
                   <HiddenText>
                     {visitorName} - {homeName}

@@ -135,7 +135,18 @@ function findGameMVP (players, team) {
   // calculate stats of each player from winning team
   // and compare it with current best result for current game
   players.api.statistics.forEach((player) => {
-    const { playerId, teamId, points, assists, totReb, steals, blocks, turnovers, plusMinus, fgp } = player
+    const {
+      playerId,
+      teamId,
+      points,
+      assists,
+      totReb,
+      steals,
+      blocks,
+      turnovers,
+      plusMinus,
+      fgp
+    } = player
     if (!teamId === team) return
 
     currentTotal = statsCalculator(player)
@@ -149,10 +160,32 @@ function findGameMVP (players, team) {
       leaders.plusMinus = plusMinus
       leaders.fgp = fgp
       leaders.player2Id = undefined
-      leaders.statsBP1 = [points, assists, totReb, steals, blocks, turnovers, plusMinus, fgp]
-    } else if (currentTotal === leaders.total && plusMinus === leaders.plusMinus && fgp === leaders.fgp) {
+      leaders.statsBP1 = [
+        points,
+        assists,
+        totReb,
+        steals,
+        blocks,
+        turnovers,
+        plusMinus,
+        fgp
+      ]
+    } else if (
+      currentTotal === leaders.total &&
+      plusMinus === leaders.plusMinus &&
+      fgp === leaders.fgp
+    ) {
       leaders.player2Id = playerId
-      leaders.statsBP2 = [points, assists, totReb, steals, blocks, turnovers, plusMinus, fgp]
+      leaders.statsBP2 = [
+        points,
+        assists,
+        totReb,
+        steals,
+        blocks,
+        turnovers,
+        plusMinus,
+        fgp
+      ]
     }
   })
   return leaders

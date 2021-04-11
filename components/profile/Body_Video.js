@@ -37,7 +37,11 @@ const renderVideos = videos => {
   videos.map(video => {
     list.push(
       <Video key={video.snippet.publishedAt}>
-        <Frame src={'https://www.youtube.com/embed/' + video.id.videoId} allowFullScreen data-tip={video.snippet.title} />
+        <Frame
+          src={'https://www.youtube.com/embed/' + video.id.videoId}
+          allowFullScreen
+          data-tip={video.snippet.title}
+        />
         <ReactTooltip />
       </Video>)
   })

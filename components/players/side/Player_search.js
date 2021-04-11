@@ -43,7 +43,12 @@ const Search = () => {
   return (
     <Container>
       <form onSubmit={onSubmit}>
-        <Input type='text' placeholder='Search Player' onChange={onChange} value={value} />
+        <Input
+          type='text'
+          placeholder='Search Player'
+          onChange={onChange}
+          value={value}
+        />
       </form>
     </Container>
   )

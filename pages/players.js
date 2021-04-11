@@ -94,7 +94,14 @@ Players.getInitialProps = async function () {
   let playerName
 
   data.map(player => {
-    const { playerid, name, jersey, pos, heightinmeters, weightinkilograms } = player
+    const {
+      playerid,
+      name,
+      jersey,
+      pos,
+      heightinmeters,
+      weightinkilograms
+    } = player
     // works with player who has nickname, like 'Nene'
     if (player.lastname.length) {
       playerName = `${player.lastname}, ${player.firstname}`

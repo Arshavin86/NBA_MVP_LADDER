@@ -31,11 +31,21 @@ const Cal = () => {
 
   return (
     <Container2>
-      <Image type='image' src='/static/scroll-left-icon.png' onClick={(e) => { e.preventDefault(); changeDate(0) }} alt='my image' />
+      <Image
+        type='image'
+        src='/static/scroll-left-icon.png'
+        onClick={(e) => { e.preventDefault(); changeDate(0) }}
+        alt='my image'
+      />
       <div>
         <Calendar />
       </div>
-      <Image type='image' src='/static/scroll-right-icon.png' onClick={(e) => { e.preventDefault(); changeDate(2) }} alt='my image' />
+      <Image
+        type='image'
+        src='/static/scroll-right-icon.png'
+        onClick={(e) => { e.preventDefault(); changeDate(2) }}
+        alt='my image'
+      />
     </Container2>
   )
 }

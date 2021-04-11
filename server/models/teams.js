@@ -18,7 +18,10 @@ async function postTeam (ID, name, logo) {
 
 async function getTeam (teamId) {
   try {
-    return await db.query('SELECT name, logo FROM team WHERE teamID = $1', teamId)
+    return await db.query(
+      'SELECT name, logo FROM team WHERE teamID = $1',
+      teamId
+    )
   } catch (error) {
     console.error('getTeam is failed: ', error)
   }
