@@ -30,10 +30,10 @@ const Description = style.div`
 const articlesListing = articles => {
   const context = []
 
-  articles.map(article => {
+  articles.map((article, index) => {
     const tip = `Continue reading on ${article.source.name}`
     context.push(
-      <Article key={article.publishedAt}>
+      <Article key={`${article.publishedAt}_${index}`}>
         <Image src={article.urlToImage} alt="Article's image" />
         <Title>{article.title}</Title>
         <Description>{article.description}</Description>
