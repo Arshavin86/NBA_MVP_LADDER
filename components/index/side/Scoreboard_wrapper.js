@@ -121,127 +121,123 @@ const gamesListing = (data, handleVideoChange) => {
     handleVideoChange(query)
   }
 
-  if (typeof data === 'object') {
-    data.map(game => {
-      visitorLogo = Number(game.score[0]) > Number(game.score[1])
-        ? game.logo
-        : game.losingTeam[0].logo
+  if (data.message === 'No games were played on this day') return data.message
 
-      visitorName = Number(game.score[0]) > Number(game.score[1])
-        ? game.name
-        : game.losingTeam[0].name
+  data.map(game => {
+    visitorLogo = Number(game.score[0]) > Number(game.score[1])
+      ? game.logo
+      : game.losingTeam[0].logo
 
-      homelogo = Number(game.score[0]) < Number(game.score[1])
-        ? game.logo
-        : game.losingTeam[0].logo
+    visitorName = Number(game.score[0]) > Number(game.score[1])
+      ? game.name
+      : game.losingTeam[0].name
 
-      homeName = Number(game.score[0]) < Number(game.score[1])
-        ? game.name
-        : game.losingTeam[0].name
+    homelogo = Number(game.score[0]) < Number(game.score[1])
+      ? game.logo
+      : game.losingTeam[0].logo
 
-      stats[0] = Number(game.statsbp1[0]) > 14
-        ? Number(game.statsbp1[0]) + ' pts '
-        : undefined
+    homeName = Number(game.score[0]) < Number(game.score[1])
+      ? game.name
+      : game.losingTeam[0].name
 
-      stats[1] = Number(game.statsbp1[1]) > 4
-        ? Number(game.statsbp1[1]) + ' ast '
-        : undefined
+    stats[0] = Number(game.statsbp1[0]) > 14
+      ? Number(game.statsbp1[0]) + ' pts '
+      : undefined
 
-      stats[2] = Number(game.statsbp1[2]) > 4
-        ? Number(game.statsbp1[2]) + ' reb '
-        : undefined
+    stats[1] = Number(game.statsbp1[1]) > 4
+      ? Number(game.statsbp1[1]) + ' ast '
+      : undefined
 
-      stats[3] = Number(game.statsbp1[3]) > 2
-        ? Number(game.statsbp1[3]) + ' stl '
-        : undefined
+    stats[2] = Number(game.statsbp1[2]) > 4
+      ? Number(game.statsbp1[2]) + ' reb '
+      : undefined
 
-      stats[4] = Number(game.statsbp1[4]) > 2
-        ? Number(game.statsbp1[4]) + ' blk '
-        : undefined
+    stats[3] = Number(game.statsbp1[3]) > 2
+      ? Number(game.statsbp1[3]) + ' stl '
+      : undefined
 
-      stats[5] = Number(game.statsbp1[5]) > 9
-        ? Number(game.statsbp1[5]) + ' tov '
-        : undefined
+    stats[4] = Number(game.statsbp1[4]) > 2
+      ? Number(game.statsbp1[4]) + ' blk '
+      : undefined
 
-      stats[6] = Number(game.statsbp1[6]) > 19
-        ? +Number(game.statsbp1[6]) + ' plusMinus '
-        : undefined
+    stats[5] = Number(game.statsbp1[5]) > 9
+      ? Number(game.statsbp1[5]) + ' tov '
+      : undefined
 
-      stats[7] = Number(game.statsbp1[7]) > 59.9
-        ? Number(game.statsbp1[7]) + ' fgp '
-        : undefined
+    stats[6] = Number(game.statsbp1[6]) > 19
+      ? +Number(game.statsbp1[6]) + ' plusMinus '
+      : undefined
 
-      const firstname = game.bestPlayerName[0].firstname
-      let lastname = game.bestPlayerName[0].lastname
-      let space = ' '
-      // get rid of this unpronounced name
-      if (lastname === 'Antetokounmpo') {
-        lastname = ''
-        space = ''
-      }
-      statsLine = firstname + space + lastname + ': ' + stats.map(stat => {
-        if (stat) {
-          return stat
-        }
-      }).join('')
+    stats[7] = Number(game.statsbp1[7]) > 59.9
+      ? Number(game.statsbp1[7]) + ' fgp '
+      : undefined
 
-      context.push(
-        <Section key={game.id}>
-          <ScoreTitle>
-            <ScoreTitleWrapper>
-              <Team>
-                <TeamLogo>
-                  <img src={visitorLogo} height='34px' />
-                </TeamLogo>
-                <TeamName>
-                  {visitorName}
-                </TeamName>
-                <TeamScore>
-                  {game.score[0]}
-                </TeamScore>
-              </Team>
-              <Team>
-                <TeamLogo>
-                  <img src={homelogo} height='34px' />
-                </TeamLogo>
-                <TeamName>
-                  {homeName}
-                </TeamName>
-                <TeamScore>
-                  {game.score[1]}
-                </TeamScore>
-              </Team>
-            </ScoreTitleWrapper>
-            <GameMVP>
-              {statsLine}
-            </GameMVP>
-            <Bottom>
-              <Watch>
-                <WatchButton onClick={changeVideo}>
+    const firstname = game.bestPlayerName[0].firstname
+    let lastname = game.bestPlayerName[0].lastname
+    let space = ' '
+    // get rid of this unpronounced name
+    if (lastname === 'Antetokounmpo') {
+      lastname = ''
+      space = ''
+    }
+    statsLine = firstname + space + lastname + ': ' + stats.map(stat => {
+      if (stat) return stat
+    }).join('')
+
+    context.push(
+      <Section key={game.id}>
+        <ScoreTitle>
+          <ScoreTitleWrapper>
+            <Team>
+              <TeamLogo>
+                <img src={visitorLogo} height='34px' />
+              </TeamLogo>
+              <TeamName>
+                {visitorName}
+              </TeamName>
+              <TeamScore>
+                {game.score[0]}
+              </TeamScore>
+            </Team>
+            <Team>
+              <TeamLogo>
+                <img src={homelogo} height='34px' />
+              </TeamLogo>
+              <TeamName>
+                {homeName}
+              </TeamName>
+              <TeamScore>
+                {game.score[1]}
+              </TeamScore>
+            </Team>
+          </ScoreTitleWrapper>
+          <GameMVP>
+            {statsLine}
+          </GameMVP>
+          <Bottom>
+            <Watch>
+              <WatchButton onClick={changeVideo}>
                             Watch
-                  <HiddenText>
-                    {visitorName} - {homeName}
-                  </HiddenText>
-                </WatchButton>
-              </Watch>
-              <Boxscore>
-                <BoxscoreButton>
+                <HiddenText>
+                  {visitorName} - {homeName}
+                </HiddenText>
+              </WatchButton>
+            </Watch>
+            <Boxscore>
+              <BoxscoreButton>
                             Boxscore
-                </BoxscoreButton>
-              </Boxscore>
-              <MVP>
-                <MVPButton>
+              </BoxscoreButton>
+            </Boxscore>
+            <MVP>
+              <MVPButton>
                             MVP of the game
-                </MVPButton>
-              </MVP>
-            </Bottom>
-          </ScoreTitle>
-        </Section>
-      )
-    })
-  } else {
-    return data
-  }
+              </MVPButton>
+            </MVP>
+          </Bottom>
+        </ScoreTitle>
+      </Section>
+    )
+  })
   return context
 }
 
