@@ -24,7 +24,9 @@ exports.getGames = async (req, res) => {
     res.status(200).send(result.games)
     return
   }
-  games = await storeGamesStats(date)
+
+//turn off/on the api call to the stats provider:
+  // games = await storeGamesStats(date)
   if (!games) {
     res.status(404).send(new Error('No games found'))
     return
