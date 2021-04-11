@@ -121,7 +121,7 @@ const gamesListing = (data, handleVideoChange) => {
     handleVideoChange(query)
   }
 
-  if (data.message === 'No games were played on this day') return data.message
+  if (data === 'No games were played on this day') return data
 
   data.map(game => {
     visitorLogo = Number(game.score[0]) > Number(game.score[1])

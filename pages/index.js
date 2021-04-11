@@ -5,7 +5,6 @@
 import { useState, useEffect } from 'react'
 import style from 'styled-components'
 import fetch from 'isomorphic-unfetch'
-import PropTypes from 'prop-types'
 import CalendarNav from '../components/index/side/CalendarNav'
 import Layout from '../components/MyLayout'
 import ScoreboardWrapper from '../components/index/side/Scoreboard_wrapper'
@@ -145,19 +144,14 @@ const Index = (props) => {
   )
 }
 
-Index.propTypes = {
-  games: PropTypes.object,
-  todaysDate: PropTypes.string
-}
-
 Index.getInitialProps = async function () {
   const date = formatDate()
   let json
 
   try {
-    const res = await fetch(`${serverHost}/api/games/date/${date}`)
+    const res = fetch(`${serverHost}/api/games/date/${date}`)
     if (res.status === 500 || res.status === 404) {
-      json = { message: 'No games were played on this day' }
+      json = 'No games were played on this day'
     } else {
       json = await res.json()
     }
