@@ -1,3 +1,5 @@
+const _ = require('lodash')
+
 const {
   getGamesByDate, getStatsByGameID, getNameByPlayerID
 } = require('../external-requests/rapidapi')
@@ -7,19 +9,19 @@ const Games = require('./games')
 exports.storeGamesStats = async (date) => {
   try {
     // get all games played on one particular date
-    const games = await getGamesByDate(date)
-    console.log(`${games.api.games.length} games on ${date}`)
-    const dayCount = games.api.games.length
+    const gamesObj = await getGamesByDate(date)
+    let games = _.get(gamesObj, 'api.games')
+    const dayCount = games.length
+    console.log(`${dayCount} games on ${date}`)
 
-    if (!games.api.games.length) {
+    if (!dayCount) {
       console.log(`There is no game played in ${date}`)
       return 0
     }
-    // prevent getting the "junk" game objects (with no real data)
-    if (!games.api.games[0].vTeam.score.points.length) {
-      console.log(`We got the junky object from API on ${date}!`)
-      return 0
-    }
+
+    // filter out "junk" game objects (with no real data)
+    games = games.filter(game => game.vTeam.score.points)
+
     const matchDay = getGamesInfo(games)
 
     for await (const team of Object.keys(matchDay)) {
@@ -99,7 +101,7 @@ function getGamesInfo (games) {
   const matchDay = {}
 
   // find gameId and id of winning team for each game
-  games.api.games.forEach((game) => {
+  games.forEach((game) => {
   // find the winning team
     if (Number(game.vTeam.score.points) > Number(game.hTeam.score.points)) {
       winningTeamID = game.vTeam.teamId
@@ -132,9 +134,12 @@ function findGameMVP (players, team) {
   }
   let currentTotal
 
+  // filter out the losing team players
+  const winners = players.api.statistics.filter(player => player.teamId === team)
+
   // calculate stats of each player from winning team
   // and compare it with current best result for current game
-  players.api.statistics.forEach((player) => {
+  winners.forEach((player) => {
     const {
       playerId,
       teamId,
@@ -147,7 +152,6 @@ function findGameMVP (players, team) {
       plusMinus,
       fgp
     } = player
-    if (!teamId === team) return
 
     currentTotal = statsCalculator(player)
     if (currentTotal > leaders.total ||
