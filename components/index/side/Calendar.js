@@ -1,6 +1,8 @@
 import Calendar from 'react-modern-datepicker'
 import { useContext } from 'react'
 import style from 'styled-components'
+import moment from 'moment'
+
 import ApiContext from '../../Context'
 import '../../../static/Calendar.css'
 
@@ -28,7 +30,7 @@ const Cal = () => {
         icon='/static/calender-google-icon.png'
         date={date}
         format='YYYY-MM-DD'
-        onChange={date => { setDate(date) }}
+        onChange={date => { setDate(moment(date)) }}
         // define minimum date (exists in DB) that the user can select
         minDate='2015-10-28'
         className='color'
