@@ -2,9 +2,14 @@ const { storeGamesStats } = require('../models/dayLeaders')
 const { getTeam } = require('../models/teams')
 const { getPlayerById } = require('../models/players')
 const { getGames } = require('../models/games')
+const { getNameByPlayerID } = require('../external-requests/rapidapi')
 
 exports.getGames = async (req, res) => {
   const date = req.params.date
+
+  if (date === new Date().toISOString().split('T')[0]) {
+    return res.status(404).send(new Error('No games found'))
+  }
 
   let games = await getGames(date)
 
@@ -25,11 +30,10 @@ exports.getGames = async (req, res) => {
     return
   }
 
-//turn off/on the api call to the stats provider:
+  // turn off/on the api call to the stats provider:
   // games = await storeGamesStats(date)
   if (!games) {
     res.status(404).send(new Error('No games found'))
-    return
   }
 
   /** *****rewrite this block as lines 21-42 when season starts*****/
@@ -57,21 +61,30 @@ async function addBestPlayerAndLoosingTeam (games) {
     for await (const game of games) {
       const { losingteamid, bestplayer1 } = game
       const losingTeam = await getTeam(losingteamid)
-      const bestPlayerName = await getPlayerById(bestplayer1)
+      let bestPlayerName = await getPlayerById(bestplayer1)
 
       // because NBA players usually don't play in Summer league we get an empty array as bestPlayerName,
       // so we have to send responce witn status 404 in that case.
       // rarely, when MVP of the game is an NBA player, FE gets that games
       if (!bestPlayerName.length) {
-        console.log(`There is no bestPlayer in the game ${game.gameID}`)
-        return {
-          notFound: true,
-          message: 'No best player found'
+        const bestPlayer = await getNameByPlayerID(bestplayer1)
+
+        if (!bestPlayer.api) {
+          console.log(`There is no bestPlayer in the game ${game.gameid}`)
+          return {
+            notFound: true,
+            message: 'No best player found'
+          }
         }
+
+        bestPlayerName = [{
+          firstname: bestPlayer.api.players[0].firstName,
+          lastname: bestPlayer.api.players[0].lastName
+        }]
       }
       // there is a problem: in some cases there is no 'losingTeam' property in data object sent to user!
       if (!losingTeam.length) {
-        console.log(`There is no losingTeam in the game ${game.gameID}`)
+        console.log(`There is no losingTeam in the game ${game.gameid}`)
         return {
           notFound: true,
           message: 'No team found'
