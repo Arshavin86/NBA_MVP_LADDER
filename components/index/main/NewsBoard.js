@@ -64,7 +64,6 @@ const NewsBoard = () => {
     return (
       <div>
         Sorry. There are currently no news available.
-        <p>This is the offseason, dude.</p>
       </div>
     )
   }

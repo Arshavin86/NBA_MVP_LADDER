@@ -6,7 +6,7 @@ exports.searchNews = async (query) => {
   try {
     const headlines = await newsapi.v2.topHeadlines({
       q: query,
-      sources: 'abc-news, bleacher-report, espn, fox-sports, google-news'
+      sources: 'abc-news, bbc-sport, bleacher-report, espn, fox-sports, google-news, talksport'
     })
     return headlines
   } catch (e) {
