@@ -2,7 +2,6 @@ const { searchNews } = require('../external-requests/news')
 
 exports.getNews = async (req, res) => {
   const query = req.params.query
-  console.log('id', query)
 
   try {
     const response = await searchNews(query)
