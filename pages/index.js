@@ -149,7 +149,7 @@ Index.getInitialProps = async function () {
   let json
 
   try {
-    const res = fetch(`${serverHost}/api/games/date/${date}`)
+    const res = await fetch(`${serverHost}/api/games/date/${date}`)
     if (res.status === 500 || res.status === 404) {
       json = 'No games were played on this day'
     } else {
