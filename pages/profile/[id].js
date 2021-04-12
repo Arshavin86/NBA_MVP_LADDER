@@ -1,4 +1,6 @@
 import { useRouter } from 'next/router'
+import fetch from 'isomorphic-unfetch'
+
 import Layout from '../../components/MyLayout'
 import { useState, useEffect } from 'react'
 import { serverHost } from '../../config.js'
@@ -68,7 +70,7 @@ export default function Post (props) {
 
 Post.getInitialProps = async function (router) {
   try {
-    const response = await fetch(server + 'players/' + router.query.id)
+    const response = await fetch(`${serverHost}/api/players/${router.query.id}`)
     const json = await response.json()
     
     return {
